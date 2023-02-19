@@ -1,16 +1,21 @@
 import { HTMLAttributes } from "react";
 import styled from "styled-components";
-import type BreakPoints from "../types/break-points";
+import { BreakPoints as mq } from "../constants";
 
-export const Grid = styled.div((): any=>{
+type GridProps = HTMLAttributes<HTMLDivElement> & {
+	justifyContent?: string;
+	alignItems?: string;
+}
+
+export const Grid = styled.div<GridProps>(({justifyContent="flex-start", alignItems="center"}): any=>{
 	return {
 		width: "100%",
 		padding: "0.25rem 0.5rem",
 		margin: "0.75rem 0",
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "flex-start",
-		alignItems: "center",
+		justifyContent: justifyContent,
+		alignItems: alignItems,
 		flexWrap: "wrap"
 	}
 });
@@ -23,10 +28,9 @@ type CellProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 export const Cell = styled.div<CellProps>(({s, m, l}): any => {
-	const mq = BreakPoints;
-	let style = {
+	const style = {
 		margin: "0.25rem 0",
-		flexBasis: "0%"
+		flexBasis: "auto"
 	};
 
 	if(s !== undefined && s <= 12 && s >= 0){

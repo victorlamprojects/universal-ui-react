@@ -1,0 +1,4 @@
+{
+	"files": ["lib/types/common.d.ts"],
+	"include": ["lib"]
+}

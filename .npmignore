@@ -4,9 +4,11 @@ node_modules/
 stories/
 
 
-# Configuration
+# Configurations
 .gitignore
 .npmignore
 .npmrc
+.eslintrc
+.eslintignore
 rollup.config.js
 tsconfig.json

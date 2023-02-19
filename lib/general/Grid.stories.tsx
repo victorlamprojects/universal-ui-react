@@ -10,7 +10,22 @@ export default {
 } as Meta<typeof Grid>;
 
 
-const Template: Story<typeof Grid> = (args) => <Grid/>;
+const Template: Story<typeof Grid> = (args) => <Grid {...args} />;
 
-export const Normal = Template.bind({});
+export const FullWhenScreenIsSmall = Template.bind({});
+FullWhenScreenIsSmall.args = {
+	children: (<>
+		<Cell s={12} m={4} style={{backgroundColor: "red"}}>1</Cell>
+		<Cell s={12} m={4} style={{backgroundColor: "blue"}}>2</Cell>
+		<Cell s={12} m={4} style={{backgroundColor: "green"}}>3</Cell>
+	</>)
+}
 
+export const TwoToOneToOne = Template.bind({});
+TwoToOneToOne.args = {
+	children: (<>
+		<Cell s={6} style={{backgroundColor: "red"}}>1</Cell>
+		<Cell s={3} style={{backgroundColor: "blue"}}>2</Cell>
+		<Cell s={3} style={{backgroundColor: "green"}}>3</Cell>
+	</>)
+}
