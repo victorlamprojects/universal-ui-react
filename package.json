@@ -50,7 +50,9 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6",
+    "@types/styled-components": "^5.1.26"
   },
   "jest": {
     "preset": "ts-jest",
