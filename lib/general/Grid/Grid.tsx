@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import styled from "styled-components";
-import { BreakPoints as mq } from "../constants";
+import { BreakPoints as mq } from "../../constants";
 
 type GridProps = HTMLAttributes<HTMLDivElement> & {
 	justifyContent?: string;

@@ -10,7 +10,7 @@ export default {
 } as Meta<typeof Grid>;
 
 
-const Template: Story<typeof Grid> = (args) => <Grid {...args} />;
+const Template: Story<typeof Grid> = (args: any) => <Grid {...args} />;
 
 export const FullWhenScreenIsSmall = Template.bind({});
 FullWhenScreenIsSmall.args = {
