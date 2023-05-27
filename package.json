@@ -1,18 +1,18 @@
 {
   "name": "universal-ui-react",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A project that contains commonly used components",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests",
-	"lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
+    "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
     "build": "yarn test && rm -rf dist && rollup -c --bundleConfigAsCjs",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-	"deploy": "yarn build && yarn version minor && yarn publish",
-	"fix": "yarn build && yarn version patch && yarn publish"
+    "deploy": "yarn build && yarn version minor && yarn publish",
+    "fix": "yarn build && yarn version patch && yarn publish"
   },
   "repository": {
     "type": "git",
