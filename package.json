@@ -11,8 +11,8 @@
     "build": "yarn test && rm -rf dist && rollup -c --bundleConfigAsCjs",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-	"deploy": "yarn build && ./scripts/upgradeVersion.sh -f package.json && yarn publish",
-	"fix": "yarn build && ./scripts/upgradeVersion.sh -f package.json -t patch"
+	"deploy": "yarn build && yarn version minor && yarn publish",
+	"fix": "yarn build && yarn version patch && yarn publish"
   },
   "repository": {
     "type": "git",
