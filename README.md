@@ -44,13 +44,11 @@ yarn run build-storybook
 yarn storybook
 ```
 ### Deploy
-0. Update version in package.json
-1. Build Project
+0. Deploy a feature
 ```
-yarn build
+yarn deploy
 ```
-2. Commit changes and push to main
-3. Deploy to NPM
+2. Deploy a fix/minor upgrade
 ```
-yarn publish
+yarn fix
 ```
