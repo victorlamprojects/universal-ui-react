@@ -9,3 +9,15 @@ export const enum IconType {
 	Square,
 	Circle
 }
+
+export const FontSize = {
+	Header: "1.875em",
+	Text: "1.5em",
+	ModalHeader: "1.875em",
+	ModalText: "1.5em"
+}
+
+export const Padding = {
+	Button: "8px 12px",
+	Container: "8px 12px"
+}

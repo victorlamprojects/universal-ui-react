@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from 'styled-components';
 
 const Image = styled.img`
@@ -14,7 +15,7 @@ interface SquareIconProps {
 	className?: string;
     onClick?: () => void;
 };
-const Icon:React.FC<SquareIconProps> = ({width="32px", height="32px", backgroundColor, className, src, onClick, ...rest}) => {
+const Icon:FC<SquareIconProps> = ({width="32px", height="32px", backgroundColor, className, src, onClick, ...rest}) => {
     if(typeof src === 'string')
         return <Image width={width} height={height} backgroundColor={backgroundColor} src={src} {...rest} className={className} onClick={onClick} />
     return src;

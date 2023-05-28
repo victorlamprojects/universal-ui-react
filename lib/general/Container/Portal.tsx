@@ -7,8 +7,8 @@ interface PortalProps {
 
 const Portal:FC<PortalProps> = ({children}) => {
     const documentDiv = document.createElement("div");
-	document.getElementById("root")!.append(documentDiv);
-    return createPortal(children, documentDiv);
+	document.body.append(documentDiv);
+    return createPortal(children, documentDiv, "portal");
 }
 
 export default Portal;
