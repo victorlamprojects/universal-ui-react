@@ -1,7 +1,7 @@
 import { FC, HTMLAttributes, CSSProperties } from "react";
 import styled, { css, keyframes } from 'styled-components';
 import Portal from '../Container/Portal';
-import { FontSize, Padding } from '../../constants';
+import { FontSize, Padding, Themes, ModalVariant } from '../../constants';
 
 // Modal Backdrop
 const ModalBackdrop = styled.div<HTMLAttributes<HTMLDivElement> & { show: boolean }>(({ show, style })=>{
@@ -114,25 +114,46 @@ type ModalProps = HTMLAttributes<HTMLDivElement> & {
 	titleStyle?: CSSProperties;
 	bodyStyle?: CSSProperties;
 	enableBackgroundClick?: boolean;
+	theme?: string;
+	variant?: ModalVariant;
 };
 const Modal: FC<ModalProps> = ({
 	children, show, setShow, title,
 	containerStyle, headerStyle, titleStyle, bodyStyle,
-	enableBackgroundClick=true,
+	enableBackgroundClick=true,theme,variant="info",
 	...rest
 }) => {
+	const Theme = theme && Themes[theme];
+
+	const ContainerStyle = Theme && {
+		backgroundColor: Theme.block,
+		color: Theme.text,
+		...containerStyle
+	} || containerStyle;
+	const HeaderStyle = Theme && {
+		color: Theme.button.text,
+		backgroundColor: Theme[variant],
+		...headerStyle
+	} || headerStyle;
+	const TitleStyle = Theme && {
+		...titleStyle
+	} || titleStyle;
+	const BodyStyle = Theme && {
+		...bodyStyle
+	} || bodyStyle;
+
 	return (<Portal {...rest} >
 		<ModalBackdrop show={show} onClick={() => {
 				if(enableBackgroundClick){
 					setShow(false);
 				}
 			}}>
-			<ModalContainer hidden={!show} onClick={e=>e.stopPropagation()} style={containerStyle}>
-				<ModalHeader style={headerStyle}>
-					<ModalTitle style={titleStyle}>{title}</ModalTitle>
+			<ModalContainer hidden={!show} onClick={e=>e.stopPropagation()} style={ContainerStyle}>
+				<ModalHeader style={HeaderStyle}>
+					<ModalTitle style={TitleStyle}>{title}</ModalTitle>
 					<ModalClose onClick={()=>setShow(false)}>&#10005;</ModalClose>
 				</ModalHeader>
-				<ModalBody style={bodyStyle}>
+				<ModalBody style={BodyStyle}>
 					{children}
 				</ModalBody>
 			</ModalContainer>
