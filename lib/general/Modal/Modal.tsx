@@ -120,10 +120,10 @@ type ModalProps = HTMLAttributes<HTMLDivElement> & {
 const Modal: FC<ModalProps> = ({
 	children, show, setShow, title,
 	containerStyle, headerStyle, titleStyle, bodyStyle,
-	enableBackgroundClick=true,theme,variant="info",
+	enableBackgroundClick=true,theme="light",variant="info",
 	...rest
 }) => {
-	const Theme = theme && Themes[theme];
+	const Theme = Themes[theme];
 
 	const ContainerStyle = Theme && {
 		backgroundColor: Theme.block,

@@ -2,6 +2,7 @@ import { ComponentProps, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import Modal from './Modal';
+import { Grid, Cell } from '../Grid/Grid';
 
 const meta: Meta<typeof Modal> = {
 	title: 'VictorLam/Modal',
@@ -14,7 +15,6 @@ type Story = StoryObj<typeof Modal>;
 
 export const SimpleModal: Story = {
 	args: {
-		theme: "dark",
 		title: "Simple Title",
 		children: (<div style={{maxWidth: "800px"}}>
 			Modal Body
@@ -22,16 +22,27 @@ export const SimpleModal: Story = {
 		</div>)
 	},
 	render: (args: ComponentProps<typeof Modal>) => {
-		const InternalComp = (text, _args) => {
+		const InternalComp = (text, theme,_args) => {
 			const [show, setShow] = useState(false);
-			return <>
+			return <Cell>
 				<button onClick={()=>setShow(true)}>{text}</button>
-				<Modal show={show} setShow={(s: boolean)=>setShow(s)} {..._args} />
-			</>
+				<Modal show={show} setShow={(s: boolean)=>setShow(s)} theme={theme} {..._args} />
+			</Cell>
 		};
-		return (<div>
-			{["info", "success", "warning", "error"].map(v => InternalComp(v, {...args, variant: v}))}
-		</div>);
+		return (<>
+			<div style={{width: "400px"}}>
+				<p>Light Theme</p>
+				<Grid justifyContent={"space-between"}>
+					{["info", "success", "warning", "error"].map(v => InternalComp(v, "light", {...args, variant: v}))}
+				</Grid>
+			</div>
+			<div style={{width: "400px"}}>
+				<p>Dark</p>
+				<Grid justifyContent={"space-between"}>
+					{["info", "success", "warning", "error"].map(v => InternalComp(v, "dark", {...args, variant: v}))}
+				</Grid>
+			</div>
+		</>);
 	}
 }
 
