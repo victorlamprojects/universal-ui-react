@@ -53,7 +53,7 @@ export const Themes = {
 		background: "#FFFFFF",
 		header: "#84A9FF",
 		sidebar: "#D6E4FF",
-		block: "#857dcc",
+		block: "#e3e3e3",
 		info: "#74CAFF",
 		success: "#AAF27F",
 		warning: "#FFE16A",
@@ -80,4 +80,18 @@ export const enum ModalVariant {
 	Success="success",
 	Warning="warning",
 	Error="error"
+}
+
+export const enum ButtonVariant {
+	Info="info",
+	Success="success",
+	Warning="warning",
+	Error="error"
+}
+
+export const enum ButtonEffect {
+	None="none",
+	Enlarge="enlarge",
+	Transparent="transparent",
+	Solidify="solidify"
 }
