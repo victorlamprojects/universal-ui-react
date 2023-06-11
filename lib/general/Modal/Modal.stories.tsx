@@ -1,11 +1,13 @@
 import { ComponentProps, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { ThemeProvider } from 'styled-components';
 
 import Modal from './Modal';
 import { Grid, Cell } from '../Grid/Grid';
 import Button from '../Button/Button';
 
 import { ModalVariant } from '../../constants';
+import { getTheme } from '../../theme';
 
 const meta: Meta<typeof Modal> = {
 	title: 'VictorLam/Modal',
@@ -25,26 +27,28 @@ export const SimpleModal: Story = {
 		</div>)
 	},
 	render: (args: ComponentProps<typeof Modal>) => {
-		const InternalComp = (text: string, theme: string,_args: ComponentProps<typeof Modal>) => {
+		const InternalComp = (text: string, _args: ComponentProps<typeof Modal>) => {
 			const [show, setShow] = useState(false);
 			return <Cell>
-				<Button onClick={()=>setShow(true)} theme={theme} variant={_args.variant}>{text}</Button>
-				<Modal show={show} setShow={(s: boolean)=>setShow(s)} theme={theme} {..._args} />
+				<Button onClick={()=>setShow(true)} variant={_args.variant}>{text}</Button>
+				<Modal show={show} setShow={(s: boolean)=>setShow(s)} {..._args} />
 			</Cell>
 		};
 		return (<>
 			<div style={{width: "400px"}}>
 				<p>Light Theme</p>
 				<Grid justifyContent={"space-between"}>
-					{["info", "success", "warning", "error"].map(v => InternalComp(v, "light", {...args, variant: v as ModalVariant}))}
+					{["info", "success", "warning", "error"].map(v => InternalComp(v, {...args, variant: v as ModalVariant}))}
 				</Grid>
 			</div>
-			<div style={{width: "400px"}}>
-				<p>Dark Theme</p>
-				<Grid justifyContent={"space-between"}>
-					{["info", "success", "warning", "error"].map(v => InternalComp(v, "dark", {...args, variant: v as ModalVariant}))}
-				</Grid>
-			</div>
+			<ThemeProvider theme={getTheme("dark")}>
+				<div style={{width: "400px"}}>
+					<p>Dark Theme</p>
+					<Grid justifyContent={"space-between"}>
+						{["info", "success", "warning", "error"].map(v => InternalComp(v, {...args, variant: v as ModalVariant}))}
+					</Grid>
+				</div>
+			</ThemeProvider>
 		</>);
 	}
 }
@@ -57,7 +61,7 @@ export const DisableBackgroundClickModal = {
 	render: (args: ComponentProps<typeof Modal>) => {
 		const [show, setShow] = useState(false);
 		return <div>
-			<button onClick={()=>setShow(true)}>Open Modal</button>
+			<Button onClick={()=>setShow(true)}>Open Modal</Button>
 			<Modal show={show} setShow={(s: boolean)=>setShow(s)} {...args} />
 		</div>
 	}

@@ -1,7 +1,8 @@
 import { FC, HTMLAttributes, CSSProperties } from "react";
 import styled, { css, keyframes } from 'styled-components';
 import Portal from '../Container/Portal';
-import { FontSize, Padding, Themes, ModalVariant } from '../../constants';
+import { FontSize, Padding, ModalVariant } from '../../constants';
+import { ThemeType, Light } from '../../theme';
 
 // Modal Backdrop
 const ModalBackdrop = styled.div<HTMLAttributes<HTMLDivElement> & { show: boolean }>(({ show, style })=>{
@@ -106,6 +107,7 @@ const ModalBody = styled.div(({style}) => {
 
 // Modal
 type ModalProps = HTMLAttributes<HTMLDivElement> & {
+	theme?: ThemeType;
 	show: boolean;
 	setShow: (s: boolean) => void;
 	title?: string;
@@ -114,31 +116,31 @@ type ModalProps = HTMLAttributes<HTMLDivElement> & {
 	titleStyle?: CSSProperties;
 	bodyStyle?: CSSProperties;
 	enableBackgroundClick?: boolean;
-	theme?: string;
 	variant?: ModalVariant;
 };
 const Modal: FC<ModalProps> = ({
+	theme,
 	children, show, setShow, title,
 	containerStyle, headerStyle, titleStyle, bodyStyle,
-	enableBackgroundClick=true,theme="light",variant="info",
+	enableBackgroundClick=true,variant="info",
 	...rest
 }) => {
-	const Theme = Themes[theme];
+	theme = (!theme || (typeof theme === "object" && Object.keys(theme).length === 0)) ? Light : theme;
 
-	const ContainerStyle = Theme && {
-		backgroundColor: Theme.block,
-		color: Theme.text,
+	const ContainerStyle = theme && {
+		backgroundColor: theme.block,
+		color: theme.text,
 		...containerStyle
 	} || containerStyle;
-	const HeaderStyle = Theme && {
-		color: Theme.button.text,
-		backgroundColor: Theme[variant],
+	const HeaderStyle = theme && {
+		color: theme.button.text,
+		backgroundColor: theme[variant],
 		...headerStyle
 	} || headerStyle;
-	const TitleStyle = Theme && {
+	const TitleStyle = theme && {
 		...titleStyle
 	} || titleStyle;
-	const BodyStyle = Theme && {
+	const BodyStyle = theme && {
 		...bodyStyle
 	} || bodyStyle;
 

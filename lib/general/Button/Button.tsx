@@ -1,17 +1,18 @@
 import { ButtonHTMLAttributes } from "react";
 import styled, { CSSProperties } from 'styled-components';
-import { Themes, ButtonVariant, ButtonEffect } from '../../constants';
+import { ButtonVariant, ButtonEffect } from '../../constants';
+import { ThemeType, Light } from '../../theme';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	style?: CSSProperties;
-	theme?: string;
+	theme?: ThemeType;
 	variant?: ButtonVariant;
 	effect?: ButtonEffect;
 };
 
-const Button = styled.button<ButtonProps>(({ style, theme="light", variant="info", effect="none"}) => {
-	const Theme = Themes[theme];
+const Button = styled.button<ButtonProps>(({ style, theme, variant="info", effect="none"}) => {
 	let effects = {};
+	theme = Object.keys(theme).length === 0 ? Light : theme;
 
 	if(effect === ButtonEffect.Enlarge){
 		effects = {
@@ -35,23 +36,23 @@ const Button = styled.button<ButtonProps>(({ style, theme="light", variant="info
 			transitionDuration: "0.3s",
 			backgroundColor: "#fff",
 			color: "#121212",
-			border: `1px solid ${Theme[variant]}`,
+			border: `1px solid ${theme[variant]}`,
 			"&:hover": {
 				cursor: "pointer",
-				backgroundColor: Theme[variant],
-				color: Theme.button.text
+				backgroundColor: theme[variant],
+				color: theme.button.text
 			}
 		}
 	}
 
-	const s = Theme && {
+	const s = theme && {
 		outline: "none",
 		border: "none",
 		borderRadius: "8px",
 		padding: "8px 12px",
 		margin: "8px 10px",
-		backgroundColor: Theme[variant],
-		color: Theme.button.text,
+		backgroundColor: theme[variant],
+		color: theme.button.text,
 		"&:hover": {
 			cursor: "pointer"
 		},

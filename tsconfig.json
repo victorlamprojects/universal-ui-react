@@ -20,7 +20,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true
 	},
-	"include": ["lib"],
+	"include": ["lib/**/**"],
 	"exclude": [
 		"node_modules",
 		"dist",
