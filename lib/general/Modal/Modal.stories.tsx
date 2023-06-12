@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import Modal from './Modal';
 import { Grid, Cell } from '../Grid/Grid';
+import Block from '../Container/Block';
 import Button from '../Button/Button';
 
 import { ModalVariant } from '../../constants';
@@ -35,19 +36,19 @@ export const SimpleModal: Story = {
 			</Cell>
 		};
 		return (<>
-			<div style={{width: "400px"}}>
+			<Block style={{width: "400px"}}>
 				<p>Light Theme</p>
 				<Grid justifyContent={"space-between"}>
 					{["info", "success", "warning", "error"].map(v => InternalComp(v, {...args, variant: v as ModalVariant}))}
 				</Grid>
-			</div>
+			</Block>
 			<ThemeProvider theme={getTheme("dark")}>
-				<div style={{width: "400px"}}>
+				<Block style={{width: "400px"}}>
 					<p>Dark Theme</p>
 					<Grid justifyContent={"space-between"}>
 						{["info", "success", "warning", "error"].map(v => InternalComp(v, {...args, variant: v as ModalVariant}))}
 					</Grid>
-				</div>
+				</Block>
 			</ThemeProvider>
 		</>);
 	}

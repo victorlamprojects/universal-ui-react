@@ -3,6 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 
 import { Grid, Cell } from '../Grid/Grid';
+import Block from '../Container/Block';
 import Button from './Button';
 import { getTheme } from '../../theme';
 
@@ -23,19 +24,19 @@ export const SimpleButton: Story = {
 			return <Cell><Button variant={variant} {...args} >{text}</Button></Cell>
 		};
 		return (<>
-			<div style={{width: "400px"}}>
+			<Block style={{width: "400px"}}>
 				<p>Light Theme</p>
 				<Grid justifyContent={"space-between"}>
 					{["info", "success", "warning", "error"].map(v => InternalComp(v, v[0].toUpperCase() + v.slice(1)))}
 				</Grid>
-			</div>
+			</Block>
 			<ThemeProvider theme={getTheme("dark")}>
-				<div style={{width: "400px"}}>
+				<Block style={{width: "400px"}}>
 					<p>Dark Theme</p>
 					<Grid justifyContent={"space-between"}>
 						{["info", "success", "warning", "error"].map(v => InternalComp(v, v[0].toUpperCase() + v.slice(1)))}
 					</Grid>
-				</div>
+				</Block>
 			</ThemeProvider>
 		</>);
 	}

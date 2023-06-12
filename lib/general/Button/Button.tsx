@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import styled, { CSSProperties } from 'styled-components';
-import { ButtonVariant, ButtonEffect } from '../../constants';
+import { Padding, ButtonVariant, ButtonEffect } from '../../constants';
 import { ThemeType, Light } from '../../theme';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -49,7 +49,7 @@ const Button = styled.button<ButtonProps>(({ style, theme, variant="info", effec
 		outline: "none",
 		border: "none",
 		borderRadius: "8px",
-		padding: "8px 12px",
+		padding: Padding.Button,
 		margin: "8px 10px",
 		backgroundColor: theme[variant],
 		color: theme.button.text,

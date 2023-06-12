@@ -34,7 +34,7 @@ export const Dark: ThemeType = {
 	success: "#0f9d58",
 	warning: "#d5a439",
 	error: "#d23f31",
-	primary: "#42b9f5",
+	primary: "#C8FACD",
 	secondary: "#828282",
 	card: {
 		primary: "#02aab0",
@@ -57,10 +57,10 @@ export const Light: ThemeType = {
 	sidebar: "#D6E4FF",
 	block: "#e3e3e3",
 	info: "#74CAFF",
-	success: "#AAF27F",
-	warning: "#FFE16A",
+	success: "#82e846",
+	warning: "#f7d54d",
 	error: "#FFA48D",
-	primary: "#C8FACD",
+	primary: "#42b9f5",
 	secondary: "#D6E4FF",
 	card: {
 		primary: "#8e2de2",
