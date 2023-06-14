@@ -1,8 +1,8 @@
 import { FC, HTMLAttributes, CSSProperties } from "react";
 import styled, { css, keyframes } from 'styled-components';
 import Portal from '../Container/Portal';
-import { FontSize, Padding, ModalVariant } from '../../constants';
-import { ThemeType, Light } from '../../theme';
+import { FontSize, Padding, ModalVariant } from '../../config/constants';
+import { ThemeType, Light } from '../../theme/theme';
 
 // Modal Backdrop
 const ModalBackdrop = styled.div<HTMLAttributes<HTMLDivElement> & { show: boolean }>(({ show, style })=>{
@@ -57,7 +57,7 @@ const ModalHeader = styled.div(({style}) => {
 	return {
 		width: "100%",
 		minHeight: "24px",
-		maxHeight: `calc(${FontSize.ModalHeader} + 1.25em)`,
+		maxHeight: `calc(${FontSize.ModalTitle} + 1.25em)`,
 		display: "block",
 		position: "relative",
 		backgroundColor: "inherit",
@@ -70,7 +70,7 @@ const ModalHeader = styled.div(({style}) => {
 // Modal Title
 const ModalTitle = styled.p(({style}) => {
 	return {
-		fontSize: FontSize.ModalHeader,
+		fontSize: FontSize.ModalTitle,
 		textAlign: "center",
 		display: "inline-block",
 		margin: "0.25em 0",
@@ -81,9 +81,9 @@ const ModalTitle = styled.p(({style}) => {
 // Modal Close
 const ModalClose = styled.span(({style}) => {
 	return {
-		fontSize: FontSize.ModalHeader,
-		width: FontSize.ModalHeader,
-		height: FontSize.ModalHeader,
+		fontSize: FontSize.ModalTitle,
+		width: FontSize.ModalTitle,
+		height: FontSize.ModalTitle,
 		position: "absolute",
 		right: 0,
 		top: "0.25em",

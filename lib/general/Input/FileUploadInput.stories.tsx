@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import FileUploadInput from './FileUploadInput';
 import Block from '../Container/Block';
-import { getTheme } from '../../theme';
+import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof FileUploadInput> = {
 	title: 'VictorLam/Input',

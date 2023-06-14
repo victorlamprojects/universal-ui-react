@@ -11,15 +11,17 @@ export const enum IconType {
 }
 
 export const FontSize = {
-	Header: "1.875em",
-	Text: "1.5em",
-	ModalHeader: "1.875em",
-	ModalText: "1.5em"
+	Header: "1.375rem",
+	Title: "1.375rem",
+	Text: "1.25rem",
+	ModalTitle: "1.75rem",
+	ModalText: "1.5rem"
 }
 
 export const Padding = {
 	Button: "8px 12px",
-	Container: "8px 12px"
+	Container: "8px 12px",
+	Header: "12px 18px"
 }
 
 export const enum ModalVariant {
@@ -30,15 +32,23 @@ export const enum ModalVariant {
 }
 
 export const enum ButtonVariant {
+	Default="default",
 	Info="info",
 	Success="success",
 	Warning="warning",
 	Error="error"
 }
 
-export const enum ButtonEffect {
+export const enum HoverEffect {
 	None="none",
 	Enlarge="enlarge",
-	Transparent="transparent",
+	Opaque="opaque",
+	Solidify="solidify"
+}
+
+export const enum ActiveEffect {
+	None="none",
+	Enlarge="enlarge",
+	Opaque="opaque",
 	Solidify="solidify"
 }

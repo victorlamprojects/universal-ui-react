@@ -27,14 +27,14 @@ export type ThemeType = {
 export const Dark: ThemeType = {
 	text: "#e3e3e3",
 	background: "#1e1e1e",
-	header: "#000",
+	header: "#1e1e1e",
 	sidebar: "#121212",
 	block: "#171717",
 	info: "#398AD7",
 	success: "#0f9d58",
 	warning: "#d5a439",
 	error: "#d23f31",
-	primary: "#C8FACD",
+	primary: "#60C689",
 	secondary: "#828282",
 	card: {
 		primary: "#02aab0",
@@ -52,8 +52,8 @@ export const Dark: ThemeType = {
 
 export const Light: ThemeType = {
 	text: "#212121",
-	background: "#FFFFFF",
-	header: "#84A9FF",
+	background: "#fff",
+	header: "#fff",
 	sidebar: "#D6E4FF",
 	block: "#e3e3e3",
 	info: "#74CAFF",

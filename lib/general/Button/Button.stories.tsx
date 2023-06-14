@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { Grid, Cell } from '../Grid/Grid';
 import Block from '../Container/Block';
 import Button from './Button';
-import { getTheme } from '../../theme';
+import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Button> = {
 	title: 'VictorLam/Button',
@@ -57,9 +57,9 @@ export const ButtonWithEffects: Story = {
 				</Grid>
 			</div>
 			<div style={{width: "400px"}}>
-				<p>Transparent</p>
+				<p>Opaque</p>
 				<Grid justifyContent={"space-between"}>
-					{["info", "success", "warning", "error"].map(v => InternalComp(v, v[0].toUpperCase() + v.slice(1), "transparent"))}
+					{["info", "success", "warning", "error"].map(v => InternalComp(v, v[0].toUpperCase() + v.slice(1), "opaque"))}
 				</Grid>
 			</div>
 			<div style={{width: "400px"}}>

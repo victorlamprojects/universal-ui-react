@@ -1,6 +1,6 @@
 import styled, { CSSObject } from 'styled-components';
-import { Light } from '../../theme';
-import { Padding } from '../../constants';
+import { Light } from '../../theme/theme';
+import { Padding } from '../../config/constants';
 
 const Block = styled.div(({style, theme}) => {
 	theme = Object.keys(theme).length === 0 ? Light : theme;

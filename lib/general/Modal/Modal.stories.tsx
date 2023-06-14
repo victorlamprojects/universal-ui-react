@@ -7,8 +7,8 @@ import { Grid, Cell } from '../Grid/Grid';
 import Block from '../Container/Block';
 import Button from '../Button/Button';
 
-import { ModalVariant } from '../../constants';
-import { getTheme } from '../../theme';
+import { ModalVariant } from '../../config/constants';
+import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Modal> = {
 	title: 'VictorLam/Modal',

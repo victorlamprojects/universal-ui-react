@@ -1,8 +1,8 @@
 import { FC, ChangeEvent, DragEvent } from "react";
 import styled, { CSSObject } from "styled-components";
 
-import { FontSize, Padding } from '../../constants';
-import { Light } from '../../theme';
+import { FontSize, Padding } from '../../config/constants';
+import { Light } from '../../theme/theme';
 
 
 const Container = styled.div(() => {
