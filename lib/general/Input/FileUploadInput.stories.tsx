@@ -1,4 +1,4 @@
-import { useState, ComponentProps } from 'react';
+import React, { useState, ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 
