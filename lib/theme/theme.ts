@@ -21,6 +21,11 @@ export type ThemeType = {
 	button: {
 		text: string;
 		background: string;
+	},
+	table: {
+		header: string,
+		primary: string,
+		secondary: string
 	}
 };
 
@@ -47,6 +52,11 @@ export const Dark: ThemeType = {
 	button: {
 		text: "#fff",
 		background: "#25aea6"
+	},
+	table: {
+		header: "#575041",
+		primary: "#424242",
+		secondary: "#60C689"
 	}
 }
 
@@ -61,7 +71,7 @@ export const Light: ThemeType = {
 	warning: "#f7d54d",
 	error: "#FFA48D",
 	primary: "#42b9f5",
-	secondary: "#D6E4FF",
+	secondary: "#fefedd",
 	card: {
 		primary: "#8e2de2",
 		primary2: "#4a00e0",
@@ -73,6 +83,11 @@ export const Light: ThemeType = {
 	button: {
 		text: "#fff",
 		background: "#25aea6"
+	},
+	table: {
+		header: "#ac9d81",
+		primary: "#fefedd",
+		secondary: "#42b9f5"
 	}
 }
 

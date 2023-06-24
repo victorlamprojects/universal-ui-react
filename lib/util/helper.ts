@@ -62,3 +62,8 @@ export const getActiveEffect = (active: ActiveEffect, theme: ThemeType) => {
 	}
 	return effects;
 }
+
+export const isNumeric = (val: any) => {
+	const v = parseFloat(val);
+	return !isNaN(v) && !isNaN(val - 0);
+}

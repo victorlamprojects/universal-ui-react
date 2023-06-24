@@ -15,13 +15,20 @@ export const FontSize = {
 	Title: "1.375rem",
 	Text: "1.25rem",
 	ModalTitle: "1.75rem",
-	ModalText: "1.5rem"
+	ModalText: "1.5rem",
+	TableTitle: "1rem",
+	TableText: "1rem"
 }
 
 export const Padding = {
 	Button: "8px 12px",
 	Container: "8px 12px",
-	Header: "12px 18px"
+	Header: "12px 18px",
+	Table: "0.3rem 0.5rem"
+}
+
+export const Margin = {
+	Container: "0.5rem 0"
 }
 
 export const enum ModalVariant {

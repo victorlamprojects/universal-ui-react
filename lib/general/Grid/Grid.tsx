@@ -29,7 +29,7 @@ type CellProps = HTMLAttributes<HTMLDivElement> & {
 
 export const Cell = styled.div<CellProps>(({s, m, l}): any => {
 	const style = {
-		margin: "0.25rem 0",
+		margin: "0",
 		flexBasis: "auto"
 	};
 
