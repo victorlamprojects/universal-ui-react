@@ -2,7 +2,7 @@ import { FC, HTMLAttributes, CSSProperties } from "react";
 import styled, { css, keyframes } from 'styled-components';
 import Portal from '../Container/Portal';
 import { FontSize, Padding, ModalVariant } from '../../config/constants';
-import { ThemeType, Light } from '../../theme/theme';
+import { ThemeType, getDefaultThemeIfNotFound } from '../../theme/theme';
 
 // Modal Backdrop
 const ModalBackdrop = styled.div<HTMLAttributes<HTMLDivElement> & { show: boolean }>(({ show, style })=>{
@@ -125,7 +125,7 @@ const Modal: FC<ModalProps> = ({
 	enableBackgroundClick=true,variant="info",
 	...rest
 }) => {
-	theme = (!theme || (typeof theme === "object" && Object.keys(theme).length === 0)) ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	const ContainerStyle = theme && {
 		backgroundColor: theme.block,

@@ -64,7 +64,7 @@ export const Light: ThemeType = {
 	text: "#212121",
 	background: "#fff",
 	header: "#fff",
-	sidebar: "#D6E4FF",
+	sidebar: "#d2d3db",
 	block: "#e3e3e3",
 	info: "#74CAFF",
 	success: "#82e846",
@@ -96,6 +96,10 @@ export const getTheme = (theme: string) => {
 		return Dark;
 	}
 	return Light;
+}
+
+export const getDefaultThemeIfNotFound = (theme: ThemeType | undefined | null): ThemeType => {
+	return (!theme || (typeof theme === "object" && Object.keys(theme).length === 0)) ? Light : theme;
 }
 
 const theme = Light;

@@ -2,7 +2,7 @@ import { FC, ChangeEvent, DragEvent } from "react";
 import styled, { CSSObject } from "styled-components";
 
 import { FontSize, Padding } from '../../config/constants';
-import { Light } from '../../theme/theme';
+import { getDefaultThemeIfNotFound } from '../../theme/theme';
 
 
 const Container = styled.div(() => {
@@ -20,7 +20,7 @@ const Input = styled.input(()=>{
 	return s;
 });
 const Label = styled.label(({ theme }) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 	let s = {
 		display: "block",
 		position: "relative",

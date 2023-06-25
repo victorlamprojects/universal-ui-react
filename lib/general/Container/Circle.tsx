@@ -1,11 +1,11 @@
 import { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 
-const CircleContainer = styled.div((): any => {
+const CircleContainer = styled.div<HTMLAttributes<HTMLDivElement> & { size?: string }>(({ size }): any => {
 	return {
-		width: "100%",
+		width: size || "100%",
 		position: "relative",
-		paddingBottom: "100%"
+		paddingBottom: size || "100%"
 	}
 });
 const CircleContent = styled.div((): any => {
@@ -20,8 +20,8 @@ const CircleContent = styled.div((): any => {
 	};
 });
 
-const Circle: FC<HTMLAttributes<HTMLDivElement>> = ({children, ...rest})=>{
-	return (<CircleContainer {...rest} >
+const Circle: FC<HTMLAttributes<HTMLDivElement> & { size?: string}> = ({children, size, ...rest})=>{
+	return (<CircleContainer size={size} {...rest} >
 		<CircleContent>
 			{children}
 		</CircleContent>

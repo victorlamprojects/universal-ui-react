@@ -3,13 +3,11 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import Icon from './Icon';
 import Circle from '../Container/Circle';
+import Square from '../Container/Square';
 
 const meta: Meta<typeof Icon> = {
 	title: 'VictorLam/Icon',
-	component: Icon,
-	decorators: [
-		(Story) => (<div style={{width: "10em", height: "10em"}} ><Story /></div>)
-	]
+	component: Icon
 };
 
 export default meta;
@@ -21,7 +19,10 @@ export const SquareIcon: Story = {
 		width: "100%",
 		height: "100%",
 		src: "https://picsum.photos/200"
-	}
+	},
+	decorators: [
+		(Story) => (<Square size={"10em"}><Story /></Square>)
+	]
 }
 
 export const CircleIcon: Story = {
@@ -31,6 +32,6 @@ export const CircleIcon: Story = {
 		src: "https://picsum.photos/200"
 	},
 	decorators: [
-		(Story) => (<Circle><Story /></Circle>)
+		(Story) => (<Circle size={"10em"}><Story /></Circle>)
 	]
 }

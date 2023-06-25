@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from "react";
 import styled, { CSSProperties, CSSObject } from 'styled-components';
 import { Padding, ButtonVariant, HoverEffect } from '../../config/constants';
 import { getHoverEffect } from '../../util/helper';
-import { ThemeType, Light } from '../../theme/theme';
+import { ThemeType, getDefaultThemeIfNotFound } from '../../theme/theme';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	style?: CSSProperties;
@@ -12,7 +12,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const Button = styled.button<ButtonProps>(({ style, theme, variant="info", effect="none"}) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	let effects = getHoverEffect(effect as HoverEffect, theme, variant as ButtonVariant);
 	const s = theme && {

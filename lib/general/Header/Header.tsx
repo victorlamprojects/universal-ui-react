@@ -1,12 +1,12 @@
 import { FC, HTMLAttributes, LinkHTMLAttributes, CSSProperties, useState } from "react";
 import styled, { CSSObject, useTheme } from "styled-components";
 import { BreakPoints as mq, Padding, FontSize, HoverEffect, ActiveEffect } from "../../config/constants";
-import { Light } from '../../theme/theme';
+import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import { getHoverEffect, getActiveEffect } from '../../util/helper';
 
 const HamburgerMenu = styled.svg(() => {
 	let theme = useTheme();
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	return {
 		display: "block",
@@ -63,7 +63,7 @@ const HeaderItemContainer = styled.div<HTMLAttributes<HTMLDivElement> & {effects
 	} as CSSObject;
 });
 export const HeaderItem = styled.a.attrs<LinkHTMLAttributes<HTMLLinkElement>>(() => ({ className: "header-item" }))(({ theme, style }) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	let s = {
 		display: "block",
@@ -94,7 +94,7 @@ type HeaderProps = HTMLAttributes<HTMLDivElement> & {
 export const Header: FC<HeaderProps> = (({ style, children, hover=HoverEffect.None, active=ActiveEffect.None, ...args}) => {
 	const [collapsed, setCollapsed] = useState(true);
 	let theme = useTheme();
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	let effects = {
 		...getHoverEffect(hover, theme),

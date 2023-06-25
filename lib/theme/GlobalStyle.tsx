@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 	html, body {
 		padding: 0;
 		margin: 0;
+		height: 100%;
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: ${FontSize.Text};
 		color: ${props => props.theme.text};

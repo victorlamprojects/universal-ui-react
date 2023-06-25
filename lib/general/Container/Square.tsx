@@ -1,11 +1,11 @@
 import { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 
-const SquareContainer = styled.div((): any => {
+const SquareContainer = styled.div<HTMLAttributes<HTMLDivElement> & { size?: string }>(({ size }): any => {
 	return {
-		width: "100%",
+		width: size || "100%",
 		position: "relative",
-		paddingBottom: "100%"
+		paddingBottom: size || "100%"
 	}
 });
 
@@ -19,8 +19,8 @@ const SquareContent = styled.div((): any => {
 	};
 });
 
-const Square: FC<HTMLAttributes<HTMLDivElement>> = ({children, ...rest})=>{
-	return (<SquareContainer {...rest} >
+const Square: FC<HTMLAttributes<HTMLDivElement> & { size?: string}> = ({children, size, ...rest})=>{
+	return (<SquareContainer size={size} {...rest} >
 		<SquareContent>
 			{children}
 		</SquareContent>

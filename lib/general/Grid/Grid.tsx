@@ -21,14 +21,19 @@ export const Grid = styled.div<GridProps>(({justifyContent="flex-start", alignIt
 });
 
 
-type CellProps = HTMLAttributes<HTMLDivElement> & {
+export type CellProps = HTMLAttributes<HTMLDivElement> & {
 	s?: number;
 	m?: number;
 	l?: number;
+	justifyContent?: string;
+	alignItems?: string;
 }
 
-export const Cell = styled.div<CellProps>(({s, m, l}): any => {
+export const Cell = styled.div<CellProps>(({s, m, l, justifyContent="flex-start", alignItems="center"}): any => {
 	const style = {
+		display: "flex",
+		justifyContent: justifyContent,
+		alignItems: alignItems,
 		margin: "0",
 		flexBasis: "auto"
 	};

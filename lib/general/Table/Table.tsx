@@ -1,12 +1,12 @@
 import { FC, useState, TableHTMLAttributes } from "react";
 import styled from 'styled-components';
 import { Padding, FontSize } from '../../config/constants';
-import { Light } from '../../theme/theme';
+import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import { TRow, TCol, getDefaultHeaderView, getOverridenHeaderView } from './Table.type';
 
 // Table
 const TableContainer = styled.table<TableHTMLAttributes<HTMLTableElement> & {bordered?: boolean}>(({style, theme, bordered}) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	return {
 		background: "inherit",
@@ -21,14 +21,14 @@ const TableBody = styled.tbody``;
 
 // Table Header
 const TableHeaderContainer = styled.tr(({theme}) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 	return {
 		backgroundColor: theme.table.header,
 		borderBottom: `1px solid ${theme.text}`
 	};
 });
 const TableHeader = styled.th<TableHTMLAttributes<HTMLTableElement> & {bordered?: boolean}>(({style, theme, bordered}) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	return {
 		padding: Padding.Table,
@@ -47,7 +47,7 @@ const TableHeader = styled.th<TableHTMLAttributes<HTMLTableElement> & {bordered?
 
 // Table Content
 const TableRow = styled.tr<TableHTMLAttributes<HTMLTableElement> & {striped?: boolean}>(({theme, striped}) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 	return {
 		"&:nth-child(even)": {
 			backgroundColor: striped ? theme.table.primary : "none"
@@ -58,7 +58,7 @@ const TableRow = styled.tr<TableHTMLAttributes<HTMLTableElement> & {striped?: bo
 	};
 });
 const TableData = styled.td<TableHTMLAttributes<HTMLTableElement> & {bordered?: boolean}>(({style, theme, bordered}) => {
-	theme = Object.keys(theme).length === 0 ? Light : theme;
+	theme = getDefaultThemeIfNotFound(theme);
 
 	return {
 		padding: Padding.Table,
