@@ -5,11 +5,6 @@ export const enum BreakPoints {
 	l = "@media only screen and (min-width: 992px)"
 }
 
-export const enum IconType {
-	Square,
-	Circle
-}
-
 export const FontSize = {
 	Header: "1.375rem",
 	Title: "1.375rem",

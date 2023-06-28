@@ -1,7 +1,13 @@
 import { FC, HTMLAttributes, ComponentType, Children, cloneElement, ReactElement, useState } from "react";
-import styled, { useTheme, CSSObject }  from "styled-components";
+import styled, { CSSObject }  from "styled-components";
 import { Grid, Cell, CellProps } from "../Grid/Grid";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
+
+// Types
+export const enum MultiTabLayoutType {
+	Default="default",
+	Bar="bar"
+};
 
 // Main Container
 const MultiTabContainer = styled.div(({theme}) => {
@@ -20,6 +26,7 @@ const MultiTabContainer = styled.div(({theme}) => {
 // MultiTab
 type MultiTabProps = CellProps & {
 	tabContent: ComponentType | JSX.Element | Element;
+	type?: MultiTabLayoutType;
 };
 const MultiTabGroup = styled(Grid)(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
@@ -34,8 +41,30 @@ const MultiTabGroup = styled(Grid)(({theme}) => {
 		color: theme.text
 	};
 });
-export const MultiTab = styled(Cell)<MultiTabProps>(({theme}) => {
+export const MultiTab = styled(Cell)<MultiTabProps>(({theme, type}) => {
 	theme = getDefaultThemeIfNotFound(theme);
+
+	let effects = {};
+	if(type === MultiTabLayoutType.Default) {
+		effects = {
+			"&.active": {
+				backgroundColor: "transparent",
+				"*:has(+&)": {
+					borderTopRightRadius: "10px"
+				},
+				"& + *": {
+					borderTopLeftRadius: "10px"
+				},
+			}
+		}
+	}
+	else if(type === MultiTabLayoutType.Bar){
+		effects = {
+			"&.active": {
+				boxShadow: `0 -1px 0 ${theme.text}`
+			}
+		}
+	}
 
 	return {
 		userSelect: "none",
@@ -45,18 +74,10 @@ export const MultiTab = styled(Cell)<MultiTabProps>(({theme}) => {
 		alignItems: "center",
 		flexGrow: 1,
 		backgroundColor: theme.sidebar,
-		"&.active": {
-			backgroundColor: "transparent",
-			"*:has(+&)": {
-				borderTopRightRadius: "10px"
-			},
-			"& + *": {
-				borderTopLeftRadius: "10px"
-			},
-		},
 		"&:hover": {
 			cursor: "pointer"
-		}
+		},
+		...effects
 	} as CSSObject;
 });
 
@@ -69,8 +90,10 @@ const MultiTabContent = styled.div(({theme}) => {
 	};
 });
 
-
-export const MultiTabLayout: FC<HTMLAttributes<HTMLDivElement>> = ({children, ...rest}) => {
+type MultiTabLayoutProps = HTMLAttributes<HTMLDivElement> & {
+	type?: MultiTabLayoutType;
+}
+export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, type=MultiTabLayoutType.Default, ...rest}) => {
 	const childrenArr = Children.toArray(children);
 	const [tab, setTab] = useState< number>(0);
 
@@ -81,6 +104,7 @@ export const MultiTabLayout: FC<HTMLAttributes<HTMLDivElement>> = ({children, ..
 					return (<>
 						{
 							cloneElement(child, {
+								type: type,
 								className: i === tab ? "active" : "",
 								onClick: () => {
 									setTab(i);

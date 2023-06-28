@@ -1,9 +1,8 @@
-
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 
-import { MultiTabLayout, MultiTab } from './MultiTabLayout';
+import { MultiTabLayoutType, MultiTabLayout, MultiTab } from './MultiTabLayout';
 import Block from '../Container/Block';
 import Circle from '../Container/Circle';
 import Icon from '../Icon/Icon';
@@ -20,36 +19,19 @@ export default meta;
 
 type Story = StoryObj<typeof MultiTabLayout>;
 
-const Tab1 = () => {
-	return (<Block>
-		Tab 1 Content
-	</Block>);
-}
-
-const Tab2 = () => {
-	return (<Block>
-		Tab 2 Content
-	</Block>);
-}
-const Tab3 = () => {
-	return (<Block>
-		Tab 3 Content
-	</Block>);
-}
-const Tab4 = () => {
-	return (<Block>
-		Tab 4 Content
-	</Block>);
-}
+const Tab1 = () => (<Block>Tab 1 Content</Block>);
+const Tab2 = () => (<Block>Tab 2 Content</Block>);
+const Tab3 = () => (<Block>Tab 3 Content</Block>);
+const Tab4 = () => (<Block>Tab 4 Content</Block>);
 
 export const NormalMultiTabLayoutWithDarkTheme: Story = {
 	args: {
 	},
-	render: () => {
+	render: (args: ComponentProps<typeof MultiTabLayout>) => {
 		return (
 			<ThemeProvider theme={getTheme("dark")}>
 				<GlobalStyle />
-				<MultiTabLayout>
+				<MultiTabLayout {...args}>
 					<MultiTab tabContent={<Tab1 />}>
 						Tab1
 					</MultiTab>
@@ -88,14 +70,22 @@ export const NormalMultiTabLayoutWithDarkTheme: Story = {
 	}
 }
 
+export const SolidMultiTabLayoutWithDarkTheme: Story = {
+	args: {
+		type: MultiTabLayoutType.Bar
+	},
+	render: NormalMultiTabLayoutWithDarkTheme.render
+}
+
+// Light Theme
 export const NormalMultiTabLayoutWithLightTheme: Story = {
 	args: {
 	},
-	render: () => {
+	render: (args: ComponentProps<typeof MultiTabLayout>) => {
 		return (
 			<ThemeProvider theme={getTheme("light")}>
 				<GlobalStyle />
-				<MultiTabLayout>
+				<MultiTabLayout {...args}>
 					<MultiTab tabContent={<Tab1 />}>
 						Tab1
 					</MultiTab>
@@ -132,4 +122,11 @@ export const NormalMultiTabLayoutWithLightTheme: Story = {
 			</ThemeProvider>
 		)
 	}
+}
+
+export const SolidMultiTabLayoutWithLightTheme: Story = {
+	args: {
+		type: MultiTabLayoutType.Bar
+	},
+	render: NormalMultiTabLayoutWithLightTheme.render
 }
