@@ -3,12 +3,12 @@ import { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 
 import { Header, HeaderItem } from './Header';
-import { getTheme } from '../../theme/theme';
-import GlobalStyle from '../../theme/GlobalStyle';
-import { HoverEffect, ActiveEffect } from '../../config/constants';
+import { getTheme } from '../../../theme/theme';
+import GlobalStyle from '../../../theme/GlobalStyle';
+import { HoverEffect, ActiveEffect } from '../../../config/constants';
 
 const meta: Meta<typeof Header> = {
-	title: 'VictorLam/Header',
+	title: 'VictorLam/Layout/Header',
 	component: Header
 };
 

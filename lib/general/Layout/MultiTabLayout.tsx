@@ -61,7 +61,7 @@ export const MultiTab = styled(Cell)<MultiTabProps>(({theme, type}) => {
 	else if(type === MultiTabLayoutType.Bar){
 		effects = {
 			"&.active": {
-				boxShadow: `0 -1px 0 ${theme.text}`
+				boxShadow: `0 -1px 0 ${theme.primary}`
 			}
 		}
 	}

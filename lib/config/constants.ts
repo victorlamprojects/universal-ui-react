@@ -12,14 +12,18 @@ export const FontSize = {
 	ModalTitle: "1.75rem",
 	ModalText: "1.5rem",
 	TableTitle: "1rem",
-	TableText: "1rem"
+	TableText: "1rem",
+	FormTitle: "1.375rem",
+	FormText: "1rem",
+	FormGroupText: "0.9rem"
 }
 
 export const Padding = {
 	Button: "8px 12px",
 	Container: "8px 12px",
 	Header: "12px 18px",
-	Table: "0.3rem 0.5rem"
+	Table: "0.3rem 0.5rem",
+	Input: "4px 6px"
 }
 
 export const Margin = {

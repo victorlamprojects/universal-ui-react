@@ -1,8 +1,8 @@
 import { FC, HTMLAttributes, LinkHTMLAttributes, CSSProperties, useState } from "react";
 import styled, { CSSObject, useTheme } from "styled-components";
-import { BreakPoints as mq, Padding, FontSize, HoverEffect, ActiveEffect } from "../../config/constants";
-import { getDefaultThemeIfNotFound } from '../../theme/theme';
-import { getHoverEffect, getActiveEffect } from '../../util/helper';
+import { BreakPoints as mq, Padding, FontSize, HoverEffect, ActiveEffect } from "../../../config/constants";
+import { getDefaultThemeIfNotFound } from '../../../theme/theme';
+import { getHoverEffect, getActiveEffect } from '../../../util/helper';
 
 const HamburgerMenu = styled.svg(() => {
 	let theme = useTheme();

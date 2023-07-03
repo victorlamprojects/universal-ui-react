@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 import styled from "styled-components";
 import { BreakPoints as mq } from "../../config/constants";
 
-type GridProps = HTMLAttributes<HTMLDivElement> & {
+export type GridProps = HTMLAttributes<HTMLDivElement> & {
 	justifyContent?: string;
 	alignItems?: string;
 }
