@@ -17,7 +17,7 @@ import Button from "../Button/Button";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import { FData, FState, FElementBaseProps } from './Form.type';
 import { FontSize, Padding } from '../../config/constants';
-import { TextInput } from '../Input';
+import { TextInput, DateInput } from '../Input';
 
 // Form Container
 const FormContainer = styled.form(({ theme }) => {
@@ -88,11 +88,18 @@ export const FormLabel = styled(Cell)<FElementBaseProps & LabelHTMLAttributes<HT
 		}
 	};
 });
-type FormTextInputProps = ComponentProps<typeof TextInput> & FElementBaseProps;
-export const FormTextInput = styled(TextInput)<FormTextInputProps>(({theme}) => {
+export const FormTextInput = styled(TextInput)<ComponentProps<typeof TextInput> & FElementBaseProps>(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 	return {
-		"&>input:not([type]),&>input[type=text],&>input[type=password]": {
+		"&>input:not([type]),&>input[type=text],&>input[type=password],&>input[type=email]": {
+			fontSize: FontSize.FormText
+		}
+	};
+});
+export const FormDateInput = styled(DateInput)<ComponentProps<typeof DateInput> & FElementBaseProps>(({theme}) => {
+	theme = getDefaultThemeIfNotFound(theme);
+	return {
+		"&>input[type=date]": {
 			fontSize: FontSize.FormText
 		}
 	};
@@ -141,15 +148,15 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 					children: (<Grid style={{margin: "0"}}>{child.props.children}</Grid>)
 				});
 			}
-			else if(elType === FormTextInput){
+			else if(elType === FormTextInput || elType === FormDateInput){
 				const { s, m, l, name, defaultValue, ...rest } = child.props;
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormTextInput>>, {
+				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormDateInput>>, {
 					s: s || 12,
 					m: m || 6,
 					l: l || 6,
 					value: formState.has(name) ? formState.get(name) : defaultValue,
-					onChange: (e: FormEvent<HTMLInputElement>) => {
-						updateState(name, e.currentTarget.value);
+					onChange: (d: FData) => {
+						updateState(name, d);
 					},
 					...rest
 				});

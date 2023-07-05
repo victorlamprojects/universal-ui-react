@@ -24,7 +24,7 @@ const Tab2 = () => (<Block>Tab 2 Content</Block>);
 const Tab3 = () => (<Block>Tab 3 Content</Block>);
 const Tab4 = () => (<Block>Tab 4 Content</Block>);
 
-export const NormalMultiTabLayoutWithDarkTheme: Story = {
+export const MultiTabLayoutWithDarkTheme: Story = {
 	args: {
 	},
 	render: (args: ComponentProps<typeof MultiTabLayout>) => {
@@ -74,11 +74,11 @@ export const SolidMultiTabLayoutWithDarkTheme: Story = {
 	args: {
 		type: MultiTabLayoutType.Bar
 	},
-	render: NormalMultiTabLayoutWithDarkTheme.render
+	render: MultiTabLayoutWithDarkTheme.render
 }
 
 // Light Theme
-export const NormalMultiTabLayoutWithLightTheme: Story = {
+export const MultiTabLayoutWithLightTheme: Story = {
 	args: {
 	},
 	render: (args: ComponentProps<typeof MultiTabLayout>) => {
@@ -128,5 +128,5 @@ export const SolidMultiTabLayoutWithLightTheme: Story = {
 	args: {
 		type: MultiTabLayoutType.Bar
 	},
-	render: NormalMultiTabLayoutWithLightTheme.render
+	render: MultiTabLayoutWithLightTheme.render
 }
