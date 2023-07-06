@@ -2,7 +2,7 @@ import {
 	FC,
 	ReactNode,
 	Children,
-	FormEvent,
+	MouseEvent,
 	FormHTMLAttributes,
 	LabelHTMLAttributes,
 	ComponentProps,
@@ -104,14 +104,18 @@ export const FormDateInput = styled(DateInput)<ComponentProps<typeof DateInput> 
 		}
 	};
 });
-
-export const FormSubmitButton = styled(Button)<ComponentProps<typeof Button> & FElementBaseProps>(({theme}) => {
+export const FormSubmitButton = styled(Cell)<ComponentProps<typeof Button> & FElementBaseProps>(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
-	return {};
+	return {
+		"& > * > button":{
+			backgroundColor: theme.primary,
+			fontSize: FontSize.FormText
+		}
+	};
 });
 
-type FormProps = FormHTMLAttributes<HTMLFormElement> & {
+type FormProps = Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit"> & {
 	onSubmit?: (formState: FState) => void
 };
 
@@ -132,12 +136,20 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 			let newChild = child as ReactElement<any>;
 			const elType = newChild.type;
 			if(elType === FormSubmitButton){
+				const { justifyContent, children, ...rest } = child.props;
 				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSubmitButton>>, {
-					onClick: () => {
-						if(onSubmit){
-							onSubmit(Object.fromEntries(formState));
-						}
-					}
+					s: 12,
+					m: 12,
+					l: 12,
+					children: <Grid justifyContent={justifyContent || "flex-end"} >
+						<Button {...rest} onClick={ (e: MouseEvent<HTMLButtonElement>) => {
+							e.preventDefault();
+							e.stopPropagation();
+							if(onSubmit){
+								onSubmit(Object.fromEntries(formState));
+							}
+						}}>{children}</Button>
+					</Grid>
 				});
 			}
 			else if(elType === FormRow){
@@ -145,16 +157,19 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 					s: child.props.s || 12,
 					m: child.props.m || 12,
 					l: child.props.l || 12,
-					children: (<Grid style={{margin: "0"}}>{child.props.children}</Grid>)
+					children: (<Grid style={{margin: "0", justifyContent: child.props.justifyContent || "flex-start" }}>{child.props.children}</Grid>)
 				});
 			}
 			else if(elType === FormTextInput || elType === FormDateInput){
 				const { s, m, l, name, defaultValue, ...rest } = child.props;
+				if(!formState.has(name)){
+					formState.set(name, defaultValue || child.props.value || null);
+				}
 				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormDateInput>>, {
 					s: s || 12,
 					m: m || 6,
 					l: l || 6,
-					value: formState.has(name) ? formState.get(name) : defaultValue,
+					value: formState.get(name),
 					onChange: (d: FData) => {
 						updateState(name, d);
 					},

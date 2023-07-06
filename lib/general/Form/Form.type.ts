@@ -9,6 +9,7 @@ export type FState = {
 };
 
 export type FElementBaseProps = CellProps & {
+	label?: string;
 };
 
 // Configured Form

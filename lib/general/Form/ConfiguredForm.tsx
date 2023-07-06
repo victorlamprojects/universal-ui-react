@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Form, FormTitle, FormGroup, FormRow, FormLabel, FormTextInput, FormDateInput } from './Form';
+import { Form, FormTitle, FormGroup, FormRow, FormLabel, FormTextInput, FormDateInput, FormSubmitButton } from './Form';
 import { FState, FConfiguration, FConfigurationElement, FConfigurationGroup } from './Form.type';
 import { DatetimeType } from "../Input/DateInput";
 
@@ -9,22 +9,24 @@ type ConfiguredFormProps = {
 };
 
 const getFormElement = (key: string, config: FConfigurationElement) => {
-	let input = null;
+	let element = null;
 	const { label, type, datetimeType, ...rest } = config;
 	if(type === "text" || type === "password" || type === "email"){
-		input = <FormTextInput name={key} type={type} {...rest} />
+		element = (<FormRow>
+			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
+			<FormTextInput name={key} type={type} {...rest} />
+		</FormRow>);
 	}
 	else if(type === "date"){
-		input = <FormDateInput name={key} datetimeType={datetimeType as DatetimeType} />
+		element = (<FormRow>
+			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
+			<FormDateInput name={key} datetimeType={datetimeType as DatetimeType} {...rest} />
+		</FormRow>);
 	}
-	return (<FormRow>
-		{
-			(label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel>
-		}
-		{
-			input
-		}
-	</FormRow>);
+	else if(type === "submit"){
+		element = (<FormSubmitButton name={key} {...rest}>{label}</FormSubmitButton>);
+	}
+	return element;
 }
 const getFormContent = (config: ({[key: string]: FConfigurationGroup | FConfigurationElement})): any => {
 	const formContent = [];
@@ -43,8 +45,8 @@ const getFormContent = (config: ({[key: string]: FConfigurationGroup | FConfigur
 	}
 	return formContent;
 };
-const ConfiguredForm: FC<ConfiguredFormProps> = ({ configuration }) => {
-	return (<Form>
+const ConfiguredForm: FC<ConfiguredFormProps> = ({ onSubmit, configuration }) => {
+	return (<Form onSubmit={onSubmit}>
 		{
 			configuration && configuration.title && (<FormTitle>{configuration.title}</FormTitle>)
 		}

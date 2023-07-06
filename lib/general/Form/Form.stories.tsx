@@ -3,7 +3,17 @@ import { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 
 import Block from '../Container/Block';
-import { Form, FormGroup, FormTitle, FormRow, FormLabel, FormTextInput, FormDateInput } from './Form';
+import {
+	Form,
+	FormGroup,
+	FormTitle,
+	FormRow,
+	FormLabel,
+	FormTextInput,
+	FormDateInput,
+	FormSubmitButton
+} from './Form';
+import { FState } from './Form.type';
 import ConfiguredForm from './ConfiguredForm';
 import GlobalStyle from '../../theme/GlobalStyle';
 import { getTheme } from '../../theme/theme';
@@ -21,7 +31,7 @@ type ConfiguredStory = StoryObj<typeof ConfiguredForm>;
 const getFormContent = (theme: string, args: any) => (<ThemeProvider theme={getTheme(theme)}>
 	<GlobalStyle />
 	<Block>
-		<Form {...args}>
+		<Form {...args} onSubmit={(d: FState)=>{alert(JSON.stringify(d))}}>
 			<FormTitle>{theme.charAt(0).toUpperCase()+theme.slice(1)} Form</FormTitle>
 			<FormGroup name={"Account"} >
 				<FormRow>
@@ -47,6 +57,7 @@ const getFormContent = (theme: string, args: any) => (<ThemeProvider theme={getT
 					<FormDateInput name={"birth-date"} datetimeType={"date-only"} />
 				</FormRow>
 			</FormGroup>
+			<FormSubmitButton>Submit</FormSubmitButton>
 		</Form>
 	</Block>
 </ThemeProvider>);
@@ -63,7 +74,7 @@ export const SimpleForm: Story = {
 }
 export const SimpleConfiguredForm: ConfiguredStory = {
 	args: {
-		onSubmit: (d) => alert(d),
+		onSubmit: (d: FState) => alert(JSON.stringify(d)),
 		configuration: {
 			title: "Configured Form",
 			content: {
@@ -111,6 +122,10 @@ export const SimpleConfiguredForm: ConfiguredStory = {
 							}
 						}
 					}
+				},
+				"Submit": {
+					type: "submit",
+					label: "Submit"
 				}
 			}
 		}
