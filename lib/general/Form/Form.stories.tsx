@@ -11,6 +11,7 @@ import {
 	FormLabel,
 	FormTextInput,
 	FormDateInput,
+	FormSwitchInput,
 	FormSubmitButton
 } from './Form';
 import { FState } from './Form.type';
@@ -55,6 +56,10 @@ const getFormContent = (theme: string, args: any) => (<ThemeProvider theme={getT
 				<FormRow>
 					<FormLabel htmlFor={"birth-date"}>Date of Birth</FormLabel>
 					<FormDateInput name={"birth-date"} datetimeType={"date-only"} />
+				</FormRow>
+				<FormRow>
+					<FormLabel htmlFor={"receive-noti"}>Receive Notification</FormLabel>
+					<FormSwitchInput name={"receive-noti"} type={"round"} />
 				</FormRow>
 			</FormGroup>
 			<FormSubmitButton>Submit</FormSubmitButton>
@@ -118,6 +123,10 @@ export const SimpleConfiguredForm: ConfiguredStory = {
 									type: "date",
 									label: "Date of Birth",
 									datetimeType: "date-only"
+								},
+								"married":{
+									type: "switch",
+									label: "Married"
 								}
 							}
 						}

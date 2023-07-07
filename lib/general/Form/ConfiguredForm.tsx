@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { Form, FormTitle, FormGroup, FormRow, FormLabel, FormTextInput, FormDateInput, FormSubmitButton } from './Form';
+import { Form, FormTitle, FormGroup, FormRow, FormLabel, FormTextInput, FormDateInput, FormSwitchInput, FormSubmitButton } from './Form';
 import { FState, FConfiguration, FConfigurationElement, FConfigurationGroup } from './Form.type';
 import { DatetimeType } from "../Input/DateInput";
+import { SwitchType } from "../Input/SwitchInput";
 
 type ConfiguredFormProps = {
 	onSubmit?: (formState: FState) => void;
@@ -10,7 +11,7 @@ type ConfiguredFormProps = {
 
 const getFormElement = (key: string, config: FConfigurationElement) => {
 	let element = null;
-	const { label, type, datetimeType, ...rest } = config;
+	const { label, type, datetimeType, switchType, ...rest } = config;
 	if(type === "text" || type === "password" || type === "email"){
 		element = (<FormRow>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
@@ -21,6 +22,12 @@ const getFormElement = (key: string, config: FConfigurationElement) => {
 		element = (<FormRow>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
 			<FormDateInput name={key} datetimeType={datetimeType as DatetimeType} {...rest} />
+		</FormRow>);
+	}
+	else if(type === "switch"){
+		element = (<FormRow>
+			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
+			<FormSwitchInput name={key} type={switchType || SwitchType.Round} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "submit"){

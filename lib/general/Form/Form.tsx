@@ -17,7 +17,7 @@ import Button from "../Button/Button";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import { FData, FState, FElementBaseProps } from './Form.type';
 import { FontSize, Padding } from '../../config/constants';
-import { TextInput, DateInput } from '../Input';
+import { TextInput, DateInput, SwitchInput } from '../Input';
 
 // Form Container
 const FormContainer = styled.form(({ theme }) => {
@@ -104,6 +104,14 @@ export const FormDateInput = styled(DateInput)<ComponentProps<typeof DateInput> 
 		}
 	};
 });
+export const FormSwitchInput = styled(SwitchInput)<ComponentProps<typeof SwitchInput> & FElementBaseProps>(({theme}) => {
+	theme = getDefaultThemeIfNotFound(theme);
+	return {
+		"&>input[type=checkbox]": {
+			fontSize: FontSize.FormText
+		}
+	};
+});
 export const FormSubmitButton = styled(Cell)<ComponentProps<typeof Button> & FElementBaseProps>(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
@@ -160,7 +168,7 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 					children: (<Grid style={{margin: "0", justifyContent: child.props.justifyContent || "flex-start" }}>{child.props.children}</Grid>)
 				});
 			}
-			else if(elType === FormTextInput || elType === FormDateInput){
+			else if(elType === FormTextInput || elType === FormDateInput || elType === FormSwitchInput){
 				const { s, m, l, name, defaultValue, ...rest } = child.props;
 				if(!formState.has(name)){
 					formState.set(name, defaultValue || child.props.value || null);

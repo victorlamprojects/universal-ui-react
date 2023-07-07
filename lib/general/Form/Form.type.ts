@@ -1,5 +1,6 @@
 import { CellProps } from "../Grid/Grid";
 import { DatetimeType } from "../Input/DateInput";
+import { SwitchType } from "../Input/SwitchInput";
 
 // Form
 export type FData = string | number | bigint | undefined | null | Date;
@@ -18,6 +19,7 @@ export type FConfigurationElement = {
 	defaultValue?: string;
 	label?: string;
 	datetimeType?: string | DatetimeType;
+	switchType?: SwitchType;
 	disabled?: boolean;
 }
 export type FConfigurationGroup = {
