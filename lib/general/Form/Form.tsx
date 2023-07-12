@@ -17,7 +17,7 @@ import Button from "../Button/Button";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import { FData, FState, FElementBaseProps } from './Form.type';
 import { FontSize, Padding } from '../../config/constants';
-import { TextInput, DateInput, SwitchInput } from '../Input';
+import { TextInput, DateInput, SwitchInput, Select } from '../Input';
 
 // Form Container
 const FormContainer = styled.form(({ theme }) => {
@@ -112,6 +112,14 @@ export const FormSwitchInput = styled(SwitchInput)<ComponentProps<typeof SwitchI
 		}
 	};
 });
+export const FormSelect = styled(Select)<ComponentProps<typeof Select> & FElementBaseProps>(({theme}) => {
+	theme = getDefaultThemeIfNotFound(theme);
+	return {
+		"& > select": {
+			fontSize: FontSize.FormText
+		}
+	};
+});
 export const FormSubmitButton = styled(Cell)<ComponentProps<typeof Button> & FElementBaseProps>(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
@@ -168,12 +176,46 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 					children: (<Grid style={{margin: "0", justifyContent: child.props.justifyContent || "flex-start" }}>{child.props.children}</Grid>)
 				});
 			}
-			else if(elType === FormTextInput || elType === FormDateInput || elType === FormSwitchInput){
+			else if(elType === FormSelect){
+				const { s, m, l, name, defaultValue, options, ...rest } = child.props;
+				if(!formState.has(name)){
+					formState.set(name, defaultValue || child.props.value || null);
+				}
+				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSelect>>, {
+					s: s || 12,
+					m: m || 6,
+					l: l || 6,
+					selected: formState.get(name),
+					onChange: (d: string) => {
+						updateState(name, d);
+					},
+					options: options,
+					...rest
+				});
+			}
+			else if(elType === FormSwitchInput){
+				const { s, m, l, name, defaultValue, type, ...rest } = child.props;
+				if(!formState.has(name)){
+					formState.set(name, defaultValue || child.props.value || null);
+				}
+				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSwitchInput>>, {
+					s: s || 1,
+					m: m || 1,
+					l: l || 1,
+					type: type,
+					value: formState.get(name),
+					onChange: (d: FData) => {
+						updateState(name, d);
+					},
+					...rest
+				});
+			}
+			else if(elType === FormTextInput || elType === FormDateInput){
 				const { s, m, l, name, defaultValue, ...rest } = child.props;
 				if(!formState.has(name)){
 					formState.set(name, defaultValue || child.props.value || null);
 				}
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormDateInput>>, {
+				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormTextInput>>, {
 					s: s || 12,
 					m: m || 6,
 					l: l || 6,
@@ -187,7 +229,7 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 			else if(elType === FormLabel){
 				const { s, m, l, ...rest } = child.props;
 				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormLabel>>, {
-					s: s || 12,
+					s: s || 10,
 					m: m || 4,
 					l: l || 3,
 				}, (<label {...rest}>{child.props.children}</label>));

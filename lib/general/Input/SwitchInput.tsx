@@ -16,7 +16,7 @@ type SwitchInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> 
 	l?: number;
 	name: string;
 	value?: boolean;
-	defaultValue?: boolean;
+	defaultValue?: string | boolean;
 	type?: string | SwitchType;
 	onChange?: (d: boolean)=>void;
 };
@@ -26,7 +26,7 @@ const InputContainer = styled(Cell)(({theme})=>{
 		margin: "0",
 		"& > label":{
 			position: "relative", display: "inline-block",
-			width: `calc(2 * ${FontSize.Text} - 4px * 2)`,
+			width: `calc(2 * ${FontSize.Text} - 3px * 2)`,
 			height: FontSize.Text,
 			"& > input[type=checkbox]": {
 				opacity: 0,
@@ -36,7 +36,7 @@ const InputContainer = styled(Cell)(({theme})=>{
 					backgroundColor: theme.primary
 				},
 				"&:checked + span:before": {
-					transform: `translate(calc(${FontSize.Text} - 4px * 2))`
+					transform: `translate(calc(${FontSize.Text} - 2px * 2))`
 				},
 				"&:focus + span": {
 					boxShadow: "0 0 1px #2196F3"
@@ -60,10 +60,10 @@ const Slider = styled.span<HTMLAttributes<HTMLSpanElement>  & {type: SwitchType}
 		borderRadius: type === SwitchType.Round ? FontSize.Text : "0",
 		"&:before": { position: "absolute",
 			content: "''",
-			left: "4px",
-			bottom: "4px",
-			width: `calc(${FontSize.Text} - 4px * 2)`,
-			height: `calc(${FontSize.Text} - 4px * 2)`,
+			left: "3px",
+			bottom: "3px",
+			width: `calc(${FontSize.Text} - 3px * 2)`,
+			height: `calc(${FontSize.Text} - 3px * 2)`,
 			backgroundColor: "#fff",
 			transition: "0.4s",
 			borderRadius: type === SwitchType.Round ? "50%" : "0",
@@ -73,7 +73,7 @@ const Slider = styled.span<HTMLAttributes<HTMLSpanElement>  & {type: SwitchType}
 const SwitchInput: FC<SwitchInputProps> = ({s, m, l, value, defaultValue, onChange, type=SwitchType.Round, ...rest}) => {
 	if((value === undefined || value === null) && onChange){
 		if(defaultValue !== undefined && defaultValue !== null){
-			onChange(defaultValue);
+			onChange(String(defaultValue).toLowerCase() === "true");
 		}
 		else{
 			onChange(false);

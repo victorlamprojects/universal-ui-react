@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Form, FormTitle, FormGroup, FormRow, FormLabel, FormTextInput, FormDateInput, FormSwitchInput, FormSubmitButton } from './Form';
+import { Form, FormTitle, FormGroup, FormRow, FormLabel, FormTextInput, FormDateInput, FormSwitchInput, FormSelect, FormSubmitButton } from './Form';
 import { FState, FConfiguration, FConfigurationElement, FConfigurationGroup } from './Form.type';
 import { DatetimeType } from "../Input/DateInput";
 import { SwitchType } from "../Input/SwitchInput";
@@ -11,23 +11,29 @@ type ConfiguredFormProps = {
 
 const getFormElement = (key: string, config: FConfigurationElement) => {
 	let element = null;
-	const { label, type, datetimeType, switchType, ...rest } = config;
+	const { label, type, options, defaultValue, datetimeType, switchType, justifyContent, ...rest } = config;
 	if(type === "text" || type === "password" || type === "email"){
-		element = (<FormRow>
+		element = (<FormRow justifyContent={justifyContent}>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
-			<FormTextInput name={key} type={type} {...rest} />
+			<FormTextInput name={key} type={type} defaultValue={defaultValue} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "date"){
-		element = (<FormRow>
+		element = (<FormRow justifyContent={justifyContent}>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
-			<FormDateInput name={key} datetimeType={datetimeType as DatetimeType} {...rest} />
+			<FormDateInput name={key} defaultValue={defaultValue} datetimeType={datetimeType as DatetimeType} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "switch"){
-		element = (<FormRow>
+		element = (<FormRow justifyContent={justifyContent}>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
-			<FormSwitchInput name={key} type={switchType || SwitchType.Round} {...rest} />
+			<FormSwitchInput name={key} defaultValue={defaultValue} type={switchType || SwitchType.Round} {...rest} />
+		</FormRow>);
+	}
+	else if(type === "select"){
+		element = (<FormRow justifyContent={justifyContent}>
+			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
+			<FormSelect name={key} selected={defaultValue} options={options} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "submit"){

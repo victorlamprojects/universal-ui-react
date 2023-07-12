@@ -31,12 +31,15 @@ const InputContainer = styled(Cell)(({theme})=>{
 			width: "100%",
 			border: "none",
 			outline: "none",
+			color: theme.input.text || "inherit",
+			backgroundColor: theme.input.background,
 			"&:focus": {
-				backgroundColor: theme.primary,
-				color: theme.button.text
+				backgroundColor: theme.input.focusBackground || theme.primary,
+				color: theme.input.focusText || "#fff"
 			},
 			"&:disabled": {
-				backgroundColor: "transparent",
+				backgroundColor: theme.input.disabledBackground || "transparent",
+				color: theme.input.disabledText || "inherit",
 				cursor: "text"
 			}
 		}

@@ -12,6 +12,7 @@ import {
 	FormTextInput,
 	FormDateInput,
 	FormSwitchInput,
+	FormSelect,
 	FormSubmitButton
 } from './Form';
 import { FState } from './Form.type';
@@ -46,6 +47,10 @@ const getFormContent = (theme: string, args: any) => (<ThemeProvider theme={getT
 			</FormGroup>
 			<FormGroup name={"Background Information"} >
 				<FormRow>
+					<FormLabel htmlFor={"sex"}>Sex</FormLabel>
+					<FormSelect name={"sex"} options={[{label: "M", value: "m"}, {label: "F", value: "f"}]}/>
+				</FormRow>
+				<FormRow>
 					<FormLabel htmlFor={"email"}>Email</FormLabel>
 					<FormTextInput name={"email"} disabled type={"email"} defaultValue={"lamwingtok@gmail.com"} />
 				</FormRow>
@@ -57,11 +62,11 @@ const getFormContent = (theme: string, args: any) => (<ThemeProvider theme={getT
 					<FormLabel htmlFor={"birth-date"}>Date of Birth</FormLabel>
 					<FormDateInput name={"birth-date"} datetimeType={"date-only"} />
 				</FormRow>
-				<FormRow>
-					<FormLabel htmlFor={"receive-noti"}>Receive Notification</FormLabel>
-					<FormSwitchInput name={"receive-noti"} type={"round"} />
-				</FormRow>
 			</FormGroup>
+			<FormRow justifyContent={"flex-end"}>
+				<FormLabel htmlFor={"receive-noti"}>Receive Notification</FormLabel>
+				<FormSwitchInput name={"receive-noti"} type={"round"} />
+			</FormRow>
 			<FormSubmitButton>Submit</FormSubmitButton>
 		</Form>
 	</Block>
@@ -103,6 +108,10 @@ export const SimpleConfiguredForm: ConfiguredStory = {
 						"Basic": {
 							group: true,
 							content: {
+								"sex": {
+									type: "select",
+									options: [{label: "M", value: "m"}, {label: "F", value: "f"}]
+								},
 								"email": {
 									type: "email",
 									label: "Email",
@@ -123,14 +132,15 @@ export const SimpleConfiguredForm: ConfiguredStory = {
 									type: "date",
 									label: "Date of Birth",
 									datetimeType: "date-only"
-								},
-								"married":{
-									type: "switch",
-									label: "Married"
 								}
 							}
 						}
 					}
+				},
+				"receive-noti":{
+					type: "switch",
+					label: "Receive Notification",
+					justifyContent: "flex-end"
 				},
 				"Submit": {
 					type: "submit",
