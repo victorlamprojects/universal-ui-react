@@ -1,6 +1,6 @@
 {
   "name": "universal-ui-react",
-  "version": "1.12.3",
+  "version": "1.12.4",
   "description": "A project that contains commonly used components",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "build": "yarn test && rm -rf dist && rollup -c --bundleConfigAsCjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-	"deploy-storybook": "gh-pages -d storybook-static",
+    "deploy-storybook": "gh-pages -d storybook-static",
     "deploy": "yarn build && npm version minor && yarn publish && git push && yarn build-storybook && yarn deploy-storybook",
     "fix": "yarn build && npm version patch && yarn publish && git push && yarn build-storybook && yarn deploy-storybook"
   },
