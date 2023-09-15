@@ -73,6 +73,7 @@
     "testEnvironment": "node"
   },
   "dependencies": {
+    "react-router-dom": "^6.15.0",
     "webpack": "^5.85.0"
   }
 }

@@ -32,10 +32,10 @@ export const MultiTabLayoutWithDarkTheme: Story = {
 			<ThemeProvider theme={getTheme("dark")}>
 				<GlobalStyle />
 				<MultiTabLayout {...args}>
-					<MultiTab tabContent={<Tab1 />}>
+					<MultiTab path={"/tab1"} component={<Tab1 />}>
 						Tab1
 					</MultiTab>
-					<MultiTab tabContent={<Tab2 />}>
+					<MultiTab path={"/tab2"} component={<Tab2 />}>
 						<Grid>
 							<Cell s={12} style={{justifyContent: "center"}}>
 								<Icon src="https://picsum.photos/200" />
@@ -45,14 +45,14 @@ export const MultiTabLayoutWithDarkTheme: Story = {
 							</Cell>
 						</Grid>
 					</MultiTab>
-					<MultiTab tabContent={<Tab3 />}>
+					<MultiTab path={"/tab3"} component={<Tab3 />}>
 						<Grid>
 							<Cell s={12} style={{justifyContent: "center"}}>
 								<Icon src="https://picsum.photos/200" />
 							</Cell>
 						</Grid>
 					</MultiTab>
-					<MultiTab tabContent={<Tab4 />}>
+					<MultiTab path={"/tab4"} component={<Tab4 />}>
 						<Grid>
 							<Cell s={12} style={{justifyContent: "center"}}>
 								<Circle size={"32px"}>
@@ -86,10 +86,10 @@ export const MultiTabLayoutWithLightTheme: Story = {
 			<ThemeProvider theme={getTheme("light")}>
 				<GlobalStyle />
 				<MultiTabLayout {...args}>
-					<MultiTab tabContent={<Tab1 />}>
+					<MultiTab path={"/tab1"} component={<Tab1 />}>
 						Tab1
 					</MultiTab>
-					<MultiTab tabContent={<Tab2 />}>
+					<MultiTab path={"/tab2"} component={<Tab2 />}>
 						<Grid>
 							<Cell s={12} style={{justifyContent: "center"}}>
 								<Icon src="https://picsum.photos/200" />
@@ -99,14 +99,14 @@ export const MultiTabLayoutWithLightTheme: Story = {
 							</Cell>
 						</Grid>
 					</MultiTab>
-					<MultiTab tabContent={<Tab3 />}>
+					<MultiTab path={"/tab3"} component={<Tab3 />}>
 						<Grid>
 							<Cell s={12} style={{justifyContent: "center"}}>
 								<Icon src="https://picsum.photos/200" />
 							</Cell>
 						</Grid>
 					</MultiTab>
-					<MultiTab tabContent={<Tab4 />}>
+					<MultiTab path={"/tab4"} component={<Tab4 />}>
 						<Grid>
 							<Cell s={12} style={{justifyContent: "center"}}>
 								<Circle size={"32px"}>

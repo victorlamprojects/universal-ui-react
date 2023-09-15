@@ -6,7 +6,7 @@ import {
 	BrowserRouter,
 	Routes,
 	Route,
-	NavLink,
+	Link,
 	LinkProps
 } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const MultiTabContainer = styled.div(({theme}) => {
 
 // MultiTab
 type MultiTabProps = CellProps & {
-	component: ReactNode | null;
+	component: ReactElement | null;
 	path: string;
 	children: ReactNode | null;
 	type?: MultiTabLayoutType;
@@ -51,7 +51,7 @@ const MultiTabGroup = styled(Grid)(({theme}) => {
 		color: theme.text
 	};
 });
-const MultiTabInternal = styled(NavLink)<LinkProps & {type?: MultiTabLayoutType}>(({theme, type}) => {
+const MultiTabInternal = styled(Link)<LinkProps & {type?: MultiTabLayoutType}>(({theme, type}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
 	let effects = {};
