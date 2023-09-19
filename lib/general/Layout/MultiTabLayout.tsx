@@ -1,14 +1,17 @@
-import { FC, HTMLAttributes, ReactNode, Children, cloneElement, ReactElement } from "react";
+import { FC, HTMLAttributes, ReactNode, Children, isValidElement, ReactElement, cloneElement } from "react";
 import styled, { CSSObject }  from "styled-components";
 import { Grid, Cell, CellProps } from "../Grid/Grid";
-import { getDefaultThemeIfNotFound } from '../../theme/theme';
+import { getDefaultThemeIfNotFound } from "../../theme/theme";
 import {
 	BrowserRouter,
 	Routes,
 	Route,
 	NavLink,
-	LinkProps
+	LinkProps,
+	useLocation,
+	Navigate
 } from "react-router-dom";
+import { assert } from "../../util/assert";
 
 // Types
 export const enum MultiTabLayoutType {
@@ -29,15 +32,6 @@ const MultiTabContainer = styled.div(({theme}) => {
 		flexDirection: "column-reverse"
 	};
 });
-
-// MultiTab
-type MultiTabProps = CellProps & {
-	component: ReactNode | null;
-	path: string;
-	children: ReactNode | null;
-	type?: MultiTabLayoutType;
-};
-export const MultiTab = styled(Cell)<MultiTabProps>;
 const MultiTabGroup = styled(Grid)(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 	return {
@@ -51,6 +45,15 @@ const MultiTabGroup = styled(Grid)(({theme}) => {
 		color: theme.text
 	};
 });
+
+// MultiTab
+type MultiTabProps = CellProps & {
+	component: ReactNode;
+	path: string;
+	children?: ReactNode;
+	auth?: boolean;
+};
+export const MultiTab: FC<MultiTabProps> = ({ children, ...rest }) => (<Cell {...rest}>{children}</Cell>);
 const MultiTabInternal = styled(NavLink)<LinkProps & {type?: MultiTabLayoutType}>(({theme, type}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
@@ -103,38 +106,70 @@ const MultiTabContent = styled.div(({theme}) => {
 	};
 });
 
-type MultiTabLayoutProps = HTMLAttributes<HTMLDivElement> & {
+type MultiTabLayoutProps = Omit<HTMLAttributes<HTMLDivElement>, "children" | "type"> & {
 	type?: MultiTabLayoutType;
+	children?: ReactNode;
+	authPath?: string;
+	isAuth?: ()=>boolean;
+	authComponent?: ReactNode;
 }
 
-export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, type=MultiTabLayoutType.Default, ...rest}) => {
+
+const Auth: FC<any> = ({isAuth, authPath, comp}) => {
+	const location = useLocation();
+	return !isAuth() ? <Navigate to={authPath} state={{ from: location }} replace /> : comp;
+}
+export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, authPath, isAuth, authComponent, type=MultiTabLayoutType.Default, ...rest}) => {
 	const childrenArr = Children.toArray(children);
+
+	const { tabs, protectedRoutes, unprotectedRoutes } = childrenArr && childrenArr.reduce((prev, child: ReactElement<MultiTabProps>, i: number) => {
+		if(!!child.props.children){
+			prev.tabs.push(<MultiTabInternal type={type} key={`layout-route-tab-${i}`} to={child.props.path}>
+				{
+					child.props.children
+				}
+			</MultiTabInternal>);
+		}
+		if (child.props.auth){
+			prev.protectedRoutes.push(<Route
+				key={`layout-route-private-${i}`}
+				path={child.props.path}
+				element={<Auth authPath={authPath || ""} isAuth={isAuth || (()=>true)} comp={child.props.component} />}
+			/>)
+		}
+		else {
+			prev.unprotectedRoutes.push(<Route
+				key={`layout-route-${i}`}
+				path={child.props.path}
+				element={child.props.component}
+			/>);
+		}
+		return prev;
+	}, { tabs: [], protectedRoutes: [], unprotectedRoutes:[]} as { tabs: ReactNode[], protectedRoutes: ReactNode[], unprotectedRoutes: ReactNode[]});
+
+	if(protectedRoutes && protectedRoutes.length > 0){
+		assert(authPath !== undefined, "authPath must be specified when using protected routes");
+		assert(isAuth !== undefined, "isAuth method must be specified when using protected routes");
+		assert(authComponent !== undefined, "authComponent must be specified when using protected routes");
+	}
 
 	return (<BrowserRouter>
 		<MultiTabContainer {...rest} >
 			<MultiTabGroup justifyContent={"stretch"}>
-				{
-					childrenArr && childrenArr.map((child: ReactElement<MultiTabProps>, i: number) => {
-						return (<MultiTabInternal type={type} key={`layout-route-tab-${i}`} to={child.props.path}>
-							{
-								child.props.children
-							}
-						</MultiTabInternal>);
-					})
-				}
+				{ tabs }
 			</MultiTabGroup>
 			<MultiTabContent>
-					<Routes>
+				<Routes>
 					{
-						childrenArr && childrenArr.map((child: ReactElement<MultiTabProps>, i: number) => {
-							return (<Route
-								key={`layout-route-${i}`}
-								path={child.props.path}
-								element={child.props.component}
-							/>);
-						})
+						authPath && authComponent &&
+						<Route
+							path={authPath}
+							element={authComponent}
+						/>
 					}
-					</Routes>
+					{ unprotectedRoutes }
+					{ protectedRoutes }
+				</Routes>
 			</MultiTabContent>
 		</MultiTabContainer>
 	</BrowserRouter>);
