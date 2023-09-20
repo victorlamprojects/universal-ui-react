@@ -10,7 +10,7 @@ import { Grid, Cell } from '../Grid/Grid';
 import Button from '../Button/Button';
 import GlobalStyle from '../../theme/GlobalStyle';
 import { getTheme } from '../../theme/theme';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, MemoryRouter } from 'react-router-dom';
 
 const meta: Meta<typeof MultiTabLayout> = {
 	title: 'VictorLam/Layout',
@@ -34,7 +34,7 @@ export const MultiTabLayoutWithDarkTheme: Story = {
 			<ThemeProvider theme={getTheme("dark")}>
 				<GlobalStyle />
 				<MultiTabLayout {...args}>
-					<MultiTab path={"/"} component={<Tab1 />}>
+					<MultiTab path={"/tab1"} component={<Tab1 />}>
 						Tab1
 					</MultiTab>
 					<MultiTab path={"/tab2"} component={<Tab2 />}>
@@ -88,7 +88,7 @@ export const MultiTabLayoutWithLightTheme: Story = {
 			<ThemeProvider theme={getTheme("light")}>
 				<GlobalStyle />
 				<MultiTabLayout {...args}>
-					<MultiTab path={"/"} component={<Tab1 />}>
+					<MultiTab path={"/tab1"} component={<Tab1 />}>
 						Tab1
 					</MultiTab>
 					<MultiTab path={"/tab2"} component={<Tab2 />}>
@@ -157,7 +157,7 @@ export const LayoutWithAuthentication: Story = {
 			<ThemeProvider theme={getTheme("dark")}>
 				<GlobalStyle />
 				<MultiTabLayout {...args} isAuth={()=>login} authComponent={<LoginPage loginCallback={()=>setLogin(true)} />}>
-					<MultiTab path={"/"} component={<Tab1 />} auth={true}>
+					<MultiTab path={"/tab1"} component={<Tab1 />} auth={true}>
 						Protected Tab
 					</MultiTab>
 					<MultiTab path={"/tab2"} component={<Tab2 />} auth={true}>

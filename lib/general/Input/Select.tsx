@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Cell } from "../Grid/Grid";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
-import { FontSize, Padding } from '../../config/constants';
+import { FontSize } from '../../config/constants';
 
 export type Option = {
 	label: string;

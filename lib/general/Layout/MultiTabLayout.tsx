@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, ReactNode, Children, isValidElement, ReactElement, cloneElement } from "react";
+import { FC, HTMLAttributes, ReactNode, Children, ReactElement } from "react";
 import styled, { CSSObject }  from "styled-components";
 import { Grid, Cell, CellProps } from "../Grid/Grid";
 import { getDefaultThemeIfNotFound } from "../../theme/theme";
@@ -6,6 +6,7 @@ import {
 	BrowserRouter,
 	Routes,
 	Route,
+	Outlet,
 	NavLink,
 	LinkProps,
 	useLocation,
@@ -122,7 +123,10 @@ const Auth: FC<any> = ({isAuth, authPath, comp}) => {
 export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, authPath, isAuth, authComponent, type=MultiTabLayoutType.Default, ...rest}) => {
 	const childrenArr = Children.toArray(children);
 
-	const { tabs, protectedRoutes, unprotectedRoutes } = childrenArr && childrenArr.reduce((prev, child: ReactElement<MultiTabProps>, i: number) => {
+	const { tabs, protectedRoutes, unprotectedRoutes, defaultRoute } = childrenArr && childrenArr.reduce((prev, child: ReactElement<MultiTabProps>, i: number) => {
+		if(prev.defaultRoute == null && !!child.props.path){
+			prev.defaultRoute = child.props.path;
+		}
 		if(!!child.props.children){
 			prev.tabs.push(<MultiTabInternal type={type} key={`layout-route-tab-${i}`} to={child.props.path}>
 				{
@@ -145,7 +149,7 @@ export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, authPath, isA
 			/>);
 		}
 		return prev;
-	}, { tabs: [], protectedRoutes: [], unprotectedRoutes:[]} as { tabs: ReactNode[], protectedRoutes: ReactNode[], unprotectedRoutes: ReactNode[]});
+	}, { tabs: [], protectedRoutes: [], unprotectedRoutes:[], defaultRoute: null} as { tabs: ReactNode[], protectedRoutes: ReactNode[], unprotectedRoutes: ReactNode[], defaultRoute: string | null});
 
 	if(protectedRoutes && protectedRoutes.length > 0){
 		assert(authPath !== undefined, "authPath must be specified when using protected routes");
@@ -153,24 +157,33 @@ export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, authPath, isA
 		assert(authComponent !== undefined, "authComponent must be specified when using protected routes");
 	}
 
-	return (<BrowserRouter>
-		<MultiTabContainer {...rest} >
+	const MainPage = () => {
+		return (<>
 			<MultiTabGroup justifyContent={"stretch"}>
 				{ tabs }
 			</MultiTabGroup>
 			<MultiTabContent>
-				<Routes>
-					{
-						authPath && authComponent &&
-						<Route
-							path={authPath}
-							element={authComponent}
-						/>
-					}
+				<Outlet />
+			</MultiTabContent>
+		</>);
+	}
+
+	return (<BrowserRouter>
+		<MultiTabContainer {...rest} >
+			<Routes>
+				{
+					authPath && authComponent &&
+					<Route
+						path={authPath}
+						element={authComponent}
+					/>
+				}
+				<Route path="/" element={<MainPage />}>
 					{ unprotectedRoutes }
 					{ protectedRoutes }
-				</Routes>
-			</MultiTabContent>
+					{ defaultRoute && <Route path="*" element={<Navigate to={defaultRoute} />} /> }
+				</Route>
+			</Routes>
 		</MultiTabContainer>
 	</BrowserRouter>);
 };
