@@ -15,7 +15,7 @@ export const FontSize = {
 	TableText: "1rem",
 	FormTitle: "1.375rem",
 	FormText: "1rem",
-	FormGroupText: "0.9rem"
+	FormGroupText: "0.9rem",
 }
 
 export const Padding = {

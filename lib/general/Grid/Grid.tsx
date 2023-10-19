@@ -5,9 +5,10 @@ import { BreakPoints as mq } from "../../config/constants";
 export type GridProps = HTMLAttributes<HTMLDivElement> & {
 	justifyContent?: string;
 	alignItems?: string;
+	alignContent?: string;
 }
 
-export const Grid = styled.div<GridProps>(({justifyContent="flex-start", alignItems="center"}): any=>{
+export const Grid = styled.div<GridProps>(({justifyContent="flex-start", alignItems="center", alignContent="stretch"}): any=>{
 	return {
 		width: "100%",
 		padding: "0.25rem 0.5rem",
@@ -16,6 +17,7 @@ export const Grid = styled.div<GridProps>(({justifyContent="flex-start", alignIt
 		flexDirection: "row",
 		justifyContent: justifyContent,
 		alignItems: alignItems,
+		alignContent: alignContent,
 		flexWrap: "wrap"
 	}
 });
@@ -27,13 +29,15 @@ export type CellProps = HTMLAttributes<HTMLDivElement> & {
 	l?: number;
 	justifyContent?: string;
 	alignItems?: string;
+	alignContent?: string;
 }
 
-export const Cell = styled.div<CellProps>(({s, m, l, justifyContent="flex-start", alignItems="center"}): any => {
+export const Cell = styled.div<CellProps>(({s, m, l, justifyContent="flex-start", alignItems="center", alignContent="stretch"}): any => {
 	const style = {
 		display: "flex",
 		justifyContent: justifyContent,
 		alignItems: alignItems,
+		alignContent: alignContent,
 		margin: "0",
 		flexBasis: "auto"
 	};
