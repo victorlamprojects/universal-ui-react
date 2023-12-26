@@ -36,7 +36,7 @@ const Events: CalendarEvent[] = [{
 	from: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 15),
 	to: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 17)
 }, {
-	name: "Lunch with Tommy Cheung",
+	name: "Lunch with Tommy Cheung ABCDEFG HIGJk DSFJlk DK",
 	type: "Personal",
 	from: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 12),
 	to: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 13)

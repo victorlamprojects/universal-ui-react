@@ -191,9 +191,9 @@ const CalendarEventTitle = styled(Cell)(({style, theme}) => {
 	return {
 		padding: "0",
 		margin: "0",
-		maxWidth: "calc(100% - 8.025rem)",
+		maxWidth: "calc(100% - 7.875rem)",
 		"& div": {
-			fontSize: "1rem",
+			fontSize: "0.9rem",
 			overflow: "hidden",
 			whiteSpace: "nowrap",
 			textOverflow: "ellipsis",
@@ -201,21 +201,21 @@ const CalendarEventTitle = styled(Cell)(({style, theme}) => {
 			[mq.m]:{
 				fontSize: "1.25rem"
 			},
-			[mq.l]:{
-				fontSize: "1.25rem"
-			},
 		},
 		"&:hover": {
 			cursor: "pointer"
 		},
+		[mq.m]: {
+			maxWidth: "calc(100% - 11rem)",
+		},
 		...style
 	};
 });
-const CalendarEventType = styled.div(({style, theme}) => {
+const CalendarEventType = styled(Cell)(({style, theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
 	return {
-		width: "1rem",
+		width: "0.875rem",
 		paddingRight: "0.25rem",
 		[mq.m]:{
 			width: "1.25rem"
@@ -230,11 +230,11 @@ const CalendarEventTime = styled(Cell)(({style, theme}) => {
 		position: "absolute",
 		top: 0,
 		right: 0,
-		maxWidth: "8rem",
-		fontSize: "0.75rem",
+		maxWidth: "7rem",
+		fontSize: "0.7rem",
 		[mq.m]:{
-			maxWidth: "12rem",
-			fontSize: "inherit"
+			maxWidth: "9.75rem",
+			fontSize: "0.975rem"
 		},
 		...style
 	};
@@ -498,7 +498,7 @@ const Calendar: FC<CalendarProps> = ({
 								<CalendarEventType>
 									<Circle style={{backgroundColor: CalendarEventTypeColor[e.type || "Other"], borderRadius: "50%"}}></Circle>
 								</CalendarEventType>
-								<CalendarEventTitle s={12} onClick={() => {
+								<CalendarEventTitle onClick={() => {
 									setSelectedEvent(prev => {
 										if(prev === i){
 											return null;
