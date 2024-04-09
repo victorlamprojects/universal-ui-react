@@ -1,4 +1,4 @@
-export * from "./Circle";
-export * from "./Square";
-export * from "./Portal";
-export * from "./Block";
+export { default as Circle } from "./Circle";
+export { default as Square } from "./Square";
+export { default as Portal } from "./Portal";
+export { default as Block } from "./Block";

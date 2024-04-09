@@ -132,4 +132,5 @@ export const getDefaultThemeIfNotFound = (theme: ThemeType | undefined | null): 
 }
 
 const theme = Light;
+
 export default theme;
