@@ -52,13 +52,13 @@ export const eventComparator = (e1: CalendarEvent, e2: CalendarEvent) => {
 	return fromDiff;
 }
 
-export const getPrevMonth = (y: number, m: number) => {
+export const getPrevMonth = (m: number) => {
 	if(m - 1 < 0){
 		return 11;
 	}
 	return m - 1;
 }
-export const getNextMonth = (y: number, m: number) => {
+export const getNextMonth = (m: number) => {
 	if(m + 1 >= 12){
 		return 0;
 	}

@@ -26,7 +26,12 @@ export const getDefaultHeaderView = (data?: TRow) : TColView[] => {
 		return {
 			key: k,
 			title: k,
-			sort: (arg0: TRow, arg1: TRow) => (arg0 && arg1 && arg0[k] && arg1[k] && arg0[k] < arg1[k] ? 1 : -1)
+			sort: (arg0: TRow, arg1: TRow) => {
+				if(arg0 && arg1){
+					return (arg0[k] || Number.NEGATIVE_INFINITY) < (arg1[k] || Number.NEGATIVE_INFINITY) ? 1 : -1;
+				}
+				return -1;
+			}
 		};
 	});
 	return cols;

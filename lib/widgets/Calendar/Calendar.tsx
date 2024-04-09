@@ -378,7 +378,7 @@ const Calendar: FC<CalendarProps> = ({
 	}, [monthInternal]);
 
 	const goToPrevMonth = () => {
-		const prevMonth = getPrevMonth(yearInternal, monthInternal);
+		const prevMonth = getPrevMonth(monthInternal);
 		const prevYear = getPrevYear(yearInternal, monthInternal);
 		setMonth(prevMonth);
 		setYear(prevYear);
@@ -387,7 +387,7 @@ const Calendar: FC<CalendarProps> = ({
 		}
 	}
 	const goToNextMonth = () => {
-		const nextMonth = getNextMonth(yearInternal, monthInternal);
+		const nextMonth = getNextMonth(monthInternal);
 		const nextYear = getNextYear(yearInternal, monthInternal);
 		setMonth(nextMonth);
 		setYear(nextYear);
@@ -462,9 +462,9 @@ const Calendar: FC<CalendarProps> = ({
 		<Cell s={12} alignItems={"flex-start"} style={{overflowInline: "hidden", position: "relative"}}>
 			<CalendarMainView
 				year={getPrevYear(yearInternal, monthInternal)}
-				month={getPrevMonth(yearInternal, monthInternal)}
+				month={getPrevMonth(monthInternal)}
 				date={dateInternal}
-				events={getEvents?.(new Date(getPrevYear(yearInternal, monthInternal), getPrevMonth(yearInternal, monthInternal))) || []}
+				events={getEvents?.(new Date(getPrevYear(yearInternal, monthInternal), getPrevMonth(monthInternal))) || []}
 				type={"left"}
 				ref={calendarPrevMonthRef}
 			/>
@@ -478,9 +478,9 @@ const Calendar: FC<CalendarProps> = ({
 			/>
 			<CalendarMainView
 				year={getNextYear(yearInternal, monthInternal)}
-				month={getNextMonth(yearInternal, monthInternal)}
+				month={getNextMonth(monthInternal)}
 				date={dateInternal}
-				events={getEvents?.(new Date(getNextYear(yearInternal, monthInternal), getNextMonth(yearInternal, monthInternal))) || []}
+				events={getEvents?.(new Date(getNextYear(yearInternal, monthInternal), getNextMonth(monthInternal))) || []}
 				ref={calendarNextMonthRef}
 				type={"right"}
 			/>
