@@ -12,12 +12,3 @@ https://victorlamprojects.github.io/universal-ui-react
 ```
 yarn storybook
 ```
-### Deploy
-1. Deploy a feature
-```
-yarn deploy
-```
-2. Deploy a fix/minor upgrade
-```
-yarn fix
-```
