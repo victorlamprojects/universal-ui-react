@@ -87,8 +87,8 @@ export const HeaderItem = styled.a.attrs<LinkHTMLAttributes<HTMLLinkElement>>(()
 
 type HeaderProps = HTMLAttributes<HTMLDivElement> & {
 	style?: CSSProperties;
-	hover: HoverEffect;
-	active: ActiveEffect;
+	hover?: HoverEffect;
+	active?: ActiveEffect;
 }
 
 export const Header: FC<HeaderProps> = (({ style, children, hover=HoverEffect.None, active=ActiveEffect.None, ...args}) => {
@@ -127,3 +127,4 @@ export const Header: FC<HeaderProps> = (({ style, children, hover=HoverEffect.No
 	</div>
 });
 
+export { HoverEffect, ActiveEffect } from "../../../config/constants";
