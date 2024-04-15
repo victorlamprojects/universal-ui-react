@@ -10,7 +10,7 @@ import { Grid, Cell } from '../Grid/Grid';
 import Button from '../Button/Button';
 import GlobalStyle from '../../theme/GlobalStyle';
 import { getTheme } from '../../theme/theme';
-import { useNavigate, useLocation, MemoryRouter } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const meta: Meta<typeof MultiTabLayout> = {
 	title: 'VictorLam/Layout',

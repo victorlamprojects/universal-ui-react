@@ -28,7 +28,12 @@ const defaultConfigs = {
 			typescript({ tsconfig: "./tsconfig.json" }),
 			terser()
 		],
-		external: ["react", "react-dom", "styled-components"]
+		external: [
+			"react",
+			"react-dom",
+			"react-router-dom",
+			"styled-components"
+		]
 }
 
 const loadModuleConfigs = (name) => {
