@@ -4,5 +4,6 @@ export * from "./Button";
 export * from "./Icon";
 export * from "./Input";
 export * from "./Layout";
+export * from "./Form";
 export * from "./Modal";
 export * from "./Table";
