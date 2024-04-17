@@ -18,7 +18,7 @@ export type FElementBaseProps = CellProps & {
 export type FConfigurationElement = {
 	type: string;
 	justifyContent?: string;
-	defaultValue?: string;
+	value?: FData;
 	label?: string;
 	datetimeType?: string | DatetimeType;
 	switchType?: SwitchType;

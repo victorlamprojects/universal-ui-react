@@ -10,7 +10,7 @@ export const enum DatetimeType {
 	DateWithTime = "date-with-time",
 	TimeOnly = "time-only"
 };
-type DateInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
+type DateInputProps = Omit<Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">, "value"> & {
 	s?: number;
 	m?: number;
 	l?: number;
@@ -69,18 +69,18 @@ const convertDatetimeString = (dt: DatetimeType, date: Date): string => {
 	}
 	return `${y}-${m}-${d}`;
 }
-const DateInput: FC<DateInputProps> = ({s, m, l, datetimeType, value, min, max, defaultValue, onChange, ...rest}) => {
-	if(!defaultValue && !value && onChange){
+const DateInput: FC<DateInputProps> = ({s, m, l, name, datetimeType, value, min, max, onChange, ...rest}) => {
+	if(!value && onChange){
 		onChange(new Date());
 	}
 	return (<InputContainer s={s} m={m} l={l} >
 		<input
 			{...rest}
+			name={name}
 			type={convertType(datetimeType as DatetimeType)}
 			value={value && convertDatetimeString(datetimeType as DatetimeType, value)}
 			min={min && convertDatetimeString(datetimeType as DatetimeType, min)}
 			max={max && convertDatetimeString(datetimeType as DatetimeType, max)}
-			defaultValue={defaultValue}
 			onChange={(e: FormEvent<HTMLInputElement>) => {
 				if(onChange){
 					onChange(e.currentTarget.valueAsDate as Date);

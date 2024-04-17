@@ -87,10 +87,11 @@ const Select = styled.div(({theme})=>{
 		}
 	}
 });
-const SelectComp: FC<SelectProps> = ({s, m, l, selected=undefined, options=[], onChange, ...rest}) => {
+const SelectComp: FC<SelectProps> = ({s, m, l, name, selected=undefined, options=[], onChange, ...rest}) => {
 	return (<SelectContainer s={s} m={m} l={l} >
 		<Select>
 			<select
+				name={name}
 				value={selected}
 				onChange={(e: FormEvent<HTMLSelectElement>) => {
 					if(onChange){

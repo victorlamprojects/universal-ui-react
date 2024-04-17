@@ -10,13 +10,12 @@ export enum SwitchType {
 	Round="round"
 }
 
-type SwitchInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
+type SwitchInputProps = Omit<Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">, "value"> & {
 	s?: number;
 	m?: number;
 	l?: number;
 	name: string;
 	value?: boolean;
-	defaultValue?: string | boolean;
 	type?: string | SwitchType;
 	onChange?: (d: boolean)=>void;
 };
@@ -70,18 +69,14 @@ const Slider = styled.span<HTMLAttributes<HTMLSpanElement>  & {type: SwitchType}
 		}
 	};
 })
-const SwitchInput: FC<SwitchInputProps> = ({s, m, l, value, defaultValue, onChange, type=SwitchType.Round, ...rest}) => {
+const SwitchInput: FC<SwitchInputProps> = ({s, m, l, name, value, onChange, type=SwitchType.Round, ...rest}) => {
 	if((value === undefined || value === null) && onChange){
-		if(defaultValue !== undefined && defaultValue !== null){
-			onChange(String(defaultValue).toLowerCase() === "true");
-		}
-		else{
-			onChange(false);
-		}
+		onChange(false);
 	}
 	return (<InputContainer s={s} m={m} l={l} >
 		<label>
 			<input
+				name={name}
 				type={"checkbox"}
 				checked={value}
 				onChange={(e: FormEvent<HTMLInputElement>) => {

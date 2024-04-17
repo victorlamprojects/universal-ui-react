@@ -11,33 +11,33 @@ type ConfiguredFormProps = {
 
 const getFormElement = (key: string, config: FConfigurationElement) => {
 	let element = null;
-	const { label, type, options, defaultValue, datetimeType, switchType, justifyContent, ...rest } = config;
+	const { label, type, options, value, datetimeType, switchType, justifyContent, ...rest } = config;
 	if(type === "text" || type === "password" || type === "email"){
-		element = (<FormRow justifyContent={justifyContent}>
+		element = (<FormRow key={`row-${key}`} justifyContent={justifyContent}>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
-			<FormTextInput name={key} type={type} defaultValue={defaultValue} {...rest} />
+			<FormTextInput name={key} type={type} value={value as string} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "date"){
-		element = (<FormRow justifyContent={justifyContent}>
+		element = (<FormRow key={`row-${key}`} justifyContent={justifyContent}>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
-			<FormDateInput name={key} defaultValue={defaultValue} datetimeType={datetimeType as DatetimeType} {...rest} />
+			<FormDateInput name={key} value={value as Date} datetimeType={datetimeType as DatetimeType} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "switch"){
-		element = (<FormRow justifyContent={justifyContent}>
+		element = (<FormRow key={`row-${key}`} justifyContent={justifyContent}>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
-			<FormSwitchInput name={key} defaultValue={defaultValue} type={switchType || SwitchType.Round} {...rest} />
+			<FormSwitchInput name={key} value={String(value).toLowerCase() === 'true'} type={switchType || SwitchType.Round} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "select"){
-		element = (<FormRow justifyContent={justifyContent}>
+		element = (<FormRow key={`row-${key}`} justifyContent={justifyContent}>
 			{ (label || key) && <FormLabel htmlFor={key}>{label || key}</FormLabel> }
-			<FormSelect name={key} selected={defaultValue} options={options} {...rest} />
+			<FormSelect name={key} selected={value as string} options={options} {...rest} />
 		</FormRow>);
 	}
 	else if(type === "submit"){
-		element = (<FormSubmitButton name={key} {...rest}>{label}</FormSubmitButton>);
+		element = (<FormSubmitButton key={`submit-${key}`} name={key} {...rest}>{label}</FormSubmitButton>);
 	}
 	return element;
 }
@@ -47,7 +47,7 @@ const getFormContent = (config: ({[key: string]: FConfigurationGroup | FConfigur
 		// Group
 		if(typeof value === "object" && (value as FConfigurationGroup).group){
 			const group = value as FConfigurationGroup;
-			formContent.push(<FormGroup name={key}>
+			formContent.push(<FormGroup key={`content-group-${key}`} name={key}>
 				{ group.content && getFormContent(group.content)}
 			</FormGroup>);
 		}

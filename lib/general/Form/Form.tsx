@@ -177,9 +177,9 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 				});
 			}
 			else if(elType === FormSelect){
-				const { s, m, l, name, defaultValue, options, ...rest } = child.props;
+				const { s, m, l, name, selected, options, ...rest } = child.props;
 				if(!formState.has(name)){
-					formState.set(name, defaultValue || child.props.value || null);
+					updateState(name, selected || "");
 				}
 				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSelect>>, {
 					s: s || 12,
@@ -194,9 +194,9 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 				});
 			}
 			else if(elType === FormSwitchInput){
-				const { s, m, l, name, defaultValue, type, ...rest } = child.props;
+				const { s, m, l, name, value, type, ...rest } = child.props;
 				if(!formState.has(name)){
-					formState.set(name, defaultValue || child.props.value || null);
+					updateState(name, value || false);
 				}
 				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSwitchInput>>, {
 					s: s || 1,
@@ -210,12 +210,28 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 					...rest
 				});
 			}
-			else if(elType === FormTextInput || elType === FormDateInput){
-				const { s, m, l, name, defaultValue, ...rest } = child.props;
+			else if(elType === FormTextInput){
+				const { s, m, l, name, value, ...rest } = child.props;
 				if(!formState.has(name)){
-					formState.set(name, defaultValue || child.props.value || null);
+					updateState(name, value || "");
 				}
 				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormTextInput>>, {
+					s: s || 12,
+					m: m || 6,
+					l: l || 6,
+					value: formState.get(name),
+					onChange: (d: FData) => {
+						updateState(name, d);
+					},
+					...rest
+				});
+			}
+			else if(elType === FormDateInput){
+				const { s, m, l, name, value, ...rest } = child.props;
+				if(!formState.has(name)){
+					updateState(name, value || new Date());
+				}
+				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormDateInput>>, {
 					s: s || 12,
 					m: m || 6,
 					l: l || 6,

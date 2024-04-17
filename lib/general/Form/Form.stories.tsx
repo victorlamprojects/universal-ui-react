@@ -38,7 +38,7 @@ const getFormContent = (theme: string, args: any) => (<ThemeProvider theme={getT
 			<FormGroup name={"Account"} >
 				<FormRow>
 					<FormLabel htmlFor={"name"}>Name</FormLabel>
-					<FormTextInput name={"name"} defaultValue={"Victor Lam"} />
+					<FormTextInput name={"name"} value={"Victor Lam"} />
 				</FormRow>
 				<FormRow>
 					<FormLabel htmlFor={"password"}>Password</FormLabel>
@@ -52,7 +52,7 @@ const getFormContent = (theme: string, args: any) => (<ThemeProvider theme={getT
 				</FormRow>
 				<FormRow>
 					<FormLabel htmlFor={"email"}>Email</FormLabel>
-					<FormTextInput name={"email"} disabled type={"email"} defaultValue={"lamwingtok@gmail.com"} />
+					<FormTextInput name={"email"} disabled type={"email"} value={"lamwingtok@gmail.com"} />
 				</FormRow>
 				<FormRow>
 					<FormLabel htmlFor={"hobbies"}>Hobbies</FormLabel>
@@ -94,7 +94,7 @@ export const SimpleConfiguredForm: ConfiguredStory = {
 						"name": {
 							type: "text",
 							label: "Name",
-							defaultValue: "Victor Lam"
+							value: "Victor Lam"
 						},
 						"password": {
 							type: "password",
@@ -116,7 +116,7 @@ export const SimpleConfiguredForm: ConfiguredStory = {
 									type: "email",
 									label: "Email",
 									disabled: true,
-									defaultValue: "lamwingtok@gmail.com"
+									value: "lamwingtok@gmail.com"
 								}
 
 							}
