@@ -9,7 +9,7 @@ export type Option = {
 	label: string;
 	value: string;
 };
-type SelectProps = InputHTMLAttributes<HTMLSelectElement> & {
+type SelectProps = Omit<InputHTMLAttributes<HTMLSelectElement>, "onChange"> & {
 	s?: number;
 	m?: number;
 	l?: number;
