@@ -2,7 +2,7 @@ import { FC, useState, TableHTMLAttributes } from "react";
 import styled from 'styled-components';
 import { Padding, FontSize } from '../../config/constants';
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
-import { TRow, TCol, getDefaultHeaderView, getOverridenHeaderView } from './Table.type';
+import { TRow, TCol, TData, getDefaultHeaderView, getOverridenHeaderView } from './Table.type';
 
 // Table
 const TableContainer = styled.table<TableHTMLAttributes<HTMLTableElement> & {bordered?: boolean}>(({style, theme, bordered}) => {
@@ -81,12 +81,14 @@ type TableProps = TableHTMLAttributes<HTMLTableElement> & {
 	columnDefs?: TCol[];
 	bordered?: boolean;
 	striped?: boolean;
+	onSelect?: (row: number, column: number, data: TData) => void;
 };
 
 
 const Table: FC<TableProps> = ({
 	data,
 	columnDefs,
+	onSelect,
 	bordered = false,
 	striped = false,
 	...args
@@ -144,7 +146,17 @@ const Table: FC<TableProps> = ({
 						<TableRow striped={striped} className={`${selectedRow === i ? "active" : ""}`} onClick={()=>setSelectedRow(i)}>
 							{
 								headerView.map((header, j: number) => (
-									<TableData bordered={bordered} className={`${selectedCell === i * headerView.length + j ? "active" : ""}`} onClick={()=>setSelectedCell(i * headerView.length + j)}>{ header.apply && header.apply(d[header.key]) || d[header.key]}</TableData>
+									<TableData
+										bordered={bordered}
+										className={`${selectedCell === i * headerView.length + j ? "active" : ""}`}
+										onClick={()=>{
+											setSelectedCell(i * headerView.length + j);
+											if(onSelect){
+												onSelect(i, j, d[header.key]);
+											}
+										}}>
+										{ header.apply && header.apply(d[header.key]) || d[header.key]}
+									</TableData>
 								))
 							}
 						</TableRow>

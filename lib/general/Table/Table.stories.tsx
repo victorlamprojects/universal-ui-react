@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../../theme/GlobalStyle';
 import Block from '../Container/Block';
 import Table from './Table';
+import { TData } from './Table.type';
 import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Table> = {
@@ -31,7 +32,10 @@ export const TableWithDarkTheme: Story = {
 			{"key": "job", "title": "Job"},
 			{"key": "salary", "title": "Income"},
 			{"key": "hobbies", "title": "Hobbies"}
-		]
+		],
+		onSelect: (row: number, col: number, data: TData) => {
+			alert(`Selected ${data} at row ${row} and column ${col}`);
+		}
 	},
 	render: (args: ComponentProps<typeof Table>) => {
 		return (<>

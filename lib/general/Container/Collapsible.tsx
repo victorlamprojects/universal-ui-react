@@ -9,8 +9,18 @@ const CollapsibleContainer = styled.div(({theme}) => {
 	};
 });
 
-const Title = styled.div(({theme}) => {
+const Title = styled.div<HTMLAttributes<HTMLDivElement> & {withToggle?: boolean}>(({theme, withToggle=false}) => {
 	theme = getDefaultThemeIfNotFound(theme);
+	let toggleEffect = withToggle && {
+		"&:before": {
+			content: "'▸  '"
+		},
+		"&.show": {
+			"&:before": {
+				content: "'▾  '"
+			}
+		}
+	}
 	return {
 		width: "100%",
 		fontSize: "1.25rem",
@@ -22,14 +32,7 @@ const Title = styled.div(({theme}) => {
 		"&:hover": {
 			filter: "alpha(opacity=100)",
 		},
-		"&:before": {
-			content: "'▸  '"
-		},
-		"&.show": {
-			"&:before": {
-				content: "'▾  '"
-			}
-		}
+		...toggleEffect
 	};
 });
 
@@ -63,7 +66,7 @@ const Collapsible:FC<CollapsibleProps> = ({
 }) => {
 	const [show, setShow] = useState<boolean>(!collapsed);
 	return <CollapsibleContainer {...args}>
-		<Title className={show ? "show" : ""} onClick={() => setShow(prev=>!prev)}>{title}</Title>
+		<Title withToggle={toggle} className={show ? "show" : ""} onClick={() => setShow(prev=>!prev)}>{title}</Title>
 		<Content className={show ? "show" : ""}>{children}</Content>
 	</CollapsibleContainer>
 }
