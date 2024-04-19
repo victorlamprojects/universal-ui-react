@@ -1,4 +1,4 @@
-export const enum BreakPoints {
+export enum BreakPoints {
 	xs = "@media only screen and (min-width: 0px)",
 	s = "@media only screen and (min-width: 576px)",
 	m = "@media only screen and (min-width: 768px)",
@@ -30,14 +30,14 @@ export const Margin = {
 	Container: "0.5rem 0"
 }
 
-export const enum ModalVariant {
+export enum ModalVariant {
 	Info="info",
 	Success="success",
 	Warning="warning",
 	Error="error"
 }
 
-export const enum ButtonVariant {
+export enum ButtonVariant {
 	Default="default",
 	Info="info",
 	Success="success",
@@ -45,14 +45,14 @@ export const enum ButtonVariant {
 	Error="error"
 }
 
-export const enum HoverEffect {
+export enum HoverEffect {
 	None="none",
 	Enlarge="enlarge",
 	Opaque="opaque",
 	Solidify="solidify"
 }
 
-export const enum ActiveEffect {
+export enum ActiveEffect {
 	None="none",
 	Enlarge="enlarge",
 	Opaque="opaque",
