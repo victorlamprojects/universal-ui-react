@@ -1,3 +1,4 @@
+import path from "path";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
@@ -43,7 +44,7 @@ const loadModuleConfigs = (name) => {
 		output: defaultConfigs.output.map(o => {
 			return {
 				...o,
-				"file": o.file.replace("index.js", name + ".js")
+				file: path.join("dist", o.format, name, "index.js"),
 			}
 		})
 	}
