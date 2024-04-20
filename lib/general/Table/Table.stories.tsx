@@ -33,7 +33,7 @@ export const TableWithDarkTheme: Story = {
 			{"key": "salary", "title": "Income"},
 			{"key": "hobbies", "title": "Hobbies"}
 		],
-		onSelect: (row: number, col: number, data: TData) => {
+		onDoubleClick: (row: number, col: number, data: TData) => {
 			alert(`Selected ${data} at row ${row} and column ${col}`);
 		}
 	},

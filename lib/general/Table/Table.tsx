@@ -76,12 +76,13 @@ const TableData = styled.td<TableHTMLAttributes<HTMLTableElement> & {bordered?: 
 });
 
 
-type TableProps = TableHTMLAttributes<HTMLTableElement> & {
+type TableProps = Omit<Omit<TableHTMLAttributes<HTMLTableElement>, "onDoubleClick">, "onSelect"> & {
 	data?: TRow[];
 	columnDefs?: TCol[];
 	bordered?: boolean;
 	striped?: boolean;
 	onSelect?: (row: number, column: number, data: TData) => void;
+	onDoubleClick?: (row: number, column: number, data: TData) => void;
 };
 
 
@@ -89,6 +90,7 @@ const Table: FC<TableProps> = ({
 	data,
 	columnDefs,
 	onSelect,
+	onDoubleClick,
 	bordered = false,
 	striped = false,
 	...args
@@ -153,6 +155,9 @@ const Table: FC<TableProps> = ({
 											setSelectedCell(i * headerView.length + j);
 											if(onSelect){
 												onSelect(i, j, d[header.key]);
+											}
+											if(onDoubleClick){
+												onDoubleClick(i, j, d[header.key]);
 											}
 										}}>
 										{ header.apply && header.apply(d[header.key]) || d[header.key]}
