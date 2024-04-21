@@ -1,6 +1,13 @@
 import { ButtonVariant, HoverEffect, ActiveEffect } from "../config/constants";
 import { ThemeType } from "../theme/theme";
 
+export const isString = (s: any) => {
+	if(typeof s === "string" || s instanceof String){
+		return true;
+	}
+	return false;
+}
+
 export const getHoverEffect = (hover: HoverEffect, theme: ThemeType, variant: ButtonVariant = ButtonVariant.Default) => {
 	let effects = {};
 	if(hover === HoverEffect.Enlarge){

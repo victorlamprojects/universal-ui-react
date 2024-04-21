@@ -1,5 +1,7 @@
-import { FC, useState, HTMLAttributes } from "react";
+import { FC, useState, HTMLAttributes, ReactElement, Children, isValidElement } from "react";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
+import Searchable, { SearchableProps } from "./Searchable";
+import { isString } from "../../util/helper";
 import styled from "styled-components";
 
 const CollapsibleContainer = styled.div(({theme}) => {
@@ -55,9 +57,10 @@ interface CollapsibleProps extends HTMLAttributes<HTMLDivElement> {
 	title?: string;
 	collapsed?: boolean;
 	toggle?: boolean;
+	searchText?: string;
 };
 
-const Collapsible:FC<CollapsibleProps> = ({
+const Collapsible: FC<SearchableProps & CollapsibleProps> = ({
 	title,
 	children,
 	collapsed=true,
@@ -66,8 +69,25 @@ const Collapsible:FC<CollapsibleProps> = ({
 }) => {
 	const [show, setShow] = useState<boolean>(!collapsed);
 	return <CollapsibleContainer {...args}>
-		<Title withToggle={toggle} className={show ? "show" : ""} onClick={() => setShow(prev=>!prev)}>{title}</Title>
-		<Content className={show ? "show" : ""}>{children}</Content>
+		<Title withToggle={toggle} className={show ? "show" : ""} onClick={() => setShow(prev=>!prev)}>
+			<Searchable text={title || ""} {...args} />
+		</Title>
+		<Content className={show ? "show" : ""}>{
+			Children.map(children, (child: ReactElement<any> | string) => {
+				if(isString(child)) {
+					return <Searchable text={child as string} {...args}/>;
+				}
+				if(!isValidElement(child)){
+					return child;
+				}
+				let newChild = child as ReactElement<any>;
+				newChild.props = {
+					...newChild.props,
+					...args
+				}
+				return newChild;
+			})
+		}</Content>
 	</CollapsibleContainer>
 }
 

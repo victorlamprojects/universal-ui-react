@@ -10,6 +10,7 @@ export type ThemeType = {
 	error: string;
 	primary: string;
 	secondary: string;
+	highlight: string;
 	card: {
 		primary: string;
 		primary2?: string;
@@ -52,6 +53,7 @@ export const Dark: ThemeType = {
 	error: "#d23f31",
 	primary: "#435B66",
 	secondary: "#828282",
+	highlight: "#d5a439",
 	card: {
 		primary: "#02aab0",
 		primary2: "#00cdac",
@@ -94,6 +96,7 @@ export const Light: ThemeType = {
 	error: "#FFA48D",
 	primary: "#9394a5",
 	secondary: "#fefedd",
+	highlight: "#f7d54d",
 	card: {
 		primary: "#8e2de2",
 		primary2: "#4a00e0",

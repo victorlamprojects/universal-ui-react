@@ -5,22 +5,21 @@ import { Cell } from "../Grid/Grid";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import { FontSize, Padding } from '../../config/constants';
 
-type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
+type SearchBoxProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
 	s?: number;
 	m?: number;
 	l?: number;
-	name: string;
-	value?: string | number | bigint | undefined | null | Date;
-	onChange?: (d: string | number | bigint | undefined | null | Date) => void;
+	value?: string;
+	onChange?: (d: string) => void;
 };
-const InputContainer = styled(Cell)(({theme})=>{
+const SearchBoxContainer = styled(Cell)(({theme})=>{
 	theme = getDefaultThemeIfNotFound(theme);
 	return {
 		margin: "0",
 		"&>input:not([type]),&>input[type=text],&>input[type=password],&>input[type=email]": {
 			fontSize: FontSize.Text,
 			padding: Padding.Input,
-			width: "100%",
+			width: "275px",
 			border: "none",
 			outline: "none",
 			color: theme.input.text || "inherit",
@@ -38,10 +37,10 @@ const InputContainer = styled(Cell)(({theme})=>{
 	}
 
 });
-const TextInput: FC<TextInputProps> = ({s, m, l, name, value, onChange, ...rest}) => {
-	return (<InputContainer s={s} m={m} l={l} >
+const SearchBox: FC<SearchBoxProps> = ({s, m, l, value, onChange, ...rest}) => {
+	return (<SearchBoxContainer s={s} m={m} l={l} >
 		<input
-			name={name}
+			name={"search"}
 			value={value}
 			onChange={(e: FormEvent<HTMLInputElement>) => {
 				if(onChange){
@@ -49,6 +48,6 @@ const TextInput: FC<TextInputProps> = ({s, m, l, name, value, onChange, ...rest}
 				}
 			}}
 			{...rest} />
-	</InputContainer>);
+	</SearchBoxContainer>);
 };
-export default TextInput;
+export default SearchBox;
