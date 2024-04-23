@@ -13,12 +13,14 @@ const Mark = styled.span(({ theme }) => {
 export type SearchableProps = {
 	searchText?: string;
 	ignoreCase?: boolean;
+	onSearch: (id: string) => void;
 }
 
 const Searchable: FC<SearchableProps & {
 	id?: string,
 	text: string
 }> = ({
+	onSearch,
 	id=(Math.random() + 1).toString(36).substring(7),
 	text="",
 	searchText="",
@@ -28,6 +30,10 @@ const Searchable: FC<SearchableProps & {
 		return <span>{text}</span>;
 	}
 	const parts = text.split(new RegExp(`(${searchText})`, `g${ignoreCase ? 'i' : ''}`));
+	const isFound = parts?.length > 1;
+	if(isFound && onSearch){
+		onSearch(id);
+	}
 
 	return (<span>
 		{

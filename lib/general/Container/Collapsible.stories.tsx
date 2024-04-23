@@ -43,6 +43,7 @@ export const CollapsibleContainer: Story = {
 					<Collapsible {...args} searchText={text}>
 						Duis congue ligula in facilisis accumsan. Quisque et nisl vel nisi consequat dignissim vel eu justo. Aliquam aliquet lorem vel justo efficitur, non mollis quam placerat. Ut iaculis vel magna eu malesuada. Nulla faucibus nisl ac finibus porttitor. Vestibulum vestibulum tempor posuere. Curabitur tempor porttitor metus, at auctor ipsum tincidunt et.
 					</Collapsible>
+					<br/>
 					<Collapsible toggle={true} {...args} searchText={text}>
 						Praesent sodales tellus non ante porttitor, a hendrerit libero luctus. Fusce luctus urna at ipsum pellentesque commodo. Phasellus interdum blandit luctus. Nunc pharetra rutrum semper. Nam sodales gravida lobortis. Suspendisse tincidunt, lorem non feugiat pulvinar, dui justo fermentum nulla, id imperdiet risus diam sit amet eros. Integer lacus ipsum, laoreet id diam non, laoreet vehicula odio.
 					</Collapsible>
