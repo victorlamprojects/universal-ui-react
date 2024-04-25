@@ -30,16 +30,18 @@ export type CellProps = HTMLAttributes<HTMLDivElement> & {
 	justifyContent?: string;
 	alignItems?: string;
 	alignContent?: string;
+	hidden?: boolean;
 }
 
-export const Cell = styled.div<CellProps>(({s, m, l, justifyContent="flex-start", alignItems="center", alignContent="stretch"}): any => {
+export const Cell = styled.div<CellProps>(({s, m, l, hidden, justifyContent="flex-start", alignItems="center", alignContent="stretch"}): any => {
 	const style = {
 		display: "flex",
 		justifyContent: justifyContent,
 		alignItems: alignItems,
 		alignContent: alignContent,
 		margin: "0",
-		flexBasis: "auto"
+		flexBasis: "auto",
+		hidden: hidden
 	};
 
 	if(s !== undefined && s <= 12 && s >= 0){
