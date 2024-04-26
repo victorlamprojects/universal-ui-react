@@ -17,6 +17,7 @@ const InputContainer = styled(Cell)(({theme})=>{
 	theme = getDefaultThemeIfNotFound(theme);
 	return {
 		margin: "0",
+		width: "100%",
 		"&>input:not([type]),&>input[type=text],&>input[type=password],&>input[type=email]": {
 			fontSize: FontSize.Text,
 			padding: Padding.Input,

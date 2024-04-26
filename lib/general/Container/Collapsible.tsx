@@ -15,7 +15,7 @@ import styled from "styled-components";
 const CollapsibleContainer = styled.div(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 	return {
-		maxWidth: "100%"
+		width: "100%"
 	};
 });
 
