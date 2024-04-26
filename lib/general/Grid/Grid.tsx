@@ -12,7 +12,7 @@ export const Grid = styled.div<GridProps>(({justifyContent="flex-start", alignIt
 	return {
 		width: "100%",
 		padding: "0.25rem 0.5rem",
-		margin: "0.75rem 0",
+		margin: "0",
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: justifyContent,
