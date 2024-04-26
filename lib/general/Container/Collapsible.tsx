@@ -1,4 +1,12 @@
-import { FC, useState, HTMLAttributes, ReactElement, Children, isValidElement } from "react";
+import {
+	FC,
+	useState,
+	HTMLAttributes,
+	ReactElement,
+	Children,
+	isValidElement,
+	cloneElement
+} from "react";
 import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import Searchable, { SearchableProps } from "./Searchable";
 import { isString } from "../../util/helper";
@@ -80,11 +88,9 @@ const Collapsible: FC<SearchableProps & CollapsibleProps> = ({
 				if(!isValidElement(child)){
 					return child;
 				}
-				let newChild = child as ReactElement<any>;
-				newChild.props = {
-					...newChild.props,
+				let newChild = cloneElement(child as ReactElement<any>, {
 					...args
-				}
+				});
 				return newChild;
 			})
 		}</Content>
