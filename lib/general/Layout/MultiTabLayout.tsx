@@ -101,9 +101,11 @@ const MultiTabInternal = styled(NavLink)<LinkProps & {type?: MultiTabLayoutType}
 // Main Content
 const MultiTabContent = styled.div(({theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
-
 	return {
-		flex: 1
+		flex: 1,
+		height: "calc(100% - 3.5rem)",
+		maxHeight: "calc(100% - 36px)",
+		overflowY: "scroll"
 	};
 });
 
