@@ -27,6 +27,10 @@ const Button = styled.button<ButtonProps>(({ style, theme, variant="info", effec
 		"&:hover": {
 			cursor: "pointer"
 		},
+		"&:disabled": {
+			opacity: "0.6",
+			cursor: "not-allowed"
+		},
 		...effects,
 		...style
 	} || style;

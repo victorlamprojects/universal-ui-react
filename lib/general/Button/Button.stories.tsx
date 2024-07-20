@@ -23,18 +23,27 @@ export const SimpleButton: Story = {
 		const InternalComp = (variant: string, text: string) => {
 			return <Cell><Button variant={variant} {...args} >{text}</Button></Cell>
 		};
+		const InternalDisabledComp = (variant: string, text: string) => {
+			return <Cell><Button variant={variant} disabled {...args} >{text}</Button></Cell>
+		};
 		return (<>
-			<Block style={{width: "400px"}}>
+			<Block style={{width: "500px"}}>
 				<p>Light Theme</p>
 				<Grid justifyContent={"space-between"}>
 					{["info", "success", "warning", "error"].map(v => InternalComp(v, v[0].toUpperCase() + v.slice(1)))}
 				</Grid>
+				<Grid justifyContent={"space-between"}>
+					{["info", "success", "warning", "error"].map(v => InternalDisabledComp(v, v[0].toUpperCase() + v.slice(1)))}
+				</Grid>
 			</Block>
 			<ThemeProvider theme={getTheme("dark")}>
-				<Block style={{width: "400px"}}>
+				<Block style={{width: "500px"}}>
 					<p>Dark Theme</p>
 					<Grid justifyContent={"space-between"}>
 						{["info", "success", "warning", "error"].map(v => InternalComp(v, v[0].toUpperCase() + v.slice(1)))}
+					</Grid>
+					<Grid justifyContent={"space-between"}>
+						{["info", "success", "warning", "error"].map(v => InternalDisabledComp(v, v[0].toUpperCase() + v.slice(1)))}
 					</Grid>
 				</Block>
 			</ThemeProvider>
