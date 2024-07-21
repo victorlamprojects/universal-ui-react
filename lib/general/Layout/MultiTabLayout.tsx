@@ -105,7 +105,7 @@ const MultiTabContent = styled.div(({theme}) => {
 		flex: 1,
 		height: "calc(100% - 3.5rem)",
 		maxHeight: "calc(100% - 36px)",
-		overflowY: "scroll"
+		overflowY: "auto"
 	};
 });
 
