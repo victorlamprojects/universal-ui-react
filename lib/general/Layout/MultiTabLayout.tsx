@@ -3,7 +3,7 @@ import styled, { CSSObject }  from "styled-components";
 import { Grid, Cell, CellProps } from "../Grid/Grid";
 import { getDefaultThemeIfNotFound } from "../../theme/theme";
 import {
-	BrowserRouter,
+	HashRouter,
 	Routes,
 	Route,
 	Outlet,
@@ -170,7 +170,7 @@ export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, authPath, isA
 		</>);
 	}
 
-	return (<BrowserRouter>
+	return (<HashRouter>
 		<MultiTabContainer {...rest} >
 			<Routes>
 				{
@@ -187,5 +187,5 @@ export const MultiTabLayout: FC<MultiTabLayoutProps> = ({children, authPath, isA
 				</Route>
 			</Routes>
 		</MultiTabContainer>
-	</BrowserRouter>);
+	</HashRouter>);
 };
