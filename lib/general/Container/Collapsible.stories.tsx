@@ -8,7 +8,7 @@ import SearchBox from '../Input/SearchBox';
 import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Collapsible> = {
-	title: 'VictorLam/Container',
+	title: 'VictorLam/General/Container',
 	component: Collapsible
 };
 

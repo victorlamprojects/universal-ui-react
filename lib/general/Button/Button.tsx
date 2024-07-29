@@ -7,7 +7,7 @@ import { ThemeType, getDefaultThemeIfNotFound } from '../../theme/theme';
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	style?: CSSProperties;
 	theme?: ThemeType;
-	variant?: ButtonVariant;
+	variant?: ButtonVariant | string;
 	effect?: HoverEffect;
 };
 

@@ -7,7 +7,7 @@ import Block from '../Container/Block';
 import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof FileUploadInput> = {
-	title: 'VictorLam/Input',
+	title: 'VictorLam/General/Input',
 	component: FileUploadInput
 };
 

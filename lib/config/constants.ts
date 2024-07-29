@@ -45,6 +45,24 @@ export enum ButtonVariant {
 	Error="error"
 }
 
+export enum NotificationType {
+	Info="info",
+	Success="success",
+	Warning="warning",
+	Error="error"
+}
+
+export enum VerticalAlignment {
+	Top="top",
+	Middle="middle",
+	Bottom="bottom"
+}
+export enum HorizontalAlignment {
+	Left="left",
+	Middle="middle",
+	Right="right"
+}
+
 export enum HoverEffect {
 	None="none",
 	Enlarge="enlarge",

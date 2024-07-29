@@ -13,7 +13,7 @@ import { getTheme } from '../../theme/theme';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const meta: Meta<typeof MultiTabLayout> = {
-	title: 'VictorLam/Layout',
+	title: 'VictorLam/General/Layout',
 	component: MultiTabLayout
 };
 

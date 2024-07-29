@@ -4,7 +4,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Grid, Cell } from './Grid';
 
 const meta: Meta<typeof Grid> = {
-	title: 'VictorLam/Grid',
+	title: 'VictorLam/General/Grid',
 	component: Grid
 };
 

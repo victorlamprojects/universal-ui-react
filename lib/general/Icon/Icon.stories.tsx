@@ -6,7 +6,7 @@ import Circle from '../Container/Circle';
 import Square from '../Container/Square';
 
 const meta: Meta<typeof Icon> = {
-	title: 'VictorLam/Icon',
+	title: 'VictorLam/General/Icon',
 	component: Icon
 };
 

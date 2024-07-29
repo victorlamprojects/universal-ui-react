@@ -8,7 +8,7 @@ import GlobalStyle from '../../../theme/GlobalStyle';
 import { HoverEffect, ActiveEffect } from '../../../config/constants';
 
 const meta: Meta<typeof Header> = {
-	title: 'VictorLam/Layout/Header',
+	title: 'VictorLam/General/Layout/Header',
 	component: Header
 };
 

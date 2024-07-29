@@ -1,4 +1,3 @@
-
 export type CalendarProps = {
 	date?: number;
 	month?: number;

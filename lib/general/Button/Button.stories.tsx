@@ -8,7 +8,7 @@ import Button from './Button';
 import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Button> = {
-	title: 'VictorLam/Button',
+	title: 'VictorLam/General/Button',
 	component: Button
 };
 

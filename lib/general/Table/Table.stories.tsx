@@ -9,7 +9,7 @@ import { TData } from './Table.type';
 import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Table> = {
-	title: 'VictorLam/Table',
+	title: 'VictorLam/General/Table',
 	component: Table
 };
 

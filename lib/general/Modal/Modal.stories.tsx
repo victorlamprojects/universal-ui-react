@@ -11,7 +11,7 @@ import { ModalVariant } from '../../config/constants';
 import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Modal> = {
-	title: 'VictorLam/Modal',
+	title: 'VictorLam/General/Modal',
 	component: Modal
 };
 

@@ -21,7 +21,7 @@ import GlobalStyle from '../../theme/GlobalStyle';
 import { getTheme } from '../../theme/theme';
 
 const meta: Meta<typeof Form> = {
-	title: 'VictorLam/Form',
+	title: 'VictorLam/General/Form',
 	component: Form
 };
 
