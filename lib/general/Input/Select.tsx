@@ -93,8 +93,10 @@ const SelectComp: FC<SelectProps> = ({s, m, l, name, selected=undefined, options
 			<select
 				name={name}
 				value={selected}
-				onChange={(e: FormEvent<HTMLSelectElement>) => {
+				onClick={(e: FormEvent<HTMLSelectElement>) => {
 					e?.currentTarget?.blur();
+				}}
+				onChange={(e: FormEvent<HTMLSelectElement>) => {
 					if(onChange){
 						onChange(e.currentTarget.value);
 					}
