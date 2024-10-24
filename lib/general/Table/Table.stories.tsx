@@ -1,23 +1,34 @@
 import React, { ComponentProps } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
+import { GlobalStyle, getTheme } from "../../theme";
 
-import GlobalStyle from "../../theme/GlobalStyle";
 import Block from "../Container/Block";
 import Table from "./Table";
 import { TData } from "./Table.type";
-import { getTheme } from "../../theme/theme";
 
 const meta: Meta<typeof Table> = {
-  title: "VictorLam/General/Table",
-  component: Table,
+    title: "VictorLam/General/Table",
+    component: Table,
+	decorators: [
+		withThemeFromJSXProvider({
+			themes: {
+				light: getTheme('light'),
+				dark: getTheme('dark'),
+			},
+			defaultTheme: 'light',
+			Provider: ThemeProvider,
+			GlobalStyles: GlobalStyle,
+		}),
+	],
 };
 
 export default meta;
 
 type Story = StoryObj<typeof Table>;
 
-export const TableWithDarkTheme: Story = {
+export const Tables: Story = {
   args: {
     data: [
       {
@@ -70,8 +81,6 @@ export const TableWithDarkTheme: Story = {
   render: (args: ComponentProps<typeof Table>) => {
     return (
       <>
-        <ThemeProvider theme={getTheme("dark")}>
-          <GlobalStyle />
           Normal Table
           <Block>
             <Table {...args} />
@@ -84,34 +93,6 @@ export const TableWithDarkTheme: Story = {
           <Block>
             <Table striped={true} {...args} />
           </Block>
-        </ThemeProvider>
-      </>
-    );
-  },
-};
-
-export const TableWithLightTheme: Story = {
-  args: {
-    ...TableWithDarkTheme.args,
-  },
-  render: (args: ComponentProps<typeof Table>) => {
-    return (
-      <>
-        <ThemeProvider theme={getTheme("light")}>
-          <GlobalStyle />
-          Normal Table
-          <Block>
-            <Table {...args} />
-          </Block>
-          Bordered Table
-          <Block>
-            <Table bordered={true} {...args} />
-          </Block>
-          Striped Table
-          <Block>
-            <Table striped={true} {...args} />
-          </Block>
-        </ThemeProvider>
       </>
     );
   },

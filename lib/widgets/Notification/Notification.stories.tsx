@@ -1,8 +1,9 @@
 import React, { ComponentProps, FC } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
+import { GlobalStyle, getTheme } from "../../theme";
 
-import GlobalStyle from "../../theme/GlobalStyle";
 import Block from "../../general/Container/Block";
 import Button from "../../general/Button/Button";
 import { NotificationProvider, useNotification } from "./Notification";
@@ -11,7 +12,6 @@ import {
   VerticalAlignment,
   HorizontalAlignment,
 } from "../../config/constants";
-import { getTheme } from "../../theme/theme";
 
 const Content = () => {
   return <Block style={{ width: "100%" }}></Block>;
@@ -22,13 +22,19 @@ const meta: Meta<typeof Content> = {
   component: Content,
   decorators: [
     (Story) => (
-      <ThemeProvider theme={getTheme("dark")}>
-        <GlobalStyle />
         <NotificationProvider>
-          <Story />
+			<Story/>
         </NotificationProvider>
-      </ThemeProvider>
     ),
+	withThemeFromJSXProvider({
+		themes: {
+			light: getTheme('light'),
+			dark: getTheme('dark'),
+		},
+		defaultTheme: 'light',
+		Provider: ThemeProvider,
+		GlobalStyles: GlobalStyle,
+	}),
   ],
 };
 
@@ -36,9 +42,8 @@ export default meta;
 
 type Story = StoryObj<typeof Content>;
 
-export const NotificationWithDarkTheme: Story = {
-  args: {},
-  render: (args: NotificationProps) => {
+
+const NotificationWrapper = () => {
     const { showNotification: showInfo } = useNotification({
       duration: 1000,
       type: NotificationType.Info,
@@ -59,7 +64,7 @@ export const NotificationWithDarkTheme: Story = {
     });
     return (
       <Block style={{ width: "100%" }}>
-        <p>Dark Theme</p>
+        <p>Notification</p>
         <Button
           variant={"info"}
           onClick={() => showInfo("Information", "This is an information.")}
@@ -86,5 +91,11 @@ export const NotificationWithDarkTheme: Story = {
         </Button>
       </Block>
     );
+}
+
+export const Notification: Story = {
+  args: {},
+  render: (args: NotificationProps) => {
+	  return <NotificationWrapper />;
   },
 };

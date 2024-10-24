@@ -8,8 +8,7 @@ const GlobalStyle = createGlobalStyle`
 		padding: 0;
 		margin: 0;
 	}
-	html, body {
-		padding: 0;
+	html, body { padding: 0;
 		margin: 0;
 		height: 100%;
 		font-family: Arial, Helvetica, sans-serif;

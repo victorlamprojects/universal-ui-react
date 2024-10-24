@@ -2,17 +2,17 @@ import React, { ComponentProps } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
-import { GlobalStyle, getTheme } from "../../theme";
 
 import { Grid, Cell } from "../Grid/Grid";
 import Block from "../Container/Block";
 import Button from "./Button";
+import { GlobalStyle, getTheme } from "../../theme";
 
 const meta: Meta<typeof Button> = {
 	title: "VictorLam/General/Button",
 	component: Button,
 	decorators: [
-		withThemeFromJSXProvider({
+		withThemeFromJSXProvider<Renderer>({
 			themes: {
 				light: getTheme('light'),
 				dark: getTheme('dark'),
@@ -63,6 +63,21 @@ export const SimpleButton: Story = {
             )}
           </Grid>
         </Block>
+        <ThemeProvider theme={getTheme("dark")}>
+          <Block style={{ width: "500px" }}>
+            <p>Dark Theme</p>
+            <Grid justifyContent={"space-between"}>
+              {["info", "success", "warning", "error"].map((v) =>
+                InternalComp(v, v[0].toUpperCase() + v.slice(1)),
+              )}
+            </Grid>
+            <Grid justifyContent={"space-between"}>
+              {["info", "success", "warning", "error"].map((v) =>
+                InternalDisabledComp(v, v[0].toUpperCase() + v.slice(1)),
+              )}
+            </Grid>
+          </Block>
+        </ThemeProvider>
       </>
     );
   },

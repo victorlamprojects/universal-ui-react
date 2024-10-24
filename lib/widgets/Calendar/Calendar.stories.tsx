@@ -1,16 +1,27 @@
 import React, { ComponentProps } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
+import { GlobalStyle, getTheme } from "../../theme";
 
-import GlobalStyle from "../../theme/GlobalStyle";
 import Block from "../../general/Container/Block";
 import Calendar from "./Calendar";
 import { CalendarEvent } from "./Calendar.type";
-import { getTheme } from "../../theme/theme";
 
 const meta: Meta<typeof Calendar> = {
-  title: "VictorLam/Widgets/Calendar",
-  component: Calendar,
+    title: "VictorLam/Widgets/Calendar",
+    component: Calendar,
+	decorators: [
+		withThemeFromJSXProvider({
+			themes: {
+				light: getTheme('light'),
+				dark: getTheme('dark'),
+			},
+			defaultTheme: 'light',
+			Provider: ThemeProvider,
+			GlobalStyles: GlobalStyle,
+		}),
+	],
 };
 
 export default meta;
@@ -95,7 +106,7 @@ const Events: CalendarEvent[] = [
   },
 ];
 
-export const CalendarWithDarkTheme: Story = {
+export const SimpleCalendar: Story = {
   args: {
     getEvents: (d: Date) => {
       return Events;
@@ -103,21 +114,10 @@ export const CalendarWithDarkTheme: Story = {
   },
   render: (args: ComponentProps<typeof Calendar>) => {
     return (
-      <>
-        <ThemeProvider theme={getTheme("light")}>
-          <GlobalStyle />
-          <Block style={{ width: "100%" }}>
-            <p>Light Theme</p>
-            <Calendar {...args} />
-          </Block>
-        </ThemeProvider>
-        <ThemeProvider theme={getTheme("dark")}>
-          <Block style={{ width: "100%" }}>
-            <p>Dark Theme</p>
-            <Calendar {...args} />
-          </Block>
-        </ThemeProvider>
-      </>
+	  <Block style={{ width: "100%" }}>
+		<p>Simple Calendar</p>
+		<Calendar {...args} />
+	  </Block>
     );
   },
 };

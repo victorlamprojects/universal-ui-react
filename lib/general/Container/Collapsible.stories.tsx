@@ -1,30 +1,37 @@
 import React, { useState, ComponentProps } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
+import { GlobalStyle, getTheme } from "../../theme";
 
 import Collapsible from "./Collapsible";
 import Block from "../Container/Block";
 import SearchBox from "../Input/SearchBox";
-import { getTheme } from "../../theme/theme";
 
 const meta: Meta<typeof Collapsible> = {
-  title: "VictorLam/General/Container",
-  component: Collapsible,
+	title: "VictorLam/General/Container",
+	component: Collapsible,
+	decorators: [
+		withThemeFromJSXProvider({
+			themes: {
+				light: getTheme('light'),
+				dark: getTheme('dark'),
+			},
+			defaultTheme: 'light',
+			Provider: ThemeProvider,
+			GlobalStyles: GlobalStyle,
+		}),
+	],
 };
 
 export default meta;
 
 type Story = StoryObj<typeof Collapsible>;
 
-export const CollapsibleContainer: Story = {
-  args: {
-    title: "Collapsible Text",
-  },
-  render: (args: ComponentProps<typeof Collapsible>) => {
+const CollapsibleWrapper = (args) => {
     const [text, setText] = useState("");
     return (
       <div>
-        <ThemeProvider theme={getTheme("light")}>
           <Block>
             <SearchBox
               value={text}
@@ -49,21 +56,6 @@ export const CollapsibleContainer: Story = {
               facilisis. Etiam ex diam, sollicitudin sit amet fringilla et,
               pellentesque quis orci. Nunc pulvinar tortor a facilisis egestas.
             </Collapsible>
-          </Block>
-        </ThemeProvider>
-        <br />
-        <br />
-        <br />
-        <ThemeProvider theme={getTheme("dark")}>
-          <Block>
-            <Collapsible {...args} searchText={text}>
-              Duis congue ligula in facilisis accumsan. Quisque et nisl vel nisi
-              consequat dignissim vel eu justo. Aliquam aliquet lorem vel justo
-              efficitur, non mollis quam placerat. Ut iaculis vel magna eu
-              malesuada. Nulla faucibus nisl ac finibus porttitor. Vestibulum
-              vestibulum tempor posuere. Curabitur tempor porttitor metus, at
-              auctor ipsum tincidunt et.
-            </Collapsible>
             <br />
             <Collapsible toggle={true} {...args} searchText={text}>
               Praesent sodales tellus non ante porttitor, a hendrerit libero
@@ -75,8 +67,15 @@ export const CollapsibleContainer: Story = {
               vehicula odio.
             </Collapsible>
           </Block>
-        </ThemeProvider>
       </div>
     );
+}
+
+export const CollapsibleContainer: Story = {
+  args: {
+    title: "Collapsible Text",
+  },
+  render: (args: ComponentProps<typeof Collapsible>) => {
+	  return <CollapsibleWrapper {...args} />
   },
 };
