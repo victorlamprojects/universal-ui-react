@@ -50,7 +50,7 @@ export const CircleIcon: Story = {
     src: "https://picsum.photos/200",
   },
   decorators: [
-    (Story) => (
+    (Story) Square=> (
       <Circle size={"10em"}>
         <Story />
       </Circle>
