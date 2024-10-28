@@ -56,6 +56,7 @@ yarn add universal-ui-react
 ### General
 #### Button
 ##### Basic Buttons
+Code Snippet:
 ```tsx
 import { ThemeProvider } from "styled-components";
 import {
@@ -83,11 +84,33 @@ const Example = () => {
                 Error
             </Button>
         </Block>
+        <Block style={{ width: "500px" }}>
+            <Button variant={"primary"} disabled>
+                Primary
+            </Button>
+            <Button variant={"success"} disabled>
+                Success
+            </Button>
+            <Button variant={"warning"} disabled>
+                Warning
+            </Button>
+            <Button variant={"error"} disabled>
+                Error
+            </Button>
+        </Block>
     </ThemeProvider>);
 }
 export default Example;
 ```
+Preview:
+![](docs/button.svg)
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?viewMode=story&globals=&id=victorlam-general-button--simple-button"
+  width="100%"
+></iframe>
+
 ##### With Effects
+Code Snippet:
 ```tsx
 import { ThemeProvider } from "styled-components";
 import {
@@ -116,9 +139,15 @@ const Example = () => {
 }
 export default Example;
 ```
+Preview:
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?viewMode=story&globals=&args=&id=victorlam-general-button--button-with-effects"
+  width="100%"
+></iframe>
 
 #### Icon
 ##### Square Icon
+Code Snippet:
 ```tsx
 import { ThemeProvider } from "styled-components";
 import {
@@ -139,7 +168,14 @@ const Example = () => {
 }
 export default Example;
 ```
+Preview:
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?viewMode=story&globals=&args=&id=victorlam-general-icon--square-icon"
+  width="100%"
+></iframe>
+
 ##### Circle Icon
+Code Snippet:
 ```tsx
 import { ThemeProvider } from "styled-components";
 import {
@@ -160,8 +196,15 @@ const Example = () => {
 }
 export default Example;
 ```
+Preview:
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?viewMode=story&globals=&args=&id=victorlam-general-icon--circle-icon"
+  width="100%"
+></iframe>
+
 #### Input
 ##### Date
+Code Snippet:
 ```tsx
 import { ThemeProvider } from "styled-components";
 import {
@@ -184,7 +227,9 @@ const Example = () => {
 }
 export default Example;
 ```
+
 ##### Select
+Code Snippet:
 ```tsx
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
@@ -218,7 +263,9 @@ const Example = () => {
 }
 export default Example;
 ```
+
 ##### Switch
+Code Snippet:
 ```tsx
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
@@ -251,7 +298,9 @@ const Example = () => {
 }
 export default Example;
 ```
+
 ##### Text
+Code Snippet:
 ```tsx
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
@@ -277,7 +326,9 @@ const Example = () => {
 }
 export default Example;
 ```
+
 ##### File Upload
+Code Snippet:
 ```tsx
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
@@ -300,13 +351,23 @@ const Example = () => {
                     setFiles((fs) => [...fs, f.name]);
                 }
             }}
-          {...args}
 		/>
+        <h2>Files uploaded:</h2>
+        <ol>
+          {files.map((file) => (
+            <li>{file}</li>
+          ))}
+        </ol>
         </Block>
     </ThemeProvider>);
 }
 export default Example;
 ```
+Preview:
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?viewMode=story&globals=&args=&id=victorlam-general-icon--circle-icon"
+  width="100%"
+></iframe>
 
 ### Widgets
 

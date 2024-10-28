@@ -1,0 +1,10 @@
+<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="200">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<iframe
+			  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?viewMode=story&amp;globals=&amp;id=victorlam-general-button--simple-button"
+			  width="100%"
+			></iframe>
+		</div>
+	</foreignObject>
+</svg>
