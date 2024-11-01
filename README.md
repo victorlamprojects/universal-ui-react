@@ -20,6 +20,10 @@
 - [Installation](#installation)
 - [Examples](#examples)
    - [General](#general)
+      - [Layout](#layout)
+         - [Multi Tab Layout](#multi-tab-layout)
+         - [Solid Multi Tab Layout](#solid-multi-tab-layout)
+         - [Multi Tab Layout with Authenticatation](#multi-tab-layout-with-authentication)
       - [Button](#general)
          - [Basic Buttons](#basic-buttons)
          - [With Effects](#with-effects)
@@ -38,6 +42,8 @@
           - [Simple Form](#simple-form)
           - [Configured Form](#configured-form)
    - [Widgets](#widgets)
+      - [Calendar](#calendar)
+      - [Notification](#notification)
 
 ## Components Docs
 This page gives a few examples for the usage of the components.
@@ -56,6 +62,233 @@ yarn add universal-ui-react
 
 ## Examples
 ### General
+#### Layout
+##### Multi Tab Layout
+Code Snippet:
+```tsx
+import { ThemeProvider } from "styled-components";
+import {
+    MultiTabLayout,
+    MultiTab,
+    Grid,
+    Cell,
+    Icon,
+    GlobalStyle,
+    getTheme
+} from "universal-ui-react";
+
+const Tab1 = () => <Block>Tab 1 Content</Block>;
+const Tab2 = () => <Block>Tab 2 Content</Block>;
+const Tab3 = () => <Block>Tab 3 Content</Block>;
+const Tab4 = () => <Block>Tab 4 Content</Block>;
+
+const Example = () => {
+    return (
+    <ThemeProvider theme={getTheme("dark")}>
+        <GlobalStyle />
+        <MultiTabLayout>
+            <MultiTab path={"/tab1"} component={<Tab1 />}>
+                Tab1
+            </MultiTab>
+            <MultiTab path={"/tab2"} component={<Tab2 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Icon src="https://picsum.photos/200" />
+                    </Cell>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        Tab2
+                    </Cell>
+                </Grid>
+            </MultiTab>
+            <MultiTab path={"/tab3"} component={<Tab3 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Icon src="https://picsum.photos/200" />
+                    </Cell>
+                </Grid>
+            </MultiTab>
+            <MultiTab path={"/tab4"} component={<Tab4 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Circle size={"32px"}>
+                            <Icon src="https://picsum.photos/200" />
+                        </Circle>
+                    </Cell>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        Tab4
+                    </Cell>
+                </Grid>
+            </MultiTab>
+        </MultiTabLayout>
+    </ThemeProvider>);
+}
+export default Example;
+```
+Preview:
+![](docs/button.svg)
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?globals=&args=&id=victorlam-general-layout--simple-multi-tab-layout"
+  width="100%"
+></iframe>
+
+##### Solid Multi Tab Layout
+Code Snippet:
+```tsx
+import { ThemeProvider } from "styled-components";
+import {
+    MultiTabLayout,
+    MultiTab,
+    MultiTabLayoutType,
+    Grid,
+    Cell,
+    Icon,
+    GlobalStyle,
+    getTheme
+} from "universal-ui-react";
+
+const Tab1 = () => <Block>Tab 1 Content</Block>;
+const Tab2 = () => <Block>Tab 2 Content</Block>;
+const Tab3 = () => <Block>Tab 3 Content</Block>;
+const Tab4 = () => <Block>Tab 4 Content</Block>;
+
+const Example = () => {
+    return (
+    <ThemeProvider theme={getTheme("dark")}>
+        <GlobalStyle />
+        <MultiTabLayout type={MultiTabLayoutType.Bar}>
+            <MultiTab path={"/tab1"} component={<Tab1 />}>
+                Tab1
+            </MultiTab>
+            <MultiTab path={"/tab2"} component={<Tab2 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Icon src="https://picsum.photos/200" />
+                    </Cell>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        Tab2
+                    </Cell>
+                </Grid>
+            </MultiTab>
+            <MultiTab path={"/tab3"} component={<Tab3 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Icon src="https://picsum.photos/200" />
+                    </Cell>
+                </Grid>
+            </MultiTab>
+            <MultiTab path={"/tab4"} component={<Tab4 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Circle size={"32px"}>
+                            <Icon src="https://picsum.photos/200" />
+                        </Circle>
+                    </Cell>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        Tab4
+                    </Cell>
+                </Grid>
+            </MultiTab>
+        </MultiTabLayout>
+    </ThemeProvider>);
+}
+export default Example;
+```
+Preview:
+![](docs/button.svg)
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?globals=&args=&id=victorlam-general-layout--solid-multi-tab-layout"
+  width="100%"
+></iframe>
+
+##### Multi Tab Layout with Authentication
+Code Snippet:
+```tsx
+import { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import {
+    MultiTabLayout,
+    MultiTab,
+    MultiTabLayoutType,
+    Grid,
+    Cell,
+    Icon,
+    GlobalStyle,
+    getTheme
+} from "universal-ui-react";
+
+const LoginPage = ({ loginCallback }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const origin = location.state?.from || "/";
+
+    const login = () => {
+        loginCallback();
+        navigate(origin, { replace: true });
+    };
+
+    return <Button onClick={() => login()}>Authenticate</Button>;
+};
+
+const Tab1 = () => <Block>Tab 1 Content</Block>;
+const Tab2 = () => <Block>Tab 2 Content</Block>;
+const Tab3 = () => <Block>Tab 3 Content</Block>;
+const Tab4 = () => <Block>Tab 4 Content</Block>;
+
+const Example = () => {
+    const [login, setLogin] = useState(false);
+    return (
+    <ThemeProvider theme={getTheme("dark")}>
+        <GlobalStyle />
+        <MultiTabLayout
+            type={MultiTabLayoutType.Bar}
+            isAuth={() => login}
+            authComponent={<LoginPage loginCallback={() => setLogin(true)} />}
+        >
+            <MultiTab path={"/tab1"} component={<Tab1 />} auth={true}>
+                Protected Tab
+            </MultiTab>
+            <MultiTab path={"/tab2"} component={<Tab2 />} auth={true}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Icon src="https://picsum.photos/200" />
+                    </Cell>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        Tab2
+                    </Cell>
+                </Grid>
+            </MultiTab>
+            <MultiTab path={"/tab3"} component={<Tab3 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Icon src="https://picsum.photos/200" />
+                    </Cell>
+                </Grid>
+            </MultiTab>
+            <MultiTab path={"/tab4"} component={<Tab4 />}>
+                <Grid>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        <Circle size={"32px"}>
+                            <Icon src="https://picsum.photos/200" />
+                        </Circle>
+                    </Cell>
+                    <Cell s={12} style={{ justifyContent: "center" }}>
+                        Tab4
+                    </Cell>
+                </Grid>
+            </MultiTab>
+        </MultiTabLayout>
+    </ThemeProvider>);
+}
+export default Example;
+```
+Preview:
+![](docs/button.svg)
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?globals=&args=&id=victorlam-general-layout--layout-with-authentication"
+  width="100%"
+></iframe>
+
 #### Button
 ##### Basic Buttons
 Code Snippet:
@@ -319,7 +552,7 @@ const Example = () => {
     <ThemeProvider theme={getTheme("dark")}>
         <GlobalStyle />
         <Block style={{ width: "500px" }}>
-            <SwitchInput
+            <TextInput
                 name="text-input"
                 value={text}
                 onChange={((s: string) => setText(s)} />
@@ -375,7 +608,6 @@ Preview:
 ##### Simple Modal
 Code Snippet:
 ```tsx
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import {
     Modal,
@@ -390,7 +622,6 @@ import {
 import { ModalVariant } from "../../config/constants";
 
 const Example = () => {
-    const [files, setFiles] = useState([]);
     return (
     <ThemeProvider theme={getTheme("dark")}>
         <GlobalStyle />
@@ -432,7 +663,6 @@ Preview:
 ##### Modal with Disabled Background Click
 Code Snippet:
 ```tsx
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import {
     Modal,
@@ -447,7 +677,6 @@ import {
 import { ModalVariant } from "../../config/constants";
 
 const Example = () => {
-    const [files, setFiles] = useState([]);
     return (
     <ThemeProvider theme={getTheme("dark")}>
         <GlobalStyle />
@@ -489,7 +718,6 @@ Preview:
 ##### Simple Table
 Code Snippet:
 ```tsx
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import {
     Table,
@@ -545,7 +773,6 @@ const columnDefs = [
 ];
 
 const Example = () => {
-    const [files, setFiles] = useState([]);
     return (
     <ThemeProvider theme={getTheme("dark")}>
         <GlobalStyle />
@@ -590,7 +817,6 @@ Preview:
 ##### Simple Form
 Code Snippet:
 ```tsx
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import {
     Block,
@@ -610,7 +836,6 @@ import {
 } from "universal-ui-react";
 
 const Example = () => {
-    const [files, setFiles] = useState([]);
     return (
     <ThemeProvider theme={getTheme("dark")}>
         <GlobalStyle />
@@ -677,7 +902,6 @@ Preview:
 ##### Configured Form
 Code Snippet:
 ```tsx
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import {
     Block,
@@ -754,7 +978,6 @@ const CONFIGURATION = {
 };
 
 const Example = () => {
-    const [files, setFiles] = useState([]);
     return (
     <ThemeProvider theme={getTheme("dark")}>
         <GlobalStyle />
@@ -773,6 +996,176 @@ Preview:
 ></iframe>
 
 ### Widgets
+#### Calendar
+Code Snippet:
+```tsx
+import { ThemeProvider } from "styled-components";
+import {
+    Block,
+    Calendar,
+    GlobalStyle,
+    getTheme
+} from "universal-ui-react";
 
+const Events: CalendarEvent[] = [
+  {
+    name: "Daily Standup",
+    type: "Work",
+    from: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() - 1,
+    ),
+  },
+  {
+    name: "Gym",
+    type: "Exercise",
+    from: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() - 1,
+    ),
+  },
+  {
+    name: "Singing",
+    type: "Learning",
+    from: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+    ),
+  },
+  {
+    name: "Swimming",
+    type: "Exercise",
+    from: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      15,
+    ),
+    to: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      17,
+    ),
+  },
+  {
+    name: "Lunch with Tommy Cheung ABCDEFG HIGJk DSFJlk DK",
+    type: "Personal",
+    from: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      12,
+    ),
+    to: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      13,
+    ),
+  },
+  {
+    name: "Apply for Visa",
+    type: "Personal",
+    from: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      12,
+    ),
+    to: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      13,
+    ),
+  },
+];
 
+const Example = () => {
+    return (
+    <ThemeProvider theme={getTheme("dark")}>
+        <GlobalStyle />
+        <Block style={{ width: "100%" }}>
+            <p>Simple Calendar</p>
+            <Calendar getEvents={(d: Date) => Events} />
+        </Block>
+    </ThemeProvider>);
+}
+export default Example;
+```
+Preview:
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?globals=&args=&id=victorlam-widgets-calendar--simple-calendar"
+  width="100%"
+  height="800px"
+></iframe>
+
+#### Notification
+Code Snippet:
+```tsx
+import { ThemeProvider } from "styled-components";
+import {
+    Block,
+    Button,
+    VerticalAlignment,
+    HorizontalAlignment,
+    NotificationType,
+    NotificationProvider,
+    useNotification,
+    GlobalStyle,
+    getTheme
+} from "universal-ui-react";
+
+const Example = () => {
+    const { showNotification: showInfo } = useNotification({
+      duration: 1000,
+      type: NotificationType.Info,
+    });
+    const { showNotification: showSuccess } = useNotification({
+      duration: 1000,
+      type: NotificationType.Success,
+      horizontal: HorizontalAlignment.Middle,
+      vertical: VerticalAlignment.Middle,
+    });
+    const { showNotification: showWarning } = useNotification({
+      duration: 1000,
+      type: NotificationType.Warning,
+    });
+    const { showNotification: showError } = useNotification({
+      duration: 1000,
+      type: NotificationType.Error,
+    });
+    return (
+    <ThemeProvider theme={getTheme("dark")}>
+        <GlobalStyle />
+        <NotificationProvider>
+            <Block style={{ width: "100%" }}>
+                <p>Notification</p>
+                <Button variant={"info"} onClick={() => showInfo("Information", "This is an information.")} >
+                    Info
+                </Button>
+                <Button variant={"success"} onClick={() => showSuccess("Success", "This is a success.")} >
+                    Success
+                </Button>
+                <Button variant={"warning"} onClick={() => showWarning("Warning", "This is a warning.")} >
+                    Warning
+                </Button>
+                <Button variant={"error"} onClick={() => showError("Error", "This is an error.")} >
+                    Error
+                </Button>
+            </Block>
+        </NotificationProvider>
+    </ThemeProvider>);
+}
+export default Example;
+```
+Preview:
+<iframe
+  src="https://victorlamprojects.github.io/universal-ui-react/iframe.html?globals=&args=&id=victorlam-widgets-notification--notification"
+  width="100%"
+></iframe>
 
