@@ -81,8 +81,8 @@ type TableProps = Omit<Omit<TableHTMLAttributes<HTMLTableElement>, "onDoubleClic
 	columnDefs?: TCol[];
 	bordered?: boolean;
 	striped?: boolean;
-	onSelect?: (row: number, column: number, data: TData) => void;
-	onDoubleClick?: (row: number, column: number, data: TData) => void;
+	onSelect?: (_row: number, _column: number, _data: TData) => void;
+	onDoubleClick?: (_row: number, _column: number, _data: TData) => void;
 };
 
 
@@ -97,8 +97,8 @@ const Table: FC<TableProps> = ({
 }) => {
 	const [selectedRow, setSelectedRow] = useState<number | undefined>(undefined);
 	const [selectedCell, setSelectedCell] = useState<number | undefined>(undefined);
-	const [sortStates, setSortStates] = useState<Map<string, ({key: number, fn: (a: any, b: any) => number})>>(new Map());
-	let dataView = data || [];
+	const [sortStates, setSortStates] = useState<Map<string, ({key: number, fn: (_a: any, _b: any) => number})>>(new Map());
+	const dataView = data || [];
 	let headerView = getDefaultHeaderView(data && data[0]);
 	if(columnDefs){
 		headerView = getOverridenHeaderView(headerView, columnDefs);
@@ -114,9 +114,9 @@ const Table: FC<TableProps> = ({
 				<TableHeaderContainer>
 				{
 					headerView.map(header => (
-						<TableHeader bordered={bordered} onClick={ () => {
+						<TableHeader bordered={bordered} key={header.key} onClick={ () => {
 							setSortStates(prev => {
-								let m = new Map();
+								const m = new Map();
 								let k = 0;
 								if(prev.has(header.key)){
 									k = prev.get(header.key)!.key + 1;
@@ -145,10 +145,11 @@ const Table: FC<TableProps> = ({
 			<TableBody>
 				{
 					dataView.map((d: TRow, i: number) => (
-						<TableRow striped={striped} className={`${selectedRow === i ? "active" : ""}`} onClick={()=>setSelectedRow(i)}>
+						<TableRow key={`${JSON.stringify(d)}-${i}`} striped={striped} className={`${selectedRow === i ? "active" : ""}`} onClick={()=>setSelectedRow(i)}>
 							{
 								headerView.map((header, j: number) => (
 									<TableData
+                                        key={`${header.key}-${i}`}
 										bordered={bordered}
 										className={`${selectedCell === i * headerView.length + j ? "active" : ""}`}
 										onClick={()=>{

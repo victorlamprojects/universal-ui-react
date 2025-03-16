@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, HTMLAttributes } from "react";
+import { useState, createContext, useContext, HTMLAttributes, ReactNode } from "react";
 import styled from "styled-components";
 import Portal from "../../general/Container/Portal";
 import { NotificationProps } from "./Notification.type";
@@ -7,15 +7,15 @@ import { getDefaultThemeIfNotFound } from '../../theme/theme';
 
 const NotificationContext = createContext<{
 	context: NotificationProps,
-	setContext: (newProps: NotificationProps) => void,
-	showNoti: (duration: number) => void,
+	setContext: (_newProps: NotificationProps) => void,
+	showNoti: (_duration: number) => void,
 }>({
 	context: {},
-	setContext: (_: NotificationProps) => {},
-	showNoti: (_: number) => {},
+	setContext: (_props: NotificationProps) => { /* Default Implementation for Ouside Provider call */ },
+	showNoti: (_n: number) => { /* Default Implementation for Ouside Provider call */ },
 });
 
-const NotificationTitle = styled.div<HTMLAttributes<HTMLDivElement>>(({theme}) => {
+const NotificationTitle = styled.div<HTMLAttributes<HTMLDivElement>>(() => {
 	return {
 		height: "1rem",
 		fontWeight: "bold",
@@ -23,7 +23,7 @@ const NotificationTitle = styled.div<HTMLAttributes<HTMLDivElement>>(({theme}) =
 	};
 });
 
-const NotificationBody = styled.div<HTMLAttributes<HTMLDivElement>>(({theme}) => {
+const NotificationBody = styled.div<HTMLAttributes<HTMLDivElement>>(() => {
 	return {
 		width: "100%",
 		padding: "3px",
@@ -48,7 +48,7 @@ const NotificationContainer = styled.div<HTMLAttributes<HTMLDivElement> & {
 	hidden: boolean,
 }>(({ style, horizontal, vertical, type, hidden, theme}) => {
 	theme = getDefaultThemeIfNotFound(theme);
-	let s = {
+	const s = {
 		...style
 	};
 	if(vertical === VerticalAlignment.Top){
@@ -87,7 +87,7 @@ const NotificationContainer = styled.div<HTMLAttributes<HTMLDivElement> & {
 	};
 });
 
-export const NotificationProvider = ({ children }) => {
+export const NotificationProvider = ({ children }: {children: ReactNode}) => {
 	const [show, setShow] = useState<boolean>(false);
 	const [context, setContext] = useState<NotificationProps>({
 		type: "info",
@@ -131,7 +131,7 @@ export const useNotification = ({
 	type="info" as NotificationType,
 	horizontal=HorizontalAlignment.Right,
 	vertical=VerticalAlignment.Bottom
-}: {duration?: number, type?: NotificationType}) => {
+}: {duration?: number, type?: NotificationType, horizontal?: HorizontalAlignment, vertical?: VerticalAlignment}) => {
 	const {context, setContext, showNoti} = useContext(NotificationContext);
 	if(!context){
 		throw new Error("Please wrap your App with NotificationProvider before using");

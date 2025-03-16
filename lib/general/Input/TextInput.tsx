@@ -11,7 +11,7 @@ type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & 
 	l?: number;
 	name: string;
 	value?: string | number | bigint | undefined | null | Date;
-	onChange?: (d: string | number | bigint | undefined | null | Date) => void;
+	onChange?: (_d: string | number | bigint | undefined | null | Date) => void;
 };
 const InputContainer = styled(Cell)(({theme})=>{
 	theme = getDefaultThemeIfNotFound(theme);

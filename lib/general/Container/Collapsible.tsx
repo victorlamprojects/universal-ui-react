@@ -7,21 +7,18 @@ import {
 	isValidElement,
 	cloneElement
 } from "react";
-import { getDefaultThemeIfNotFound } from '../../theme/theme';
 import Searchable, { SearchableProps } from "./Searchable";
 import { isString } from "../../util/helper";
 import styled from "styled-components";
 
-const CollapsibleContainer = styled.div(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const CollapsibleContainer = styled.div(() => {
 	return {
 		width: "100%"
 	};
 });
 
-const Title = styled.div<HTMLAttributes<HTMLDivElement> & {withToggle?: boolean}>(({theme, withToggle=false}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-	let toggleEffect = withToggle && {
+const Title = styled.div<HTMLAttributes<HTMLDivElement> & {withToggle?: boolean}>(({withToggle=false}) => {
+	const toggleEffect = withToggle && {
 		"&:before": {
 			content: "'▸  '"
 		},
@@ -46,8 +43,7 @@ const Title = styled.div<HTMLAttributes<HTMLDivElement> & {withToggle?: boolean}
 	};
 });
 
-const Content = styled.div(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const Content = styled.div<HTMLAttributes<HTMLDivElement>>((() => {
 	return {
 		width: "100%",
 		height: 0,
@@ -59,14 +55,14 @@ const Content = styled.div(({theme}) => {
 			overflow: "visible"
 		}
 	};
-});
+}));
 
 interface CollapsibleProps extends HTMLAttributes<HTMLDivElement> {
 	title?: string;
 	collapsed?: boolean;
 	toggle?: boolean;
 	searchText?: string;
-};
+}
 
 const Collapsible: FC<SearchableProps & CollapsibleProps> = ({
 	title,
@@ -88,10 +84,9 @@ const Collapsible: FC<SearchableProps & CollapsibleProps> = ({
 				if(!isValidElement(child)){
 					return child;
 				}
-				let newChild = cloneElement(child as ReactElement<any>, {
+				return cloneElement(child as ReactElement<any>, {
 					...args
 				});
-				return newChild;
 			})
 		}</Content>
 	</CollapsibleContainer>

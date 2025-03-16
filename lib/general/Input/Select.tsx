@@ -16,10 +16,9 @@ type SelectProps = Omit<InputHTMLAttributes<HTMLSelectElement>, "onChange"> & {
 	name: string;
 	options?: Option[];
 	selected?: string;
-	onChange?: (selected: string) => void;
+	onChange?: (_selected: string) => void;
 };
-const SelectContainer = styled(Cell)(({theme})=>{
-	theme = getDefaultThemeIfNotFound(theme);
+const SelectContainer = styled(Cell)(()=>{
 	return {
 		margin: "0",
 		display: "grid"

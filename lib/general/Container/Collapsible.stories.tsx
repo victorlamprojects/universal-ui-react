@@ -76,6 +76,6 @@ export const CollapsibleContainer: Story = {
     title: "Collapsible Text",
   },
   render: (args: ComponentProps<typeof Collapsible>) => {
-	  return <CollapsibleWrapper {...args} />
+      return <CollapsibleWrapper {...args} />
   },
 };

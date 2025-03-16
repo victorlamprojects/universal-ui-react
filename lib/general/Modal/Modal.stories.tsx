@@ -1,4 +1,4 @@
-import React, { ComponentProps, useState } from "react";
+import React, { ComponentProps, FC, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
@@ -31,27 +31,27 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
-const ModalWrapper = ({
+const ModalWrapper: FC<{text?: string, variant?: ModalVariant}> = ({
 	text,
 	variant,
 	...args
 }) => { const [show, setShow] = useState(false);
   return (
 	<Cell>
-	  <Button onClick={() => setShow(true)} variant={variant}>
+        <Button onClick={() => setShow(true)} variant={variant}>
 		{text}
-	  </Button>
-	  <Modal show={show} setShow={(s: boolean) => setShow(s)} {...args}>
-		  <div style={{ maxWidth: "800px" }}>
-			Modal Body Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-			do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-			ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-			aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-			in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-			officia deserunt mollit anim id est laborum.
-		  </div>
-	  </Modal>
+        </Button>
+        <Modal show={show} setShow={(s: boolean) => setShow(s)} {...args}>
+            <div style={{ maxWidth: "800px" }}>
+                Modal Body Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                officia deserunt mollit anim id est laborum.
+            </div>
+        </Modal>
 	</Cell>
   );
 };
@@ -62,13 +62,13 @@ export const SimpleModal: Story = {
   render: (args: ComponentProps<typeof Modal>) => {
     return (
 		<Block style={{ width: "400px" }}>
-		  <p>Simple Modal</p>
-		  <Grid justifyContent={"space-between"}>
-			{["info", "success", "warning", "error"].map((v) =>
-				<ModalWrapper text={v} variant={ v as ModalVariant} {...args} />)
-			}
-		  </Grid>
-		</Block>
+            <p>Simple Modal</p>
+            <Grid justifyContent={"space-between"}>
+                {["info", "success", "warning", "error"].map((v) =>
+                    <ModalWrapper key={`Modal-${v}`} text={v} variant={ v as ModalVariant} {...args} />)
+                }
+            </Grid>
+        </Block>
     );
   },
 };
@@ -79,7 +79,6 @@ export const DisableBackgroundClickModal = {
     enableBackgroundClick: false,
   },
   render: (args: ComponentProps<typeof Modal>) => {
-    const [show, setShow] = useState(false);
     return (
       <div>
 		<ModalWrapper text="Open Modal" {...args} />

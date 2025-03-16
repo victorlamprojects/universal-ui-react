@@ -17,8 +17,7 @@ import { getNumOfDays } from '../../util/helper';
 import { BreakPoints as mq } from "../../config/constants";
 
 // Calendar Title
-const CalendarTitle = styled(Grid)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const CalendarTitle = styled(Grid)(({style}) => {
 	return {
 		padding: "0",
 		margin: "0 0 0.5rem 0",
@@ -32,15 +31,13 @@ const CalendarTitle = styled(Grid)(({style, theme}) => {
 		...style
 	};
 });
-const CalendarTitleArrow = styled(Cell)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const CalendarTitleArrow = styled(Cell)(({style}) => {
 	return {
 		cursor: "pointer",
 		...style
 	};
 });
-const CalendarTitleMonth = styled(Cell)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const CalendarTitleMonth = styled(Cell)(({style}) => {
 	return {
 		padding: "0",
 		margin: "0",
@@ -50,16 +47,14 @@ const CalendarTitleMonth = styled(Cell)(({style, theme}) => {
 });
 
 // Calendar Content
-const WeekRow = styled(Grid)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const WeekRow = styled(Grid)(({style}) => {
 	return {
 		padding: "0",
 		margin: "0",
 		...style
 	};
 });
-const WeekCell = styled(Cell)<CellProps & {text: string}>(({style, theme, text}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const WeekCell = styled(Cell)<CellProps & {text: string}>(({style, text}) => {
 	return {
 		fontWeight: "bold",
 		fontSize: "1rem",
@@ -81,8 +76,7 @@ const WeekCell = styled(Cell)<CellProps & {text: string}>(({style, theme, text})
 		...style
 	};
 });
-const DateRow = styled(Grid)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const DateRow = styled(Grid)(({style}) => {
 	return {
 		padding: "0",
 		margin: "0",
@@ -128,9 +122,7 @@ const DateCell = styled(Cell)(({style, theme}) => {
 		...style
 	};
 });
-const DateNumber = styled.span(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-
+const DateNumber = styled.span(({style}) => {
 	return {
 		top: "0.2rem",
 		left: "0",
@@ -150,9 +142,7 @@ const DateNumber = styled.span(({style, theme}) => {
 		...style
 	};
 });
-const DateDot = styled.div(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-
+const DateDot = styled.div(({style}) => {
 	return {
 		width: "0.625rem",
 		padding: "0.1rem",
@@ -163,9 +153,7 @@ const DateDot = styled.div(({style, theme}) => {
 	};
 });
 // Calendar Event
-const CalendarEventContainer = styled(Grid)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-
+const CalendarEventContainer = styled(Grid)(({style}) => {
 	return {
 		padding: "0",
 		height: "300px",
@@ -185,9 +173,7 @@ const CalendarEventRow = styled(Cell)(({style, theme}) => {
 		...style
 	};
 });
-const CalendarEventTitle = styled(Cell)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-
+const CalendarEventTitle = styled(Cell)(({style}) => {
 	return {
 		padding: "0",
 		margin: "0",
@@ -211,9 +197,7 @@ const CalendarEventTitle = styled(Cell)(({style, theme}) => {
 		...style
 	};
 });
-const CalendarEventType = styled(Cell)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-
+const CalendarEventType = styled(Cell)(({style}) => {
 	return {
 		width: "0.875rem",
 		paddingRight: "0.25rem",
@@ -223,9 +207,7 @@ const CalendarEventType = styled(Cell)(({style, theme}) => {
 		...style
 	};
 });
-const CalendarEventTime = styled(Cell)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-
+const CalendarEventTime = styled(Cell)(({style}) => {
 	return {
 		position: "absolute",
 		top: 0,
@@ -239,9 +221,7 @@ const CalendarEventTime = styled(Cell)(({style, theme}) => {
 		...style
 	};
 });
-const CalendarEventDetails = styled(Cell)(({style, theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
-
+const CalendarEventDetails = styled(Cell)(({style}) => {
 	return {
 		fontSize: "0.875rem",
 		...style
@@ -249,18 +229,14 @@ const CalendarEventDetails = styled(Cell)(({style, theme}) => {
 });
 
 
-const CalendarContainer = styled.div(({style, theme})=>{
-	theme = getDefaultThemeIfNotFound(theme);
-
+const CalendarContainer = styled.div(({style})=>{
 	return {
 		width: "100%",
 		overflow: "hidden",
 		...style
 	};
 });
-const CalendarMain = styled.div(({style, theme})=>{
-	theme = getDefaultThemeIfNotFound(theme);
-
+const CalendarMain = styled.div(({style})=>{
 	return {
 		width: "100%",
 		...style
@@ -276,11 +252,11 @@ type CalendarMainViewProps = HTMLAttributes<HTMLDivElement> & {
 	year: number;
 	month: number;
 	date: number;
-	onSelected?: (d: number) => void;
+	onSelected?: (_d: number) => void;
 	events: CalendarEvent[];
 	type?: string;
 };
-const CalendarMainView = forwardRef<HTMLDivElement, CalendarMainViewProps>(({year, month, date, onSelected, events, type="main"}, ref) => {
+const CalendarMainView = forwardRef<HTMLDivElement, CalendarMainViewProps>(function CalendarMainViewWithRef({year, month, date, onSelected, events, type="main"}, ref) {
 	const numOfDays = getNumOfDays(year, month);
 	const firstDay = new Date(year, month, 1).getDay();
 	const numOfRows = Array.from({length: Math.ceil((numOfDays + firstDay) / 7)}, (_, k) => k);
@@ -368,14 +344,14 @@ const Calendar: FC<CalendarProps> = ({
 			onSelect(new Date(yearInternal, monthInternal, dateInternal));
 		}
 		setSelectedEvent(null);
-	}, [dateInternal, monthInternal, yearInternal]);
+	}, [dateInternal, monthInternal, yearInternal, onSelect]);
 
 	useEffect(() => {
 		// Call getEvents API
 		if(getEvents){
 			setEvents(getEvents(new Date(yearInternal, monthInternal)));
 		}
-	}, [monthInternal]);
+	}, [monthInternal, yearInternal, getEvents]);
 
 	const goToPrevMonth = () => {
 		const prevMonth = getPrevMonth(monthInternal);

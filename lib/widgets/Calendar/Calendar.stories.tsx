@@ -108,16 +108,16 @@ const Events: CalendarEvent[] = [
 
 export const SimpleCalendar: Story = {
   args: {
-    getEvents: (d: Date) => {
+    getEvents: (_d: Date) => {
       return Events;
     },
   },
   render: (args: ComponentProps<typeof Calendar>) => {
     return (
-	  <Block style={{ width: "100%" }}>
-		<p>Simple Calendar</p>
-		<Calendar {...args} />
-	  </Block>
+        <Block style={{ width: "100%" }}>
+            <p>Simple Calendar</p>
+            <Calendar {...args} />
+        </Block>
     );
   },
 };

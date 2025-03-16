@@ -9,7 +9,7 @@ export const enum DatetimeType {
 	DateOnly = "date-only",
 	DateWithTime = "date-with-time",
 	TimeOnly = "time-only"
-};
+}
 type DateInputProps = Omit<Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">, "value"> & {
 	s?: number;
 	m?: number;
@@ -18,7 +18,7 @@ type DateInputProps = Omit<Omit<InputHTMLAttributes<HTMLInputElement>, "onChange
 	value?: Date;
 	min?: Date;
 	max?: Date;
-	onChange?: (date: Date)=>void;
+	onChange?: (_date: Date)=>void;
 	datetimeType?: DatetimeType | string;
 };
 const InputContainer = styled(Cell)(({theme})=>{

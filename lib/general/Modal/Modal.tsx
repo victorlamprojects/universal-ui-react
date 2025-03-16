@@ -109,7 +109,7 @@ const ModalBody = styled.div(({style}) => {
 type ModalProps = HTMLAttributes<HTMLDivElement> & {
 	theme?: ThemeType;
 	show: boolean;
-	setShow: (s: boolean) => void;
+	setShow: (_s: boolean) => void;
 	title?: string;
 	containerStyle?: CSSProperties;
 	headerStyle?: CSSProperties;

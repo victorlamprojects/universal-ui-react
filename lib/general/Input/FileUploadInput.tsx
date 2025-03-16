@@ -14,14 +14,14 @@ const Container = styled.div(() => {
 });
 
 const Input = styled.input(()=>{
-	let s = {
+	const s = {
 		display: "none"
 	};
 	return s;
 });
 const Label = styled.label(({ theme }) => {
 	theme = getDefaultThemeIfNotFound(theme);
-	let s = {
+	const s = {
 		display: "block",
 		position: "relative",
 		height: "100%",
@@ -39,7 +39,7 @@ const Label = styled.label(({ theme }) => {
 type FileUploadInputProps = {
 	id?: string;
 	text?: string;
-	handleFileInput: (files: FileList) => void;
+	handleFileInput: (_files: FileList) => void;
 };
 
 const FileUpload: FC<FileUploadInputProps> = ({ id=Math.random().toString(36).slice(-5), handleFileInput, text="Choose or Drop Files", ...rest }) => {

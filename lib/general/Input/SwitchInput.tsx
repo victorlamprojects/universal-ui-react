@@ -17,7 +17,7 @@ type SwitchInputProps = Omit<Omit<InputHTMLAttributes<HTMLInputElement>, "onChan
 	name: string;
 	value?: boolean;
 	type?: string | SwitchType;
-	onChange?: (d: boolean)=>void;
+	onChange?: (_d: boolean)=>void;
 };
 const InputContainer = styled(Cell)(({theme})=>{
 	theme = getDefaultThemeIfNotFound(theme);
@@ -45,8 +45,7 @@ const InputContainer = styled(Cell)(({theme})=>{
 	}
 
 });
-const Slider = styled.span<HTMLAttributes<HTMLSpanElement>  & {type: SwitchType}>(({theme, type}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const Slider = styled.span<HTMLAttributes<HTMLSpanElement>  & {type: SwitchType}>(({type}) => {
 	return {
 		position: "absolute",
 		top: 0,

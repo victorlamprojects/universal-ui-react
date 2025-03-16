@@ -30,8 +30,7 @@ const FormContainer = styled.form(({ theme }) => {
 		margin: "0.25rem 0.2rem"
 	};
 });
-export const FormRow = styled(Cell)(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+export const FormRow = styled(Cell)(() => {
 	return {
 		margin: "0.1rem 0"
 	};
@@ -66,8 +65,7 @@ export const FormGroup: FC<ComponentProps<typeof Grid> & { name: string }> = (({
 });
 
 // Form Component
-export const FormTitle = styled.div(({ theme }) => {
-	theme = getDefaultThemeIfNotFound(theme);
+export const FormTitle = styled.div(() => {
 	return {
 		width: "100%",
 		minHeight: "24px",
@@ -79,8 +77,7 @@ export const FormTitle = styled.div(({ theme }) => {
 });
 
 // Form Controls
-export const FormLabel = styled(Cell)<FElementBaseProps & LabelHTMLAttributes<HTMLLabelElement>>(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+export const FormLabel = styled(Cell)<FElementBaseProps & LabelHTMLAttributes<HTMLLabelElement>>(() => {
 	return {
 		margin: "0",
 		"&>label": {
@@ -88,32 +85,28 @@ export const FormLabel = styled(Cell)<FElementBaseProps & LabelHTMLAttributes<HT
 		}
 	};
 });
-export const FormTextInput = styled(TextInput)<ComponentProps<typeof TextInput> & FElementBaseProps>(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+export const FormTextInput = styled(TextInput)<ComponentProps<typeof TextInput> & FElementBaseProps>(() => {
 	return {
 		"&>input:not([type]),&>input[type=text],&>input[type=password],&>input[type=email]": {
 			fontSize: FontSize.FormText
 		}
 	};
 });
-export const FormDateInput = styled(DateInput)<ComponentProps<typeof DateInput> & FElementBaseProps>(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+export const FormDateInput = styled(DateInput)<ComponentProps<typeof DateInput> & FElementBaseProps>(() => {
 	return {
 		"&>input[type=date]": {
 			fontSize: FontSize.FormText
 		}
 	};
 });
-export const FormSwitchInput = styled(SwitchInput)<ComponentProps<typeof SwitchInput> & FElementBaseProps>(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+export const FormSwitchInput = styled(SwitchInput)<ComponentProps<typeof SwitchInput> & FElementBaseProps>(() => {
 	return {
 		"&>input[type=checkbox]": {
 			fontSize: FontSize.FormText
 		}
 	};
 });
-export const FormSelect = styled(Select)<ComponentProps<typeof Select> & FElementBaseProps>(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+export const FormSelect = styled(Select)<ComponentProps<typeof Select> & FElementBaseProps>(() => {
 	return {
 		"& > select": {
 			fontSize: FontSize.FormText
@@ -132,7 +125,7 @@ export const FormSubmitButton = styled(Cell)<ComponentProps<typeof Button> & FEl
 });
 
 type FormProps = Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit"> & {
-	onSubmit?: (formState: FState) => void
+	onSubmit?: (_formState: FState) => void
 };
 
 export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {

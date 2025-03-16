@@ -45,62 +45,62 @@ export const SimpleForm: Story = {
   args: {},
   render: (args: ComponentProps<typeof Form>) => {
     return (
-      <>
+    <>
 		<Block>
-		  <Form
-			{...args}
-			onSubmit={(d: FState) => {
-			  alert(JSON.stringify(d));
-			}}
-		  >
-			<FormTitle>Simple Form</FormTitle>
-			<FormGroup name={"Account"}>
-			  <FormRow>
-				<FormLabel htmlFor={"name"}>Name</FormLabel>
-				<FormTextInput name={"name"} value={"Victor Lam"} />
-			  </FormRow>
-			  <FormRow>
-				<FormLabel htmlFor={"password"}>Password</FormLabel>
-				<FormTextInput name={"password"} type="password" />
-			  </FormRow>
-			</FormGroup>
-			<FormGroup name={"Background Information"}>
-			  <FormRow>
-				<FormLabel htmlFor={"sex"}>Sex</FormLabel>
-				<FormSelect
-				  name={"sex"}
-				  options={[
-					{ label: "M", value: "m" },
-					{ label: "F", value: "f" },
-				  ]}
-				/>
-			  </FormRow>
-			  <FormRow>
-				<FormLabel htmlFor={"email"}>Email</FormLabel>
-				<FormTextInput
-				  name={"email"}
-				  disabled
-				  type={"email"}
-				  value={"lamwingtok@gmail.com"}
-				/>
-			  </FormRow>
-			  <FormRow>
-				<FormLabel htmlFor={"hobbies"}>Hobbies</FormLabel>
-				<FormTextInput name={"hobbies"} />
-			  </FormRow>
-			  <FormRow>
-				<FormLabel htmlFor={"birth-date"}>Date of Birth</FormLabel>
-				<FormDateInput name={"birth-date"} datetimeType={"date-only"} />
-			  </FormRow>
-			</FormGroup>
-			<FormRow justifyContent={"flex-end"}>
-			  <FormLabel htmlFor={"receive-noti"}>Receive Notification</FormLabel>
-			  <FormSwitchInput name={"receive-noti"} type={"round"} />
-			</FormRow>
-			<FormSubmitButton>Submit</FormSubmitButton>
-		  </Form>
-		</Block>
-      </>
+            <Form
+                {...args}
+                onSubmit={(d: FState) => {
+                    alert(JSON.stringify(d));
+                }}
+            >
+                <FormTitle>Simple Form</FormTitle>
+                <FormGroup name={"Account"}>
+                    <FormRow>
+                        <FormLabel htmlFor={"name"}>Name</FormLabel>
+                        <FormTextInput name={"name"} value={"Victor Lam"} />
+                    </FormRow>
+                    <FormRow>
+                        <FormLabel htmlFor={"password"}>Password</FormLabel>
+                        <FormTextInput name={"password"} type="password" />
+                    </FormRow>
+                </FormGroup>
+                <FormGroup name={"Background Information"}>
+                    <FormRow>
+                        <FormLabel htmlFor={"sex"}>Sex</FormLabel>
+                        <FormSelect
+                            name={"sex"}
+                            options={[
+                                { label: "M", value: "m" },
+                                { label: "F", value: "f" },
+                            ]}
+                        />
+                    </FormRow>
+                    <FormRow>
+                        <FormLabel htmlFor={"email"}>Email</FormLabel>
+                        <FormTextInput
+                            name={"email"}
+                            disabled
+                            type={"email"}
+                            value={"lamwingtok@gmail.com"}
+                        />
+                    </FormRow>
+                    <FormRow>
+                        <FormLabel htmlFor={"hobbies"}>Hobbies</FormLabel>
+                        <FormTextInput name={"hobbies"} />
+                    </FormRow>
+                    <FormRow>
+                        <FormLabel htmlFor={"birth-date"}>Date of Birth</FormLabel>
+                        <FormDateInput name={"birth-date"} datetimeType={"date-only"} />
+                    </FormRow>
+                </FormGroup>
+                <FormRow justifyContent={"flex-end"}>
+                    <FormLabel htmlFor={"receive-noti"}>Receive Notification</FormLabel>
+                    <FormSwitchInput name={"receive-noti"} type={"round"} />
+                </FormRow>
+                <FormSubmitButton>Submit</FormSubmitButton>
+            </Form>
+        </Block>
+    </>
     );
   },
 };

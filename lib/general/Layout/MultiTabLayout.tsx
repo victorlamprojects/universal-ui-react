@@ -15,10 +15,10 @@ import {
 import { assert } from "../../util/assert";
 
 // Types
-export const enum MultiTabLayoutType {
+export enum MultiTabLayoutType {
 	Default="default",
 	Bar="bar"
-};
+}
 
 // Main Container
 const MultiTabContainer = styled.div(({theme}) => {
@@ -99,8 +99,7 @@ const MultiTabInternal = styled(NavLink)<LinkProps & {type?: MultiTabLayoutType}
 
 
 // Main Content
-const MultiTabContent = styled.div(({theme}) => {
-	theme = getDefaultThemeIfNotFound(theme);
+const MultiTabContent = styled.div<HTMLAttributes<HTMLDivElement>>(() => {
 	return {
 		flex: 1,
 		height: "calc(100% - 3.5rem)",

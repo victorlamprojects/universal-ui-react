@@ -13,7 +13,7 @@ const Mark = styled.span(({ theme }) => {
 export type SearchableProps = {
 	searchText?: string;
 	ignoreCase?: boolean;
-	onSearch?: (id: string) => void;
+	onSearch?: (_id: string) => void;
 }
 
 const Searchable: FC<SearchableProps & {

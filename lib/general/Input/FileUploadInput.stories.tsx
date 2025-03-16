@@ -30,28 +30,28 @@ type Story = StoryObj<typeof FileUploadInput>;
 const FileUploadWrapper = (args) => {
     const [files, setFiles] = useState([]);
     return (
-	  <Block>
-		<FileUploadInput
-		  handleFileInput={(files: FileList) => {
-			for (let f of files) {
-			  setFiles((fs) => [...fs, f.name]);
-			}
-		  }}
-		  {...args}
-		/>
-		<h2>Files uploaded:</h2>
-		<ol>
-		  {files.map((file) => (
-			<li>{file}</li>
-		  ))}
-		</ol>
-	  </Block>
+        <Block>
+            <FileUploadInput
+                handleFileInput={(files: FileList) => {
+                    for (const f of files) {
+                        setFiles((fs) => [...fs, f.name]);
+                    }
+                }}
+                {...args}
+            />
+            <h2>Files uploaded:</h2>
+            <ol>
+                {files.map((file) => (
+                    <li key={JSON.stringify(file)}>{file}</li>
+                ))}
+            </ol>
+        </Block>
     );
 }
 
 export const FileUpload: Story = {
-  args: {},
-  render: (args: ComponentProps<typeof FileUploadInput>) => {
-	  return <FileUploadWrapper {...args}/>
-  },
+    args: {},
+    render: (args: ComponentProps<typeof FileUploadInput>) => {
+        return <FileUploadWrapper {...args}/>
+    },
 };

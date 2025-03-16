@@ -2,8 +2,8 @@ export type CalendarProps = {
 	date?: number;
 	month?: number;
 	year?: number;
-	onSelect?: (d: Date) => void;
-	getEvents?: (d: Date) => CalendarEvent[];
+	onSelect?: (_d: Date) => void;
+	getEvents?: (_d: Date) => CalendarEvent[];
 };
 
 // Calendar Event

@@ -14,7 +14,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button = styled.button<ButtonProps>(({ style, theme, variant="info", effect="none"}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
-	let effects = getHoverEffect(effect as HoverEffect, theme, variant as ButtonVariant);
+	const effects = getHoverEffect(effect as HoverEffect, theme, variant as ButtonVariant);
 	const s = theme && {
 		outline: "none",
 		border: "none",

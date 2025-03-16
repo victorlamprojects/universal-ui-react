@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 interface PortalProps {
 	id?: string;
     children: ReactNode;
-};
+}
 
 const Portal:FC<PortalProps> = ({id="portal", children}) => {
 	const target = useRef(document.getElementById(id));

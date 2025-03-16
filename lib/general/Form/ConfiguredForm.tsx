@@ -5,7 +5,7 @@ import { DatetimeType } from "../Input/DateInput";
 import { SwitchType } from "../Input/SwitchInput";
 
 type ConfiguredFormProps = {
-	onSubmit?: (formState: FState) => void;
+	onSubmit?: (_formState: FState) => void;
 	configuration: FConfiguration;
 };
 

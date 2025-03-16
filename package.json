@@ -1,6 +1,6 @@
 {
   "name": "universal-ui-react",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A project that contains commonly used components",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -8,12 +8,12 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
-    "build": "yarn test && rm -rf dist && rollup -c --bundleConfigAsCjs",
+    "build": "npm run test && npm run lint && rm -rf dist && rollup -c --bundleConfigAsCjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "deploy-storybook": "gh-pages -d storybook-static",
-    "deploy": "yarn build && npm version minor && yarn publish && git push && yarn build-storybook && yarn deploy-storybook",
-    "fix": "yarn build && npm version patch && yarn publish && git push && yarn build-storybook && yarn deploy-storybook"
+    "deploy": "npm run build && npm version minor && npm publish && git push && npm run build-storybook && npm run deploy-storybook",
+    "fix": "npm run build && npm version patch && npm publish && git push && npm run build-storybook && npm run deploy-storybook"
   },
   "homepage": "https://github.com/victorlamprojects/universal-ui-react",
   "repository": {
@@ -78,5 +78,6 @@
   "dependencies": {
     "react-router-dom": "^6.15.0",
     "webpack": "^5.85.0"
-  }
+  },
+  "packageManager": "yarn@4.1.1+sha512.ec40d0639bb307441b945d9467139cbb88d14394baac760b52eca038b330d16542d66fef61574271534ace5a200518dabf3b53a85f1f9e4bfa37141b538a9590"
 }

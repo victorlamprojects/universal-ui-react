@@ -10,7 +10,7 @@ type SearchBoxProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & 
 	m?: number;
 	l?: number;
 	value?: string;
-	onChange?: (d: string) => void;
+	onChange?: (_d: string) => void;
 };
 const SearchBoxContainer = styled(Cell)(({theme})=>{
 	theme = getDefaultThemeIfNotFound(theme);

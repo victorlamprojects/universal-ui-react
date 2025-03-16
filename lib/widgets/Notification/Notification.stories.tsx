@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from "react";
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
@@ -94,8 +94,7 @@ const NotificationWrapper = () => {
 }
 
 export const Notification: Story = {
-  args: {},
-  render: (args: NotificationProps) => {
-	  return <NotificationWrapper />;
+  render: () => {
+      return <NotificationWrapper/>;
   },
 };

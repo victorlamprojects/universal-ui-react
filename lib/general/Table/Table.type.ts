@@ -7,22 +7,22 @@ export type TRow = {
 export type TCol = {
 	key: string;
 	title?: string;
-	sort?: ((arg0: TRow, arg2: TRow) => number);
-	apply?: (arg0: TData) => any;
+	sort?: ((_arg0: TRow, _arg2: TRow) => number);
+	apply?: (_arg0: TData) => any;
 };
 
 export type TColView = {
 	key: string;
 	title: string;
-	sort: ((arg0: TRow, arg2: TRow) => number);
-	apply?: (arg0: TData) => any;
+	sort: ((_arg0: TRow, _arg2: TRow) => number);
+	apply?: (_arg0: TData) => any;
 };
 
 export const getDefaultHeaderView = (data?: TRow) : TColView[] => {
 	if(!data){
 		return [];
 	}
-	let cols: TColView[] = Object.keys(data).map((k: string) => {
+	const cols: TColView[] = Object.keys(data).map((k: string) => {
 		return {
 			key: k,
 			title: k,
@@ -44,9 +44,9 @@ export const getOverridenHeaderView = (defaultCol?: TColView[], overrideCol?: TC
 	if(!overrideCol){
 		return defaultCol;
 	}
-	let cols: TColView[] = [];
-	for(let c of defaultCol){
-		let h = overrideCol.find(o => o.key === c.key);
+	const cols: TColView[] = [];
+	for(const c of defaultCol){
+		const h = overrideCol.find(o => o.key === c.key);
 		if(!h){
 			cols.push(c);
 			continue;

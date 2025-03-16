@@ -14,7 +14,7 @@ interface SquareIconProps {
     backgroundColor?: string;
 	className?: string;
     onClick?: () => void;
-};
+}
 const Icon:FC<SquareIconProps> = ({width="32px", height="32px", backgroundColor, className, src, onClick, ...rest}) => {
     if(typeof src === 'string')
         return <Image width={width} height={height} backgroundColor={backgroundColor} src={src} {...rest} className={className} onClick={onClick} />

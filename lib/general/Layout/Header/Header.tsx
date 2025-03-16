@@ -65,7 +65,7 @@ const HeaderItemContainer = styled.div<HTMLAttributes<HTMLDivElement> & {effects
 export const HeaderItem = styled.a.attrs<LinkHTMLAttributes<HTMLLinkElement>>(() => ({ className: "header-item" }))(({ theme, style }) => {
 	theme = getDefaultThemeIfNotFound(theme);
 
-	let s = {
+	const s = {
 		display: "block",
 		minHeight: "16px",
 		flexGrow: 1,
@@ -96,14 +96,14 @@ export const Header: FC<HeaderProps> = (({ style, children, hover=HoverEffect.No
 	let theme = useTheme();
 	theme = getDefaultThemeIfNotFound(theme);
 
-	let effects = {
+	const effects = {
 		...getHoverEffect(hover, theme),
 		...getActiveEffect(active, theme)
 	};
 	if(hover === HoverEffect.Solidify){
 		effects["border"] = "none"
 	}
-	let s = {
+	const s = {
 		display: "flex",
 		width: "100%",
 		position: "relative",
