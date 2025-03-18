@@ -303,7 +303,7 @@ const CalendarMainView = forwardRef<HTMLDivElement, CalendarMainViewProps>(funct
 								.filter((t: string, i: number, arr: string[]) => arr.indexOf(t) === i)
 								.map((t: string) => {
 									return (<DateDot key={`vl-calendar-col-${i}-dot-${t}`}>
-										<Circle style={{backgroundColor: CalendarEventTypeColor[t], borderRadius: "50%"}}></Circle>
+										<Circle style={{backgroundColor: CalendarEventTypeColor[t as keyof typeof CalendarEventTypeColor], borderRadius: "50%"}}></Circle>
 									</DateDot>);
 								})
 							}

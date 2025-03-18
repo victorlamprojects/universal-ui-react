@@ -96,7 +96,7 @@ export const Header: FC<HeaderProps> = (({ style, children, hover=HoverEffect.No
 	let theme = useTheme();
 	theme = getDefaultThemeIfNotFound(theme);
 
-	const effects = {
+	const effects: Record<string, any> = {
 		...getHoverEffect(hover, theme),
 		...getActiveEffect(active, theme)
 	};

@@ -1,14 +1,14 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import styled from 'styled-components';
 
-const Image = styled.img`
-    width: ${(props: { width:string, height:string, backgroundColor?: string }) => props.width};
-    height: ${(props: { width:string, height:string, backgroundColor?: string }) => props.height};
-    background-color: ${(props: { width:string, height:string, backgroundColor?: string }) => props.backgroundColor};
+const Image = styled.img<{ width:string, height:string, backgroundColor?: string }>`
+    width: ${props => props.width};
+    height: ${props => props.height};
+    background-color: ${props => props.backgroundColor};
 `
 
 interface SquareIconProps {
-    src: string | (JSX.Element);
+    src: string | ReactElement | null;
     width?: string;
     height?: string;
     backgroundColor?: string;

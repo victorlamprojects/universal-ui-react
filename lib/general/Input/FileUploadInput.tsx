@@ -49,7 +49,7 @@ const FileUpload: FC<FileUploadInputProps> = ({ id=Math.random().toString(36).sl
 	}
 	return <Container
 		onDrop={
-			e => {
+			(e: DragEvent<HTMLDivElement>) => {
 				disableDefault(e);
 				const data = e.dataTransfer;
 				if(!data.files?.length){
@@ -58,9 +58,9 @@ const FileUpload: FC<FileUploadInputProps> = ({ id=Math.random().toString(36).sl
 				handleFileInput(data.files);
 			}
 		}
-		onDragOver={ e => disableDefault(e) }
-		onDragEnter={e => disableDefault(e) }
-		onDragLeave={e => disableDefault(e) }
+		onDragOver={ (e: DragEvent<HTMLDivElement>) => disableDefault(e) }
+		onDragEnter={ (e: DragEvent<HTMLDivElement>) => disableDefault(e) }
+		onDragLeave={ (e: DragEvent<HTMLDivElement>) => disableDefault(e) }
 	>
 		<Input id={`upload-button-${id}`} type="file" onChange={ (e: ChangeEvent<HTMLInputElement>) => {
 			const input = e.target;

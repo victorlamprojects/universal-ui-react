@@ -145,8 +145,9 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 			let newChild = child as ReactElement<any>;
 			const elType = newChild.type;
 			if(elType === FormSubmitButton){
-				const { justifyContent, children, ...rest } = child.props;
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSubmitButton>>, {
+                const childEl = child as ReactElement<ComponentProps<typeof FormSubmitButton>>;
+				const { justifyContent, children, ...rest } = childEl.props;
+				newChild = cloneElement(childEl, {
 					s: 12,
 					m: 12,
 					l: 12,
@@ -162,19 +163,21 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 				});
 			}
 			else if(elType === FormRow){
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormRow>>, {
-					s: child.props.s || 12,
-					m: child.props.m || 12,
-					l: child.props.l || 12,
-					children: (<Grid style={{margin: "0", justifyContent: child.props.justifyContent || "flex-start" }}>{child.props.children}</Grid>)
+                const childEl = child as ReactElement<ComponentProps<typeof FormRow>>;
+				newChild = cloneElement(childEl, {
+					s: childEl.props.s || 12,
+					m: childEl.props.m || 12,
+					l: childEl.props.l || 12,
+					children: (<Grid style={{margin: "0", justifyContent: childEl.props.justifyContent || "flex-start" }}>{childEl.props.children}</Grid>)
 				});
 			}
 			else if(elType === FormSelect){
-				const { s, m, l, name, selected, options, ...rest } = child.props;
+                const childEl = child as ReactElement<ComponentProps<typeof FormSelect>>;
+				const { s, m, l, name, selected, options, ...rest } = childEl.props;
 				if(!formState.has(name)){
 					updateState(name, selected || "");
 				}
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSelect>>, {
+				newChild = cloneElement(childEl, {
 					s: s || 12,
 					m: m || 6,
 					l: l || 6,
@@ -187,11 +190,12 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 				});
 			}
 			else if(elType === FormSwitchInput){
-				const { s, m, l, name, value, type, ...rest } = child.props;
+                const childEl = child as ReactElement<ComponentProps<typeof FormSwitchInput>>;
+				const { s, m, l, name, value, type, ...rest } = childEl.props;
 				if(!formState.has(name)){
 					updateState(name, value || false);
 				}
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormSwitchInput>>, {
+				newChild = cloneElement(childEl, {
 					s: s || 1,
 					m: m || 1,
 					l: l || 1,
@@ -204,11 +208,12 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 				});
 			}
 			else if(elType === FormTextInput){
-				const { s, m, l, name, value, ...rest } = child.props;
+                const childEl = child as ReactElement<ComponentProps<typeof FormTextInput>>;
+				const { s, m, l, name, value, ...rest } = childEl.props;
 				if(!formState.has(name)){
 					updateState(name, value || "");
 				}
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormTextInput>>, {
+				newChild = cloneElement(childEl, {
 					s: s || 12,
 					m: m || 6,
 					l: l || 6,
@@ -220,11 +225,12 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 				});
 			}
 			else if(elType === FormDateInput){
-				const { s, m, l, name, value, ...rest } = child.props;
+                const childEl = child as ReactElement<ComponentProps<typeof FormDateInput>>;
+				const { s, m, l, name, value, ...rest } = childEl.props;
 				if(!formState.has(name)){
 					updateState(name, value || new Date());
 				}
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormDateInput>>, {
+				newChild = cloneElement(childEl, {
 					s: s || 12,
 					m: m || 6,
 					l: l || 6,
@@ -236,12 +242,13 @@ export const Form: FC<FormProps> = ({children, onSubmit, ...rest}) => {
 				});
 			}
 			else if(elType === FormLabel){
-				const { s, m, l, ...rest } = child.props;
-				newChild = cloneElement(child as ReactElement<ComponentProps<typeof FormLabel>>, {
+                const childEl = child as ReactElement<ComponentProps<typeof FormLabel>>;
+				const { s, m, l, ...rest } = childEl.props;
+				newChild = cloneElement(childEl, {
 					s: s || 10,
 					m: m || 4,
 					l: l || 3,
-				}, (<label {...rest}>{child.props.children}</label>));
+				}, (<label {...rest}>{childEl.props.children}</label>));
 			}
 
 			return cloneElement(newChild, {...newChild.props}, modifyChildren(newChild.props.children));

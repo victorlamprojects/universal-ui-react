@@ -34,7 +34,7 @@ export type CellProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 export const Cell = styled.div<CellProps>(({s, m, l, hidden, justifyContent="flex-start", alignItems="center", alignContent="stretch"}): any => {
-	const style = {
+	const style: Record<string, any> = {
 		display: "flex",
 		justifyContent: justifyContent,
 		alignItems: alignItems,

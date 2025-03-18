@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, CSSProperties } from "react";
+import { FC, MouseEvent, HTMLAttributes, CSSProperties } from "react";
 import styled, { css, keyframes } from 'styled-components';
 import Portal from '../Container/Portal';
 import { FontSize, Padding, ModalVariant } from '../../config/constants';
@@ -134,7 +134,7 @@ const Modal: FC<ModalProps> = ({
 	} || containerStyle;
 	const HeaderStyle = theme && {
 		color: theme.button.text,
-		backgroundColor: theme[variant],
+		backgroundColor: theme[variant as keyof ThemeType],
 		...headerStyle
 	} || headerStyle;
 	const TitleStyle = theme && {
@@ -150,7 +150,7 @@ const Modal: FC<ModalProps> = ({
 					setShow(false);
 				}
 			}}>
-			<ModalContainer hidden={!show} onClick={e=>e.stopPropagation()} style={ContainerStyle}>
+			<ModalContainer hidden={!show} onClick={(e: MouseEvent<HTMLElement>)=>e.stopPropagation()} style={ContainerStyle}>
 				<ModalHeader style={HeaderStyle}>
 					<ModalTitle style={TitleStyle}>{title}</ModalTitle>
 					<ModalClose onClick={()=>setShow(false)}>&#10005;</ModalClose>
