@@ -4,7 +4,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { dts } from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
-import external from "rollup-plugin-peer-deps-external";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 import pkg from "./package.json";
 
@@ -23,7 +23,7 @@ const defaultConfigs = {
 			}
 		],
 		plugins: [
-			external(),
+            peerDepsExternal(),
 			resolve(),
 			commonjs(),
 			typescript({ tsconfig: "./tsconfig.json" }),
