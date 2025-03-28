@@ -2,6 +2,9 @@
   "name": "universal-ui-react",
   "version": "2.1.6",
   "description": "A project that contains commonly used components",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests",
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
