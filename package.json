@@ -1,6 +1,6 @@
 {
   "name": "universal-ui-react",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "A project that contains commonly used components",
   "scripts": {
     "test": "jest --passWithNoTests",
