@@ -1,32 +1,16 @@
-import path from "path";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { dts } from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
-import external from "rollup-plugin-peer-deps-external";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
-import pkg from "./package.json";
-
-const defaultConfigs = {
+const defaultConfigs = () => ({
 		input: "lib/index.ts",
-		output: [
-			{
-				file: pkg.main,
-				format: "cjs",
-				sourcemap: true
-			},
-			{
-				file: pkg.module,
-				format: "esm",
-				sourcemap: true
-			}
-		],
 		plugins: [
-			external(),
+            peerDepsExternal(),
 			resolve(),
 			commonjs(),
-			typescript({ tsconfig: "./tsconfig.json" }),
 			terser()
 		],
 		external: [
@@ -35,25 +19,45 @@ const defaultConfigs = {
 			"react-router-dom",
 			"styled-components"
 		]
+})
+
+const getCjsConfig = () => {
+    const config = defaultConfigs();
+    return {
+        ...config,
+        output: [{
+            file: "dist/cjs/index.js",
+            format: "cjs",
+            sourcemap: true
+        }],
+        plugins: [
+            ...config.plugins,
+            typescript({
+                "compilerOptions": {
+                    declaration: false,
+                    declarationDir: undefined,
+                }
+            })
+        ]
+    }
 }
 
-const loadModuleConfigs = (name) => {
-	return {
-		...defaultConfigs,
-		input: "lib/" + name + "/index.ts",
-		output: defaultConfigs.output.map(o => {
-			return {
-				...o,
-				file: path.join("dist", o.format, name, "index.js"),
-			}
-		})
-	}
+const getEsmConfig = () => {
+    const config = defaultConfigs();
+    return {
+        ...config,
+        output: [{
+            file: "dist/esm/index.js",
+            format: "esm",
+            sourcemap: true
+        }],
+        plugins: [...config.plugins, typescript({ tsconfig: "./tsconfig.json" })]
+    }
 }
 
 export default [
-	defaultConfigs,
-	loadModuleConfigs("theme"),
-	loadModuleConfigs("widgets"),
+	getCjsConfig(),
+    getEsmConfig(),
 	{
 		input: "dist/esm/types/index.d.ts",
 		output: [ { file: "dist/index.d.ts", format: "esm" }],

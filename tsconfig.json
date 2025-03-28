@@ -9,7 +9,7 @@
 		"jsx": "react-jsx",
 		"resolveJsonModule": true,
 		"declaration": true,
-		"declarationDir": "types",
+		"declarationDir": "dist/esm/types",
 		"moduleResolution": "node",
 		"forceConsistentCasingInFileNames": true,
 		"noImplicitReturns": true,

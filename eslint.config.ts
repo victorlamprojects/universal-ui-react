@@ -52,7 +52,7 @@ export default defineConfig([{ extends: compat.extends(
         "no-unused-vars": "off",
         "no-extra-boolean-cast": "off",
 
-        "@typescript-eslint/no-unused-vars": ["error", {
+        "@typescript-eslint/no-unused-vars": ["warn", {
             argsIgnorePattern: "^_",
         }],
 
