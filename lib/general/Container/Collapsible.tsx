@@ -20,12 +20,12 @@ const CollapsibleContainer = styled.div(() => {
 const Title = styled.div<HTMLAttributes<HTMLDivElement> & {withToggle?: boolean}>(({withToggle=false}) => {
 	const toggleEffect = withToggle && {
 		"&:before": {
-			content: "'▸'",
+			content: "'▸   '",
             marginRight: "6px"
 		},
 		"&.show": {
 			"&:before": {
-				content: "'▾'",
+				content: "'▾   '",
                 marginRight: "6px"
 			}
 		}
