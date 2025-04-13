@@ -13,8 +13,8 @@ export const FontSize = {
 	ModalText: "1.375rem",
 	TableTitle: "1rem",
 	TableText: "1rem",
-	FormTitle: "1.375rem",
-	FormText: "1rem",
+	FormTitle: "1.25rem",
+	FormText: "1.125rem",
 	FormGroupText: "0.9rem",
 }
 
