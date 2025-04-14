@@ -108,7 +108,7 @@ const Table: FC<TableProps> = ({
 		// Currently only support single sorting
 		sortStates.forEach((state) => dataView.sort(state.fn));
 	}
-	return (<div style={{overflow: "auto"}}>
+	return (<div style={{overflow: "auto", resize: "both"}}>
 		<TableContainer bordered={bordered} {...args}>
 			<TableHead>
 				<TableHeaderContainer>
