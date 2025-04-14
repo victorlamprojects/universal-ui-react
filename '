@@ -49,13 +49,11 @@ const TableHeader = styled.th<TableHTMLAttributes<HTMLTableElement> & {bordered?
 const TableRow = styled.tr<TableHTMLAttributes<HTMLTableElement> & {striped?: boolean}>(({theme, striped}) => {
 	theme = getDefaultThemeIfNotFound(theme);
 	return {
-        opacity: 0.8,
-        backgroundColor: theme.table.primary,
+        opacity: 0.9,
 		"&:nth-child(even)": {
-			backgroundColor: striped ? theme.table.primary2 : theme.table.primary
+			backgroundColor: striped ? theme.table.primary2 : "none"
 		},
 		"&.active": {
-            opacity: 1,
 			backgroundColor: theme.table.secondary
 		},
         "&:hover": {

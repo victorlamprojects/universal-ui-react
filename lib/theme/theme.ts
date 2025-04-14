@@ -26,6 +26,7 @@ export type ThemeType = {
 	table: {
 		header: string;
 		primary: string;
+		primary2: string;
 		secondary: string;
 	},
 	form: {
@@ -69,6 +70,7 @@ export const Dark: ThemeType = {
 	table: {
 		header: "#575041",
 		primary: "#424242",
+		primary2: "#252525",
 		secondary: "#435B66"
 	},
 	form: {
@@ -111,7 +113,8 @@ export const Light: ThemeType = {
 	},
 	table: {
 		header: "#ac9d81",
-		primary: "#fefedd",
+		primary: "#d9d9d9",
+		primary2: "#fefedd",
 		secondary: "#42b9f5"
 	},
 	form: {
