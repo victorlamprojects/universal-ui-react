@@ -1,6 +1,6 @@
 {
   "name": "universal-ui-react",
-  "version": "2.1.17",
+  "version": "2.1.18",
   "description": "A project that contains commonly used components",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
