@@ -85,7 +85,7 @@ const ModalClose = styled.span(({style}) => {
 		width: FontSize.ModalTitle,
 		height: FontSize.ModalTitle,
 		position: "absolute",
-		right: 0,
+		right: "0.375em",
 		top: "0.25em",
 		cursor: "pointer",
 		...style
