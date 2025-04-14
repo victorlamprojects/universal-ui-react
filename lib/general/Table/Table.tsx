@@ -134,7 +134,6 @@ const Table: FC<TableProps> = ({
 							});
 						}}>
 							{header.title || header.key}
-							<span hidden={sortStates.get(header.key)?.key !== undefined}> ⇵</span>
 							<span hidden={sortStates.get(header.key)?.key !== 0}> ⬇</span>
 							<span hidden={sortStates.get(header.key)?.key !== 1}> ⬆</span>
 						</TableHeader>
