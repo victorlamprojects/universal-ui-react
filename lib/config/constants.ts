@@ -6,12 +6,11 @@ export enum BreakPoints {
 }
 
 export const FontSize = {
-    Header: "1.875rem",
     Title: "1.875rem",
     Text: "1.125rem",
-    ModalTitle: "1.875rem",
+    ModalTitle: "1.375rem",
     ModalText: "1.125rem",
-    TableTitle: "1.875rem",
+    TableTitle: "1.375rem",
     TableText: "1.125rem",
     FormTitle: "1.875rem",
     FormText: "1.125rem",
