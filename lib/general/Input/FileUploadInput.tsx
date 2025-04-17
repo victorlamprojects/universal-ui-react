@@ -6,73 +6,73 @@ import { getDefaultThemeIfNotFound } from '../../theme/theme';
 
 
 const Container = styled.div(() => {
-	const s = {
-		minHeight: "100px",
-		position: "relative"
-	};
-	return s as CSSObject;
+    const s = {
+        minHeight: "100px",
+        position: "relative"
+    };
+    return s as CSSObject;
 });
 
-const Input = styled.input(()=>{
-	const s = {
-		display: "none"
-	};
-	return s;
+const Input = styled.input(() => {
+    const s = {
+        display: "none"
+    };
+    return s;
 });
 const Label = styled.label(({ theme }) => {
-	theme = getDefaultThemeIfNotFound(theme);
-	const s = {
-		display: "block",
-		position: "relative",
-		height: "100%",
-		fontSize: FontSize.Header,
-		color: theme.primary,
-		textAlign: "center",
-		padding: Padding.Container,
-		borderRadius: "12px",
-		border: `3px dashed ${theme.primary}`,
-		cursor: "pointer"
-	};
-	return s as CSSObject;
+    theme = getDefaultThemeIfNotFound(theme);
+    const s = {
+        display: "block",
+        position: "relative",
+        height: "100%",
+        fontSize: FontSize.Title,
+        color: theme.primary,
+        textAlign: "center",
+        padding: Padding.Container,
+        borderRadius: "12px",
+        border: `3px dashed ${theme.primary}`,
+        cursor: "pointer"
+    };
+    return s as CSSObject;
 });
 
 type FileUploadInputProps = {
-	id?: string;
-	text?: string;
-	handleFileInput: (_files: FileList) => void;
+    id?: string;
+    text?: string;
+    handleFileInput: (_files: FileList) => void;
 };
 
-const FileUpload: FC<FileUploadInputProps> = ({ id=Math.random().toString(36).slice(-5), handleFileInput, text="Choose or Drop Files", ...rest }) => {
-	const disableDefault = (e: DragEvent | ChangeEvent) => {
-		e.preventDefault();
-		e.stopPropagation();
-	}
-	return <Container
-		onDrop={
-			(e: DragEvent<HTMLDivElement>) => {
-				disableDefault(e);
-				const data = e.dataTransfer;
-				if(!data.files?.length){
-					return;
-				}
-				handleFileInput(data.files);
-			}
-		}
-		onDragOver={ (e: DragEvent<HTMLDivElement>) => disableDefault(e) }
-		onDragEnter={ (e: DragEvent<HTMLDivElement>) => disableDefault(e) }
-		onDragLeave={ (e: DragEvent<HTMLDivElement>) => disableDefault(e) }
-	>
-		<Input id={`upload-button-${id}`} type="file" onChange={ (e: ChangeEvent<HTMLInputElement>) => {
-			const input = e.target;
-			if(!input.files?.length){
-				return;
-			}
-			handleFileInput(input.files);
-		}} {...rest} />
-		<Label htmlFor={`upload-button-${id}`}>
-			{text}&nbsp;<i className="fa-solid fa-upload" />
-		</Label>
-	</Container>
+const FileUpload: FC<FileUploadInputProps> = ({ id = Math.random().toString(36).slice(-5), handleFileInput, text = "Choose or Drop Files", ...rest }) => {
+    const disableDefault = (e: DragEvent | ChangeEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    return <Container
+        onDrop={
+            (e: DragEvent<HTMLDivElement>) => {
+                disableDefault(e);
+                const data = e.dataTransfer;
+                if (!data.files?.length) {
+                    return;
+                }
+                handleFileInput(data.files);
+            }
+        }
+        onDragOver={(e: DragEvent<HTMLDivElement>) => disableDefault(e)}
+        onDragEnter={(e: DragEvent<HTMLDivElement>) => disableDefault(e)}
+        onDragLeave={(e: DragEvent<HTMLDivElement>) => disableDefault(e)}
+    >
+        <Input id={`upload-button-${id}`} type="file" onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            const input = e.target;
+            if (!input.files?.length) {
+                return;
+            }
+            handleFileInput(input.files);
+        }} {...rest} />
+        <Label htmlFor={`upload-button-${id}`}>
+            {text}&nbsp;<i className="fa-solid fa-upload" />
+        </Label>
+    </Container>
 }
 
 export default FileUpload;
